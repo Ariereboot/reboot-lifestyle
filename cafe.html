@@ -589,57 +589,6 @@
             border-color: var(--oxygen-blue);
         }
 
-        /* DIVIDER */
-        .share-divider {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin: 28px auto 20px;
-            max-width: 320px;
-            color: var(--text-light);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
-        .share-divider::before,
-        .share-divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        /* DOWNLOAD BUTTON */
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 26px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.3px;
-            background: var(--black-seed);
-            color: var(--arie-yellow);
-            border: 2px solid var(--black-seed);
-            transition: transform 0.2s, background 0.2s, color 0.2s;
-            font-family: inherit;
-            cursor: pointer;
-        }
-        .download-btn:hover {
-            transform: translateY(-2px);
-            background: var(--arie-yellow);
-            color: var(--black-seed);
-        }
-        .download-note {
-            margin-top: 12px;
-            color: var(--text-light);
-            font-size: 13px;
-            font-style: italic;
-        }
-
         /* FOLLOW CARD */
         .follow-card {
             background: white;
@@ -676,20 +625,34 @@
             border-color: var(--earth-carrot);
         }
 
-        /* FOOTER - Monocromático clean */
+        /* FOOTER - Monocromático clean + disclaimer blindado */
         footer {
             background: var(--black-seed);
             color: rgba(255,255,255,0.4);
-            padding: 40px 0;
+            padding: 40px 0 32px;
             text-align: center;
+        }
+        .footer-brand {
             font-size: 13px;
             letter-spacing: 1px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
         footer .brand {
             color: white;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+        .footer-disclaimer {
+            color: rgba(255,255,255,0.35);
+            font-size: 10.5px;
+            line-height: 1.55;
+            letter-spacing: 0.2px;
+            max-width: 560px;
+            margin: 0 auto;
+            font-weight: 400;
         }
         footer .separator {
             margin: 0 10px;
@@ -783,7 +746,7 @@
                 Si estos <span class="transition-accent">3 hacks</span> te abrieron los ojos...
             </h2>
             <p class="transition-sub">
-                ¿Qué pasaría si te enseño los otros <strong>30</strong>?
+                Creé un programa para enseñarte <strong>todos mis hacks en 30 días</strong>.<br>Gratis.
             </p>
             <div class="transition-arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
@@ -887,14 +850,6 @@
                     <span class="copy-text">Copiar link</span>
                 </button>
             </div>
-            <div class="share-divider">
-                <span>O si prefieres</span>
-            </div>
-            <a href="pdfs/reboot-cafe.pdf" download class="download-btn" data-share-event="download_pdf">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                Descargar como PDF
-            </a>
-            <p class="download-note">Guárdalo en tu celular para tenerlo a mano</p>
         </div>
 
     </div>
@@ -902,7 +857,14 @@
 
 <footer>
     <div class="container">
-        <span class="brand">ReBoot Lifestyle</span><span class="separator">·</span>by Arie Reboot<span class="separator">·</span>Panamá
+        <div class="footer-brand">
+            <span class="brand">ReBoot Lifestyle</span><span class="separator">·</span>by Arie Reboot<span class="separator">·</span>Panamá
+        </div>
+        <div class="footer-disclaimer">
+            Contenido educativo con fines informativos. No sustituye diagnóstico, tratamiento ni consejo médico profesional. Consulta a tu médico antes de hacer cambios en tu alimentación o estilo de vida, especialmente si tienes condiciones de salud. Los resultados varían según cada persona.
+            <br><br>
+            © 2026 ReBoot Lifestyle · Arie Schwartz. Todos los derechos reservados. Prohibida la reproducción total o parcial del contenido, imágenes, metodología o material por cualquier medio sin autorización escrita previa.
+        </div>
     </div>
 </footer>
 
