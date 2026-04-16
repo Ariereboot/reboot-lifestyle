@@ -35,10 +35,38 @@ Crear el sistema completo de registro para el Programa Reboot 30. Debe capturar 
 
 ### Opciones exactas para el dropdown "País"
 
-- Panamá
-- Fuera de Panamá
+El dropdown debe tener lista completa de países (para tener el dato en BD), pero la LÓGICA de grupos WhatsApp es binaria:
+- **Panamá** → Grupo 1 (Reboot 30 · Panamá)
+- **Cualquier otro país** → Grupo 2 (Reboot 30 · Internacional)
 
-**Nota:** Simplificamos a solo 2 opciones. Los grupos de WhatsApp son solo 2: uno para Panamá, uno internacional.
+**Lista sugerida del dropdown (Panamá primero, después orden alfabético):**
+
+- Panamá
+- Argentina
+- Bolivia
+- Chile
+- Colombia
+- Costa Rica
+- Cuba
+- Ecuador
+- El Salvador
+- España
+- Estados Unidos
+- Guatemala
+- Honduras
+- México
+- Nicaragua
+- Paraguay
+- Perú
+- Puerto Rico
+- República Dominicana
+- Uruguay
+- Venezuela
+- Otro
+
+**Campo nombre interno en Fluent Forms:** `pais` (lowercase sin acento) para que coincida con el script del thank-you page.
+
+**Backup opcional:** También agregar un campo "Ciudad" (texto libre, opcional) para tener más granularidad en la BD, especialmente útil para los panameños.
 
 ### Opciones exactas para "¿Cuál es tu reto principal hoy?"
 
@@ -65,10 +93,15 @@ Crear el sistema completo de registro para el Programa Reboot 30. Debe capturar 
 
 **URL de redirect:**
 ```
-https://rebootlifestyle.com/reboot30/bienvenida/?nombre={inputs.names.first_name}&ciudad={inputs.ciudad}
+https://rebootlifestyle.com/reboot30/bienvenida/?nombre={inputs.names.first_name}&pais={inputs.pais}
 ```
 
-Esto pasa el nombre y ciudad a la página de bienvenida para personalizarla.
+Esto pasa el nombre y el país a la página de bienvenida.
+
+**Cómo el thank-you usa el país:**
+- Si `pais=Panamá` → botón WhatsApp lleva al grupo Panamá
+- Si `pais=[cualquier otro]` → botón WhatsApp lleva al grupo Internacional
+- Pero TODOS los países se guardan en FluentCRM + Google Sheet para analytics
 
 ---
 
