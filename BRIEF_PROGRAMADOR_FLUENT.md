@@ -23,7 +23,7 @@ Crear el sistema completo de registro para el Programa Reboot 30. Debe capturar 
 | 1 | Nombre completo | Name Fields (First Name) | Required, min 2 chars | "¿Cómo te llamas?" |
 | 2 | Teléfono WhatsApp | Phone Field | Required, default country Panamá (+507) | "Tu número con código de país" |
 | 3 | País | Dropdown | Required | "¿Desde dónde nos acompañas?" |
-| 4 | Reto principal | Radio | Required | "¿Cuál es tu reto principal hoy?" |
+| 4 | Retos (múltiples) | Checkbox | Required, mín 1 | "¿Qué quieres lograr? (puedes elegir varios)" |
 
 **OPCIONAL (pero recomendado):**
 
@@ -68,14 +68,22 @@ El dropdown debe tener lista completa de países (para tener el dato en BD), per
 
 **Backup opcional:** También agregar un campo "Ciudad" (texto libre, opcional) para tener más granularidad en la BD, especialmente útil para los panameños.
 
-### Opciones exactas para "¿Cuál es tu reto principal hoy?"
+### Opciones exactas para "¿Qué quieres lograr?" (CHECKBOX múltiple)
 
-- Quiero bajar de peso de forma sostenible
-- Dejar los antojos de azúcar
-- Tener más energía durante el día
+**IMPORTANTE:** Este campo es **checkbox** (selección múltiple), NO radio. El usuario puede marcar varios a la vez. Mínimo 1 marcado.
+
+- Bajar de peso de forma sostenible
+- Dejar los antojos de azúcar y/o harinas
+- Recuperar mi energía
+- Recuperar mi salud
 - Dormir mejor y reducir el estrés
 - Mejorar mi relación con la comida
-- Todas las anteriores
+
+**Nombre interno del campo:** `retos` (array en la base de datos)
+
+**Para Google Sheets:** guardar los retos seleccionados separados por coma en una sola celda. Ejemplo: `"Recuperar mi energía, Dormir mejor y reducir el estrés"`
+
+**Para FluentCRM:** crear un custom field `retos_seleccionados` (texto) con los valores separados por coma. Esto permite segmentar después: *"mandar email X solo a los que marcaron 'bajar de peso'"*.
 
 ### Botón de submit
 - Texto: "Guardar mi cupo →"
