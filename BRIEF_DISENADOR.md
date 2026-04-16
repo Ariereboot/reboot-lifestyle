@@ -101,6 +101,32 @@ Por cada PDF necesito:
 
 ---
 
+## ⚠️ CRÍTICO: LINKS CLICKEABLES EN LOS PDFs
+
+Los PDFs se van a compartir por WhatsApp y email. TODOS los links dentro del PDF deben ser clickeables:
+
+**Links que debe tener cada PDF:**
+1. **CTA botón principal:** "Guardar mi cupo →" → link al formulario de inscripción
+2. **Link al programa Reboot 30** → https://rebootlifestyle.com/programa-30-dias (URL final confirmar con Arie)
+3. **Link a Instagram:** https://instagram.com/ariereboot
+4. **Link a la página web del recurso** (para que lo compartan online): cada recurso tiene su URL en ariereboot.com/[recurso]
+5. **Botón "Compartir por WhatsApp"** al final del PDF → usar link wa.me/?text=...
+
+**Cómo hacerlos clickeables:**
+- **Canva:** Seleccionar elemento → clic en "Enlace" → pegar URL → Enlace externo → Descargar como PDF
+- **Figma:** Plugin "Hyperlink" → aplicar a cada elemento → exportar como PDF con "Include hyperlinks"
+- **Illustrator:** Window → Interactive → Hyperlinks → aplicar → Save As PDF con interactividad
+
+**TEST obligatorio antes de entregar:**
+Abrir cada PDF en iPhone Y Android, tocar cada link y verificar que abre el URL correcto. Si un link no funciona, el PDF no está listo.
+
+**Frase de cierre en el PDF:**
+> "¿Conoces a alguien a quien le sirva? Compártelo 👆"
+
+Con botón visible de WhatsApp abajo.
+
+---
+
 ## Timeline
 
 - **Sábado 19 abril:** Briefing con Arie
