@@ -306,64 +306,83 @@
 
         .cta-eyebrow {
             display: inline-block;
-            background: rgba(118,211,209,0.12);
-            color: var(--oxygen-blue);
-            padding: 6px 16px;
+            background: var(--arie-yellow);
+            color: var(--black-seed);
+            padding: 8px 18px;
             border-radius: 100px;
             font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
             text-transform: uppercase;
-            margin-bottom: 24px;
-            border: 1px solid rgba(118,211,209,0.25);
+            margin-bottom: 28px;
         }
         .cta-section h2 {
-            font-size: clamp(32px, 5.5vw, 52px);
-            line-height: 1.02;
+            font-size: clamp(34px, 5.5vw, 56px);
+            line-height: 1;
             font-weight: 900;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: -0.02em;
         }
         .cta-section h2 .cta-highlight {
             color: var(--oxygen-blue);
+            position: relative;
+            display: inline-block;
         }
-        .cta-section p {
-            color: rgba(255,255,255,0.75);
-            margin-bottom: 40px;
-            font-size: 17px;
-            max-width: 480px;
+        .cta-section h2 .cta-highlight::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 6px;
+            height: 10px;
+            background: rgba(118,211,209,0.25);
+            z-index: -1;
+        }
+        .cta-subhead {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 44px !important;
+            font-size: 18px !important;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-weight: 500;
         }
-        .cta-stats {
+
+        /* BENEFITS LIST */
+        .benefits-list {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            max-width: 480px;
-            margin: 0 auto 44px;
-            padding: 28px 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 540px;
+            margin: 0 auto 48px;
+            text-align: left;
         }
-        .stat {
-            text-align: center;
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 4px 0;
         }
-        /* Consistencia: TODOS los números en turquesa */
-        .stat-number {
+        .benefit-icon {
             font-size: 28px;
-            font-weight: 900;
-            color: var(--oxygen-blue);
             line-height: 1;
-            margin-bottom: 6px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 8px rgba(118,211,209,0.3));
         }
-        .stat-label {
-            font-size: 11px;
-            color: rgba(255,255,255,0.55);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            font-weight: 700;
+        .benefit-text {
+            font-size: 14px;
+            line-height: 1.4;
+            color: rgba(255,255,255,0.7);
+        }
+        .benefit-text strong {
+            display: block;
+            color: white;
+            font-weight: 800;
+            font-size: 15px;
+            margin-bottom: 3px;
+            letter-spacing: -0.01em;
         }
         .cta-button {
             display: inline-block;
@@ -451,7 +470,11 @@
         @media (max-width: 640px) {
             .cta-section { padding: 48px 24px; }
             .error-card { padding: 28px 22px; }
-            .cta-stats { grid-template-columns: 1fr; gap: 20px; }
+            .benefits-list {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                max-width: 340px;
+            }
             .hero { padding: 48px 0 80px; }
             h1 { font-size: 40px; }
         }
@@ -526,29 +549,59 @@
 
         <div class="cta-section">
             <div class="cta-content">
-                <div class="cta-eyebrow">🇵🇦 Solo para Panamá</div>
-                <h2>Imagínate los otros<br><span class="cta-highlight">30 hacks</span></h2>
-                <p>
-                    El café es solo UNO. Hay 30 hábitos más que probablemente están saboteando tu energía. En 30 días te enseño todos.
+                <div class="cta-eyebrow">Edición gratuita · Arranca el 4 de mayo</div>
+                <h2>En 30 días vas a sentir<br>que vives en <span class="cta-highlight">otro cuerpo</span></h2>
+                <p class="cta-subhead">
+                    No es dieta. No es contar calorías. Es aprender a comer diferente para siempre.
                 </p>
 
-                <div class="cta-stats">
-                    <div class="stat">
-                        <div class="stat-number">30</div>
-                        <div class="stat-label">Días</div>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⚡</div>
+                        <div class="benefit-text">
+                            <strong>Energía estable todo el día</strong>
+                            Sin bajones, sin depender del café
+                        </div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">70+</div>
-                        <div class="stat-label">Lecciones</div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">😴</div>
+                        <div class="benefit-text">
+                            <strong>Sueño profundo de verdad</strong>
+                            Dormir toda la noche sin despertarte
+                        </div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">$0</div>
-                        <div class="stat-label">Gratis</div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🧠</div>
+                        <div class="benefit-text">
+                            <strong>Claridad mental y mejor humor</strong>
+                            La niebla mental desaparece
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🍽️</div>
+                        <div class="benefit-text">
+                            <strong>Comer sin antojos ni culpa</strong>
+                            Liberación real de la adicción al azúcar
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💪</div>
+                        <div class="benefit-text">
+                            <strong>Cuerpo liviano y desinflamado</strong>
+                            Ropa que te queda diferente en 30 días
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🔥</div>
+                        <div class="benefit-text">
+                            <strong>Nueva relación con la comida</strong>
+                            Para siempre, no solo 30 días
+                        </div>
                     </div>
                 </div>
 
-                <a href="#" class="cta-button">Reservar mi cupo →</a>
-                <span class="cta-small">Arranca el 4 de mayo · Cupos limitados</span>
+                <a href="#" class="cta-button">Quiero empezar el 4 de mayo →</a>
+                <span class="cta-small">100% gratuito · Cupos limitados · Comunidad exclusiva</span>
             </div>
         </div>
 
