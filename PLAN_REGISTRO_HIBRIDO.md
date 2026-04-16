@@ -32,10 +32,18 @@
 | # | Campo | Tipo | Para qué sirve |
 |---|-------|------|----------------|
 | 5 | Email | Email | Backup si WhatsApp falla + futuras ofertas |
-| 6 | ¿Cómo te enteraste? | Radio | Instagram @ariereboot, TikTok, un amigo/conocido, ads, búsqueda, otro |
 
 **Checkbox obligatorio al final:**
 - "Acepto recibir comunicaciones por WhatsApp y email sobre el programa"
+
+**Fuente del registro (automático, sin preguntar al usuario):**
+Se captura vía UTM parameters en la URL. Cada canal tiene su UTM:
+- Desde reel Instagram: `/reboot30?utm_source=ig_reel_[tema]`
+- Desde WhatsApp grupo: `/reboot30?utm_source=wa_group`
+- Desde ads Meta: `/reboot30?utm_source=ad_meta_[campaña]`
+- Desde bio de Instagram: `/reboot30?utm_source=bio_ig`
+
+Fluent Forms captura automáticamente estos parámetros y los guarda en el campo `fuente`.
 
 ### Configuración técnica en Fluent Forms
 
@@ -91,6 +99,67 @@ Mientras tanto, sígueme en Instagram
 Fórmula: `rebootlifestyle.com/reboot30/bienvenida?ciudad={ciudad}&nombre={nombre}`
 
 En la página de bienvenida, JavaScript lee el parámetro y muestra el link correcto.
+
+---
+
+## 2B. BACKUP A GOOGLE SHEETS (crítico - protección de data)
+
+### Estrategia: Triple backup redundante
+
+Para proteger la data más importante del negocio (leads del programa), implementamos triple backup:
+
+**Capa 1 — FluentCRM (local WordPress)**
+- Data primaria
+- Tags, listas, custom fields
+- Automations activas
+- ⚠️ Si el WordPress se cae/hackea/banean, se pierde
+
+**Capa 2 — Google Sheets (nube personal, privada)** ⭐ nueva
+- Duplicación automática en cada registro
+- Propiedad 100% de Arie (no del hosting)
+- Accesible desde cualquier dispositivo
+- Compartible selectivamente con equipo
+- Base para análisis futuro
+
+**Capa 3 — Export CSV manual (mensual)**
+- Descarga completa de FluentCRM
+- Guardado en 1Password o Dropbox privado encriptado
+- Para cumplimiento legal y auditoría
+
+### Setup Google Sheets
+
+**Google Sheet privado:**
+- Nombre: `Reboot 30 - Registros Mayo 2026`
+- Ubicación: Drive personal de Arie (NO compartido)
+- Solo accesible con cuenta arie@arieschwartz.com
+
+**Columnas del sheet:**
+```
+A: Timestamp del registro
+B: Nombre completo
+C: Teléfono (con código país)
+D: Ciudad
+E: Reto principal seleccionado
+F: Email (si lo dio)
+G: Fuente (UTM source)
+H: Consentimiento dado (Sí/No)
+I: ID único FluentCRM
+```
+
+**Integración técnica:**
+Fluent Forms Pro tiene integración NATIVA con Google Sheets (incluida en tu plan Pro, sin costo extra).
+
+Setup en WordPress:
+1. Fluent Forms → Global Settings → Integrations
+2. Activar "Google Sheets" 
+3. Conectar cuenta Google de Arie (OAuth)
+4. En el formulario específico → Integrations → Add New Feed → Google Sheets
+5. Seleccionar el spreadsheet creado
+6. Mapear campos del form a columnas
+7. Modo: "Append" (agregar al final)
+
+**Testing obligatorio:**
+Hacer 3 registros de prueba y verificar que aparecen en el Google Sheet en segundos.
 
 ---
 

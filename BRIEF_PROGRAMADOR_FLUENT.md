@@ -1,0 +1,325 @@
+# Brief para Programador: Setup Fluent Forms + CRM + Google Sheets
+## Proyecto: Reboot 30 · Lanzamiento 4 mayo 2026
+
+---
+
+## Objetivo
+Crear el sistema completo de registro para el Programa Reboot 30. Debe capturar leads, duplicar automáticamente a Google Sheets (backup), enviar email automático, y redirigir al grupo de WhatsApp correcto según ciudad.
+
+---
+
+## PARTE 1: Crear el formulario en Fluent Forms Pro
+
+### Ubicación
+- Nueva página WordPress: `rebootlifestyle.com/reboot30`
+- Plantilla de página: "Blank / Full Width" (sin header ni sidebar)
+
+### Campos del formulario (EN ESTE ORDEN)
+
+**OBLIGATORIOS:**
+
+| # | Campo | Tipo Fluent Forms | Validación | Placeholder |
+|---|-------|-------------------|------------|-------------|
+| 1 | Nombre completo | Name Fields (First Name) | Required, min 2 chars | "¿Cómo te llamas?" |
+| 2 | Teléfono WhatsApp | Phone Field | Required, default country Panamá (+507) | "Tu número con código de país" |
+| 3 | Ciudad | Dropdown | Required | "Elige tu ciudad" |
+| 4 | Reto principal | Radio | Required | "¿Cuál es tu reto principal hoy?" |
+
+**OPCIONAL (pero recomendado):**
+
+| 5 | Email | Email Field | Valid email format | "Para backup si WhatsApp falla" |
+
+**AL FINAL:**
+
+| 6 | Checkbox consentimiento | Checkbox | Required | "Acepto recibir comunicaciones por WhatsApp y email sobre el programa" |
+
+### Opciones exactas para el dropdown "Ciudad"
+
+- Ciudad de Panamá
+- Panamá Oeste (Arraiján, La Chorrera, Capira)
+- Colón
+- David / Chiriquí
+- Chitré / Herrera / Los Santos
+- Santiago / Veraguas
+- Otra ciudad de Panamá
+- Fuera de Panamá
+
+### Opciones exactas para "¿Cuál es tu reto principal hoy?"
+
+- Quiero bajar de peso de forma sostenible
+- Dejar los antojos de azúcar
+- Tener más energía durante el día
+- Dormir mejor y reducir el estrés
+- Mejorar mi relación con la comida
+- Todas las anteriores
+
+### Botón de submit
+- Texto: "Guardar mi cupo →"
+- Color: Naranja `#e85c26` (identidad de marca)
+- Texto blanco, bold
+- Padding generoso
+
+---
+
+## PARTE 2: Configuración de confirmación (post-submit)
+
+### En Fluent Forms → el form → tab "Confirmations":
+
+**Tipo de confirmación:** `Redirect to Custom URL`
+
+**URL de redirect:**
+```
+https://rebootlifestyle.com/reboot30/bienvenida/?nombre={inputs.names.first_name}&ciudad={inputs.ciudad}
+```
+
+Esto pasa el nombre y ciudad a la página de bienvenida para personalizarla.
+
+---
+
+## PARTE 3: Integración con FluentCRM (tags + automation)
+
+### En Fluent Forms → el form → tab "Marketing & CRM Integration":
+
+**Activar:** FluentCRM integration
+
+**Configuración:**
+- Add as contact: ✅
+- Tag: `Reboot30_Mayo2026` + `Lead_Abril2026`
+- List: `Programa 30 dias Mayo` (crear si no existe)
+- Custom field mapping:
+  - `reto_principal` = valor del radio "¿Cuál es tu reto?"
+  - `ciudad` = valor del dropdown ciudad
+  - `fuente` = query param `utm_source` si existe (ver abajo)
+
+### Crear automation en FluentCRM
+
+**Nombre:** `Reboot 30 - Welcome Flow`
+
+**Trigger:** Tag Added → `Reboot30_Mayo2026`
+
+**Acciones secuenciales:**
+
+```
+1. Wait: 0 minutos
+   Action: Send Email → Template "Reboot30 Welcome"
+
+2. Wait: 24 horas
+   Condition: Has NOT clicked link in previous email
+   Action: Send Email → Template "Reboot30 Reminder Grupo WhatsApp"
+
+3. Wait: 72 horas
+   Action: Send Email → Template "Reboot30 Pre-arranque Tip 1"
+
+4. Wait: hasta 1 Mayo 2026
+   Action: Send Email → Template "Reboot30 Cuenta regresiva 3 días"
+
+5. Wait: hasta 4 Mayo 2026 (7:00 AM)
+   Action: Send Email → Template "Reboot30 Día 1 - Arrancamos"
+```
+
+---
+
+## PARTE 4: INTEGRACIÓN CON GOOGLE SHEETS (CRÍTICO - BACKUP)
+
+### Requisito del cliente (Arie):
+Tener TODOS los registros duplicados automáticamente en un Google Sheet privado, como backup propio.
+
+### Setup:
+
+**Paso 1:** Crear Google Sheet privado
+- Google Drive → Nueva hoja de cálculo
+- Nombre: `Reboot 30 - Registros Mayo 2026`
+- Compartir solo con Arie (arie@arieschwartz.com) con permisos de Editor
+- NO compartir públicamente
+
+**Paso 2:** Agregar columnas (fila 1):
+```
+A: Timestamp
+B: Nombre
+C: Teléfono
+D: Ciudad
+E: Reto principal
+F: Email
+G: Fuente (UTM)
+H: IP (opcional)
+I: Consentimiento
+```
+
+**Paso 3:** En Fluent Forms → el form → tab "Integrations":
+- Buscar "Google Sheets"
+- Si no aparece, instalar add-on (Fluent Forms Pro lo tiene nativo)
+- Conectar cuenta de Google (la del cliente Arie)
+- Seleccionar el spreadsheet creado
+- Seleccionar la hoja específica
+- Mapear cada campo del formulario a la columna correspondiente
+
+**Paso 4:** Configurar modo "Append" (agregar al final, no sobrescribir)
+
+**Paso 5:** TESTEAR con 3 registros de prueba. Verificar que aparecen en el Google Sheet.
+
+---
+
+## PARTE 5: Página de bienvenida post-registro
+
+### Crear página: `rebootlifestyle.com/reboot30/bienvenida`
+
+**Template:** Blank / Full Width
+
+**Contenido (en Elementor o HTML):**
+
+```
+[Fondo negro #0f0f0f, texto blanco]
+
+[Logo ReBoot Lifestyle centrado]
+
+¡Hola [NOMBRE]! 🎉
+
+Tu cupo está reservado oficialmente.
+
+[Caja con fondo negro y borde amarillo #fae62b]
+ARRANCA
+4 · MAYO
+2026
+
+[Botón verde WhatsApp, gigante, centrado]
+"Entrar al grupo exclusivo de WhatsApp →"
+
+[Link dinámico según ciudad - ver JavaScript abajo]
+
+[Texto secundario]
+Tu cupo oficial queda confirmado cuando entras al grupo.
+
+[Separador]
+
+Mientras tanto, sígueme en Instagram
+[Botón secundario]
+@ariereboot →
+```
+
+### JavaScript para link dinámico según ciudad
+
+En el `<head>` o en un bloque HTML custom:
+
+```javascript
+<script>
+(function() {
+    // Capturar parámetros de URL
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get('nombre') || '';
+    const ciudad = params.get('ciudad') || '';
+
+    // Mapeo de ciudad a link de WhatsApp (actualizar con links reales de cada grupo)
+    const grupos = {
+        'Ciudad de Panamá': 'https://chat.whatsapp.com/LINK_GRUPO_1',
+        'Panamá Oeste (Arraiján, La Chorrera, Capira)': 'https://chat.whatsapp.com/LINK_GRUPO_2',
+        'Colón': 'https://chat.whatsapp.com/LINK_GRUPO_3',
+        'David / Chiriquí': 'https://chat.whatsapp.com/LINK_GRUPO_3',
+        'Chitré / Herrera / Los Santos': 'https://chat.whatsapp.com/LINK_GRUPO_3',
+        'Santiago / Veraguas': 'https://chat.whatsapp.com/LINK_GRUPO_3',
+        'Otra ciudad de Panamá': 'https://chat.whatsapp.com/LINK_GRUPO_3',
+        'Fuera de Panamá': 'https://chat.whatsapp.com/LINK_GRUPO_4'
+    };
+
+    // Personalizar nombre en la página
+    const nombreElement = document.getElementById('nombre-placeholder');
+    if (nombreElement && nombre) {
+        nombreElement.textContent = nombre;
+    }
+
+    // Asignar link del grupo correspondiente al botón
+    const botonWA = document.getElementById('boton-whatsapp');
+    if (botonWA && grupos[ciudad]) {
+        botonWA.href = grupos[ciudad];
+    } else if (botonWA) {
+        // Fallback: grupo general si la ciudad no está mapeada
+        botonWA.href = 'https://chat.whatsapp.com/LINK_GRUPO_GENERAL';
+    }
+})();
+</script>
+```
+
+En el HTML:
+```html
+<h1>¡Hola <span id="nombre-placeholder">amigo</span>! 🎉</h1>
+<a id="boton-whatsapp" href="#" class="boton-verde">
+    Entrar al grupo exclusivo de WhatsApp →
+</a>
+```
+
+---
+
+## PARTE 6: Crear los 5 grupos de WhatsApp
+
+Arie necesita crear manualmente en WhatsApp estos grupos:
+
+1. **Reboot 30 · Ciudad de Panamá**
+2. **Reboot 30 · Panamá Oeste**
+3. **Reboot 30 · Interior** (Colón, David, Chitré, Santiago)
+4. **Reboot 30 · Internacional** (fuera de Panamá)
+5. **Reboot 30 · General** (overflow)
+
+De cada grupo sacar el **link de invitación** (chat.whatsapp.com/XXXXX).
+
+Esos 5 links se insertan en el JavaScript de la página de bienvenida (ver arriba).
+
+---
+
+## PARTE 7: Testing obligatorio antes de lanzar
+
+### Testear con 5 registros de prueba usando diferentes ciudades:
+
+1. ✅ El formulario envía sin errores
+2. ✅ El registro aparece en FluentCRM con los tags correctos
+3. ✅ El registro aparece en el Google Sheet (doble backup)
+4. ✅ El email de bienvenida llega a la inbox
+5. ✅ La página de bienvenida muestra el nombre correcto
+6. ✅ El botón de WhatsApp lleva al grupo correcto según ciudad
+7. ✅ Los campos custom (ciudad, reto) se guardan bien
+8. ✅ En mobile, el formulario se ve bien y es fácil de llenar
+9. ✅ Testear en iPhone, Android y desktop
+10. ✅ La automation dispara emails en los tiempos correctos
+
+---
+
+## PARTE 8: Instalación del Pixel de Meta (para retargeting futuro)
+
+Cuando Arie tenga el Pixel ID (lo saca en business.facebook.com → Events Manager):
+
+1. Instalar plugin "Insert Headers and Footers" en WordPress (si no está)
+2. Pegar el código del Pixel en el `<head>` de toda la web
+3. En la página de registro, agregar evento custom `Lead`:
+```javascript
+fbq('track', 'Lead', {
+    content_name: 'Reboot 30 Registration',
+    content_category: 'Program',
+    value: 0.00,
+    currency: 'USD'
+});
+```
+4. En la página de bienvenida, agregar evento `CompleteRegistration`:
+```javascript
+fbq('track', 'CompleteRegistration');
+```
+
+---
+
+## Timeline sugerido
+
+| Día | Tarea | Responsable |
+|-----|-------|-------------|
+| Viernes 17 abril | Crear formulario + integración Google Sheets | Programador |
+| Viernes 17 abril | Crear página de bienvenida con JS dinámico | Programador |
+| Sábado 18 abril | Arie crea los 5 grupos de WhatsApp | Arie |
+| Sábado 18 abril | Insertar links de WhatsApp en JS | Programador |
+| Domingo 19 abril | Testing completo del flujo | Programador + Arie |
+| Lunes 20 abril | Configurar automation de emails en FluentCRM | Programador |
+| Martes 21 abril | Envío del mensaje a los 1000 actuales | Arie |
+| Miércoles 23 abril | Primer reel sale (café) → primer tráfico real | Arie |
+
+---
+
+## Contacto
+
+- Cliente: Arie Schwartz (arie@arieschwartz.com)
+- Urgencia: Lanzamiento 4 de mayo 2026 (18 días)
+- Comunicación: WhatsApp directo o según prefiera el programador
