@@ -7,13 +7,5 @@
     "api/analyze.js": {
       "maxDuration": 30
     }
-  },
-  "headers": [
-    {
-      "source": "/(.*\\.(css|js|svg|jpg|jpeg|png|webp|ico))",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=300, must-revalidate" }
-      ]
-    }
-  ]
+  }
 }
