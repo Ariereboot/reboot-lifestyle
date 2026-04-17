@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semáforo Reboot · Analiza cualquier menú</title>
+  <meta name="description" content="Sube el menú de cualquier restaurante y te digo qué pedir. Análisis instantáneo según la filosofía Reboot Lifestyle." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Semáforo Reboot · Analiza cualquier menú" />
+  <meta property="og:description" content="Sube el menú y te digo qué pedir. En segundos." />
+  <meta property="og:image" content="/og-semaforo.jpg" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Canonical (update when custom domain is live) -->
+  <link rel="canonical" href="https://reboot-lifestyle-semaforo.vercel.app/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Meta Pixel placeholder — activate when Arie provides ID -->
+  <!--
+  <script>
+    !function(f,b,e,v,n,t,s){ ... }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'PIXEL_ID_PLACEHOLDER');
+    fbq('track', 'PageView');
+  </script>
+  -->
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="/">Reboot Lifestyle · <span>Semáforo</span></a>
+      <a class="ig-handle" href="https://instagram.com/ariereboot" target="_blank" rel="noopener">@ariereboot</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 1: Upload / Hero -->
+    <section id="upload-section" class="section section--hero">
+      <div class="hero">
+        <span class="badge">NUEVO · BETA</span>
+        <h1>Sube el menú y te digo <span class="hl">qué pedir</span></h1>
+        <p class="subtitle">Escanea el menú de cualquier restaurante y recibe el análisis Reboot en segundos. Cada plato con su semáforo: verde, amarillo o rojo.</p>
+
+        <label for="file-input" class="upload-btn" id="upload-btn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          <span>Subir foto del menú</span>
+        </label>
+        <input id="file-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic" capture="environment" hidden />
+
+        <p class="hint">Tip: asegúrate de que el menú se lea bien y haya buena luz.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Loading -->
+    <section id="loading-section" class="section section--loading" hidden>
+      <div class="loading">
+        <div class="loading__spinner" aria-hidden="true"></div>
+        <p class="loading__text" id="loading-text">Leyendo el menú…</p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Result -->
+    <section id="result-section" class="section section--result" hidden>
+      <div class="result" id="result-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-secondary" id="share-whatsapp-btn" type="button">
+          Compartir por WhatsApp
+        </button>
+        <button class="btn-secondary" id="new-analysis-btn" type="button">
+          Analizar otro menú
+        </button>
+      </div>
+
+      <!-- CTA Hook -->
+      <div class="cta-hook">
+        <p class="cta-hook__eyebrow">Reboot 30 · Programa de 30 días</p>
+        <h2>Quieres esto personalizado para <span class="hl">TI</span>?</h2>
+        <p class="cta-hook__copy">
+          Este análisis aplica el estándar Reboot general. Regístrate al <strong>Reboot 30</strong> gratis y pronto tendrás análisis ajustado a tu dieta, tus alergias, tu etapa de vida y tu objetivo.
+        </p>
+        <a class="btn-primary" id="cta-reboot30" href="https://rebootlifestyle.com/reboot30?utm_source=semaforo&utm_medium=app&utm_campaign=lanzamiento_reboot30" target="_blank" rel="noopener">
+          Guardar mi cupo →
+        </a>
+        <p class="date-accent">4 · MAYO · 2026</p>
+      </div>
+    </section>
+
+    <!-- Error -->
+    <section id="error-section" class="section section--error" hidden>
+      <div class="error-box">
+        <h2>Algo falló</h2>
+        <p id="error-message">Intenta de nuevo en un minuto.</p>
+        <button class="btn-secondary" id="retry-btn" type="button">Reintentar</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="disclaimer">
+      <strong>Contenido educativo con fines informativos.</strong> No sustituye diagnóstico, tratamiento ni consejo médico profesional. Consulta a tu médico antes de hacer cambios en tu alimentación o estilo de vida, especialmente si tienes condiciones de salud. Los resultados varían según cada persona.
+    </p>
+    <p class="copyright">© 2026 ReBoot Lifestyle · Arie Schwartz. Todos los derechos reservados. Prohibida la reproducción total o parcial sin autorización escrita previa.</p>
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
