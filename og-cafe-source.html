@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #0f0f0f;
+    width: 1200px;
+    height: 630px;
+    padding: 80px 96px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+.glow-right {
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(118,211,209,0.28) 0%, transparent 70%);
+    border-radius: 50%;
+}
+.glow-left {
+    position: absolute;
+    bottom: -200px;
+    left: -200px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(250,230,43,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+}
+.content { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+.top { display: flex; justify-content: space-between; align-items: center; }
+.brand { font-weight: 900; font-size: 24px; letter-spacing: -0.3px; text-transform: uppercase; }
+.brand .accent { color: #76d3d1; }
+.handle { color: rgba(255,255,255,0.5); font-size: 16px; font-weight: 600; letter-spacing: 1.5px; }
+.badge {
+    display: inline-block;
+    background: #fae62b;
+    color: #0f0f0f;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    width: fit-content;
+}
+h1 {
+    font-size: 96px;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+h1 .highlight {
+    color: #76d3d1;
+}
+.subtitle {
+    font-size: 22px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+    max-width: 900px;
+    line-height: 1.4;
+}
+.bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+.cta-chip {
+    background: #e85c26;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 100px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+.by {
+    text-align: right;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.by span { color: #fae62b; display: block; font-size: 16px; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="glow-right"></div>
+<div class="glow-left"></div>
+<div class="content">
+    <div class="top">
+        <div class="brand">ReBoot<span class="accent">·</span>Lifestyle</div>
+        <div class="handle">@ariereboot</div>
+    </div>
+    <div>
+        <div class="badge">⚡ Recurso Gratis</div>
+        <h1>Los 3 errores del café<br>que te roban <span class="highlight">energía</span></h1>
+        <p class="subtitle">Si tomas café con azúcar, PARA. Aprende los hacks que están saboteando tu energía todos los días.</p>
+    </div>
+    <div class="bottom">
+        <div class="cta-chip">Reboot 30 · 4 Mayo 2026</div>
+        <div class="by">by<span>ARIE REBOOT</span></div>
+    </div>
+</div>
+</body>
+</html>
