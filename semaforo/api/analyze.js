@@ -80,9 +80,13 @@ export default async function handler(req, res) {
         message: 'El modelo devolvió algo inesperado. Intenta con otra foto o PDF.',
       });
     }
+    // Distinguish timeout from other errors
+    const isTimeout = err?.name === 'AbortError' || /timeout|timed out/i.test(err?.message || '');
     return res.status(500).json({
-      error: 'internal_error',
-      message: 'Algo falló del lado nuestro. Intenta de nuevo en un minuto.',
+      error: isTimeout ? 'timeout' : 'internal_error',
+      message: isTimeout
+        ? 'El menú es muy grande y el análisis tardó más de lo esperado. Intenta con una parte del menú o una foto más corta.'
+        : 'Algo falló del lado nuestro. Intenta de nuevo en un minuto.',
     });
   }
 }

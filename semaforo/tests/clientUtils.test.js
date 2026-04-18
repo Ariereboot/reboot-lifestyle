@@ -9,10 +9,10 @@ describe('escapeHtml', () => {
 });
 
 describe('verdictLabel', () => {
-  it('returns Spanish labels for each verdict', () => {
-    expect(verdictLabel('green')).toBe('SE PUEDE');
-    expect(verdictLabel('yellow')).toBe('CON CAMBIO');
-    expect(verdictLabel('red')).toBe('MEJOR NO');
+  it('returns empathetic, non-judgmental Spanish labels for each verdict', () => {
+    expect(verdictLabel('green')).toBe('ALINEADO');
+    expect(verdictLabel('yellow')).toBe('PEQUEÑO AJUSTE');
+    expect(verdictLabel('red')).toBe('OTRA MEJOR');
   });
 });
 
@@ -39,9 +39,9 @@ describe('renderResult', () => {
     const html = renderResult(sample);
     expect(html).toContain('3');
     expect(html).toContain('Pollo a la plancha');
-    expect(html).toContain('SE PUEDE');
-    expect(html).toContain('CON CAMBIO');
-    expect(html).toContain('MEJOR NO');
+    expect(html).toContain('ALINEADO');
+    expect(html).toContain('PEQUEÑO AJUSTE');
+    expect(html).toContain('OTRA MEJOR');
   });
 
   it('renders the substitution only for yellow verdicts', () => {

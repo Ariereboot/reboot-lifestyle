@@ -9,7 +9,7 @@ export function escapeHtml(str) {
 }
 
 export function verdictLabel(v) {
-  return { green: 'SE PUEDE', yellow: 'CON CAMBIO', red: 'MEJOR NO' }[v] || '';
+  return { green: 'ALINEADO', yellow: 'PEQUEÑO AJUSTE', red: 'OTRA MEJOR' }[v] || '';
 }
 
 export function verdictColor(v) {
@@ -33,9 +33,9 @@ export function renderResult(data) {
     <div class="result-summary">
       <p class="result-summary__total">Analicé <strong>${summary.total}</strong> platos</p>
       <ul class="result-summary__breakdown">
-        <li><span class="dot" style="background:#22c55e"></span>${summary.green} verdes</li>
-        <li><span class="dot" style="background:#facc15"></span>${summary.yellow} amarillos</li>
-        <li><span class="dot" style="background:#ef4444"></span>${summary.red} rojos</li>
+        <li><span class="dot" style="background:#22c55e"></span>${summary.green} alineados</li>
+        <li><span class="dot" style="background:#facc15"></span>${summary.yellow} con ajuste</li>
+        <li><span class="dot" style="background:#ef4444"></span>${summary.red} otra mejor</li>
       </ul>
     </div>
   `;
@@ -50,7 +50,7 @@ export function renderResult(data) {
             <span class="item__label" style="color:${verdictColor(item.verdict)}">${verdictLabel(item.verdict)}</span>
           </div>
           <p class="item__reason">${escapeHtml(item.reason)}</p>
-          ${item.substitution ? `<p class="item__sub"><strong>Sustitución:</strong> ${escapeHtml(item.substitution)}</p>` : ''}
+          ${item.substitution ? `<p class="item__sub"><strong>Sugerencia:</strong> ${escapeHtml(item.substitution)}</p>` : ''}
         </li>
       `
     )
