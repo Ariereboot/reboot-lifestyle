@@ -11,7 +11,8 @@ const uploadSection = $('#upload-section');
 const loadingSection = $('#loading-section');
 const resultSection = $('#result-section');
 const errorSection = $('#error-section');
-const fileInput = $('#file-input');
+const cameraInput = $('#camera-input');
+const galleryInput = $('#gallery-input');
 const resultContainer = $('#result-container');
 const loadingText = $('#loading-text');
 const errorMessage = $('#error-message');
@@ -89,10 +90,12 @@ function showError(msg) {
   showSection(errorSection);
 }
 
-fileInput.addEventListener('change', (e) => {
-  const file = e.target.files?.[0];
-  fileInput.value = '';
-  if (file) handleFile(file);
+[cameraInput, galleryInput].forEach((input) => {
+  input.addEventListener('change', (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (file) handleFile(file);
+  });
 });
 
 retryBtn.addEventListener('click', () => showSection(uploadSection));
