@@ -300,6 +300,26 @@
             .wa-button { padding: 16px 26px; font-size: 15px; gap: 10px; }
         }
     </style>
+
+    <!-- Meta Pixel Code - ReBoot Lifestyle Woo -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1132977114723398');
+    fbq('track', 'PageView');
+    fbq('track', 'CompleteRegistration', {
+        content_name: 'Registro Reboot 30 Completado',
+        content_category: 'Lead Conversion',
+        status: 'completed',
+        value: 0.00,
+        currency: 'USD'
+    });
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1132977114723398&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -387,8 +407,18 @@
         if (nameEl) nameEl.textContent = nombre;
     }
 
-    // Tracking para pixel (activar cuando esté)
-    // if (typeof fbq !== 'undefined') fbq('track', 'CompleteRegistration');
+    // Tracking: clic en botón WhatsApp = Contact event (intención de unirse al grupo)
+    if (waLink) {
+        waLink.addEventListener('click', () => {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Contact', {
+                    content_name: 'Click WhatsApp Group Join',
+                    content_category: esPanama ? 'WhatsApp Panama' : 'WhatsApp Internacional',
+                    status: 'clicked'
+                });
+            }
+        });
+    }
 })();
 </script>
 
