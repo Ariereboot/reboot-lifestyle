@@ -33,34 +33,27 @@
     <link rel="canonical" href="https://ariereboot.github.io/reboot-lifestyle/cafe.html">
 
     <!-- ============================================= -->
-    <!-- META PIXEL (reemplazar TU_PIXEL_ID cuando lo tengas) -->
+    <!-- META PIXEL - ReBoot Lifestyle (ID 2240890496716069) -->
     <!-- ============================================= -->
     <script>
-    /*
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'TU_PIXEL_ID');
+    fbq('init', '2240890496716069');
     fbq('track', 'PageView');
     fbq('track', 'ViewContent', {
-        content_name: 'Recurso Café - 3 Errores',
+        content_name: 'Recurso Café - 3 Errores del Café',
         content_category: 'Lead Magnet',
-        content_ids: ['cafe-reboot-30']
+        content_ids: ['landing_cafe'],
+        content_type: 'landing_page'
     });
-    */
     </script>
-    <!-- <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1"/></noscript> -->
-
-    <!-- Google Analytics 4 (opcional, reemplazar G-XXXX cuando esté) -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
-    <!-- <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script> -->
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2240890496716069&ev=PageView&noscript=1"/></noscript>
+    <!-- ============================================= -->
+    <!-- End Meta Pixel -->
+    <!-- ============================================= -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -974,21 +967,6 @@
     </div>
 </footer>
 
-<!-- ============================================= -->
-<!-- TRACKING PIXELS (pendiente de configurar)    -->
-<!-- ============================================= -->
-<!-- Meta/Facebook Pixel: pega aquí tu código cuando tengas pixel ID -->
-<!-- <script>
-!function(f,b,e,v,n,t,s){...}
-fbq('init', 'TU_PIXEL_ID');
-fbq('track', 'PageView');
-fbq('track', 'ViewContent', {content_name: 'Recurso Cafe', content_category: 'Lead Magnet'});
-</script> -->
-<!-- ============================================= -->
-<!-- Google Analytics / GTM: pega aquí cuando tengas GA4 ID -->
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
-<!-- ============================================= -->
-
 <script>
     // COPIAR LINK AL PORTAPAPELES
     function copyLink(btn) {
@@ -1003,7 +981,6 @@ fbq('track', 'ViewContent', {content_name: 'Recurso Cafe', content_category: 'Le
                 btn.classList.remove('copied');
             }, 2000);
         }).catch(() => {
-            // Fallback para navegadores viejos
             const textarea = document.createElement('textarea');
             textarea.value = url;
             document.body.appendChild(textarea);
@@ -1018,18 +995,35 @@ fbq('track', 'ViewContent', {content_name: 'Recurso Cafe', content_category: 'Le
                 btn.classList.remove('copied');
             }, 2000);
         });
+
+        // Track evento Meta Pixel
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Share', { method: 'copy_link', content_name: 'Recurso Café' });
+        }
     }
 
-    // TRACKING EVENTS - Preparado para Meta Pixel/GA4 cuando se agreguen
+    // TRACKING META PIXEL - eventos clave
     document.querySelectorAll('.cta-button').forEach(btn => {
         btn.addEventListener('click', () => {
-            // if (typeof fbq !== 'undefined') fbq('track', 'Lead', {content_name: 'Guardar Cupo Cafe'});
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'Click CTA Guardar Cupo - Landing Café',
+                    content_category: 'CTA',
+                    value: 0.00,
+                    currency: 'USD'
+                });
+            }
             console.log('CTA click: Guardar mi cupo');
         });
     });
     document.querySelectorAll('.share-wa').forEach(btn => {
         btn.addEventListener('click', () => {
-            // if (typeof fbq !== 'undefined') fbq('track', 'Share', {method: 'whatsapp'});
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Share', {
+                    method: 'whatsapp',
+                    content_name: 'Recurso Café'
+                });
+            }
             console.log('Share: WhatsApp');
         });
     });

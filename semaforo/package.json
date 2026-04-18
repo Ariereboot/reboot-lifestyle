@@ -1,0 +1,25 @@
+{
+  "name": "reboot-lifestyle-semaforo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.90.0",
+    "@supabase/supabase-js": "^2.103.3"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.2.0",
+    "jsdom": "^25.0.0",
+    "sharp": "^0.34.5",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
