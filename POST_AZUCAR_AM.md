@@ -22,7 +22,7 @@ Dar valor MASIVO en el carrusel (que la gente lo guarde y comparta), pero dejar 
 >
 > **Guarda este post** para leer etiquetas esta semana. Te va a cambiar la relación con el super.
 >
-> ¿Quieres la lista completa de los 10 nombres tramposos + la guía para leer cualquier etiqueta en 15 segundos + 3 swaps que usas desde mañana?
+> ¿Quieres la lista completa de los 10 nombres disfrazados + la guía para leer cualquier etiqueta en 15 segundos + 3 swaps que usas desde mañana?
 >
 > 👉 **Comenta "AZÚCAR"** y te mando todo por DM. Gratis. Es el primero de una serie que estoy soltando antes del Programa Reboot 30 que arranca el 4 de mayo.
 >
@@ -65,11 +65,11 @@ Dar valor MASIVO en el carrusel (que la gente lo guarde y comparta), pero dejar 
 > Significa que le cambiaron el nombre.
 
 **Subtexto (abajo):**
-> Te enseño los 3 más tramposos 👉
+> Te enseño los 3 más disfrazados 👉
 
 ---
 
-### SLIDE 4 — TRAMPOSO #1
+### SLIDE 4 — DISFRAZADO #1
 **Título:** JARABE DE AGAVE
 **Texto:**
 > Te lo venden como "natural".
@@ -81,7 +81,7 @@ Dar valor MASIVO en el carrusel (que la gente lo guarde y comparta), pero dejar 
 
 ---
 
-### SLIDE 5 — TRAMPOSO #2
+### SLIDE 5 — DISFRAZADO #2
 **Título:** MALTODEXTRINA
 **Texto:**
 > Disparó tu glucosa más rápido que el azúcar puro.
@@ -92,7 +92,7 @@ Dar valor MASIVO en el carrusel (que la gente lo guarde y comparta), pero dejar 
 
 ---
 
-### SLIDE 6 — TRAMPOSO #3
+### SLIDE 6 — DISFRAZADO #3
 **Título:** CONCENTRADO DE JUGO DE FRUTA
 **Texto:**
 > "Endulzado con fruta" = marketing.
@@ -119,7 +119,7 @@ Dar valor MASIVO en el carrusel (que la gente lo guarde y comparta), pero dejar 
 ### SLIDE 8 — CURIOSITY GAP
 **Texto:**
 > Hay **7 nombres más**
-> que son igual de tramposos.
+> que son igual de disfrazados.
 >
 > + los productos específicos del super panameño donde los encuentras.
 >
@@ -135,7 +135,7 @@ Dar valor MASIVO en el carrusel (que la gente lo guarde y comparta), pero dejar 
 
 **Subtexto:**
 > Te mando GRATIS por DM:
-> ✅ Los 10 nombres tramposos (PDF)
+> ✅ Los 10 nombres disfrazados (PDF)
 > ✅ Guía: leer etiquetas en 15 seg
 > ✅ 3 swaps para tu día
 >
@@ -161,6 +161,6 @@ Dar valor MASIVO en el carrusel (que la gente lo guarde y comparta), pero dejar 
 ## 🔄 FOLLOW-UP STORIES (mismo día)
 
 - **Story 1 (AM):** Captura del post con sticker "comenta AZÚCAR"
-- **Story 2 (mediodía):** Foto genérica de una etiqueta del super (tapando la marca o en primer plano solo la lista de ingredientes) con las palabras tramposas marcadas con círculo
+- **Story 2 (mediodía):** Foto genérica de una etiqueta del super (tapando la marca o en primer plano solo la lista de ingredientes) con las palabras disfrazadas marcadas con círculo
 - **Story 3 (PM):** Screenshot anónimo de un DM agradeciendo + "ya van X comentarios"
 - **Story 4 (noche):** Recordatorio del programa 4 de mayo con link en bio
