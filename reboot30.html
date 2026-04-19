@@ -683,10 +683,10 @@
 
 <script>
 // ============================================
-// FORMULARIO REBOOT 30 - ENVÍO A GOOGLE SHEETS
+// FORMULARIO REBOOT 30 - ENVÍO A SUPABASE (via Vercel)
 // ============================================
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvi2wo3MGCqQZEdgIrLVGe6tcQyXI-DL6glZKQONnxfg_QQvySTjAEfjvnMXB3tAqtwg/exec';
+const REGISTER_ENDPOINT = 'https://reboot-lifestyle-semaforo.vercel.app/api/register';
 
 const form = document.getElementById('reboot30-form');
 const submitBtn = document.getElementById('submit-btn');
@@ -727,34 +727,37 @@ form.addEventListener('submit', async (e) => {
     const codigo = document.getElementById('codigo').value;
     const telefono = document.getElementById('telefono').value.trim();
     const pais = document.getElementById('pais').value;
-    const retos = Array.from(retosChecked).map(cb => cb.value).join(', ');
-    const consentimiento = document.getElementById('consentimiento').checked ? 'SÍ' : 'NO';
+    const retos = Array.from(retosChecked).map(cb => cb.value);
+    const consentimiento = document.getElementById('consentimiento').checked;
 
     // UTM tracking
     const urlParams = new URLSearchParams(window.location.search);
-    const fuente = urlParams.get('utm_source') || urlParams.get('fuente') || 'directo';
-
-    // Preparar params
-    const params = new URLSearchParams();
-    params.append('nombre', nombre);
-    params.append('apellido', apellido);
-    params.append('email', email);
-    params.append('telefono', codigo + ' ' + telefono);
-    params.append('pais', pais);
-    params.append('retos', retos);
-    params.append('consentimiento', consentimiento);
-    params.append('fuente', fuente);
+    const payload = {
+        nombre,
+        apellido,
+        email,
+        codigo,
+        telefono,
+        pais,
+        retos,
+        consentimiento,
+        source: urlParams.get('source') || urlParams.get('fuente') || 'directo',
+        utm_source: urlParams.get('utm_source') || '',
+        utm_medium: urlParams.get('utm_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || '',
+    };
 
     try {
-        // Enviar a Apps Script (no-cors porque Google Apps Script no devuelve CORS headers correctos)
-        await fetch(APPS_SCRIPT_URL, {
+        const response = await fetch(REGISTER_ENDPOINT, {
             method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: params.toString()
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
         });
+
+        if (!response.ok) {
+            const err = await response.json().catch(() => ({}));
+            throw new Error(err.message || 'Error en el servidor');
+        }
 
         // Tracking Pixel Meta (cuando esté activo)
         if (typeof fbq !== 'undefined') {
