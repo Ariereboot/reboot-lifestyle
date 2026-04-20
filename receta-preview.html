@@ -715,12 +715,12 @@
   <section>
     <h2>Preparación</h2>
     <ol class="steps">
-      <li>Enjuaga la <strong>quinoa</strong> y cocínala con 2 tazas de agua y una pizca de sal, ~15 min a fuego bajo hasta que absorba el líquido. Mientras, avanzas lo demás.</li>
-      <li>Precalienta el horno a <strong>200°C</strong>. Corta los zucchinis, pimentones y brócoli en pedazos parejos. Mezcla en una bandeja con 2 cdas de aceite, sal y pimienta. Hornea <strong>20 minutos</strong>.</li>
-      <li>Condimenta el pollo con paprika, comino, ajo, sal y pimienta. Masajea bien para que agarre sabor.</li>
-      <li>Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina el pollo <strong>5-6 minutos por lado</strong> hasta que esté dorado.</li>
-      <li><strong>Deja reposar el pollo 3 minutos antes de cortarlo.</strong> Este paso no es negociable.</li>
-      <li>Arma 4 tapers: arroz de base, pollo en tiras encima, vegetales al lado. Termina cada uno con un chorrito de limón y cilantro antes de comer.</li>
+      <li data-step-slot="carb">Enjuaga la <strong>quinoa</strong> y cocínala con 2 tazas de agua y una pizca de sal, ~15 min a fuego bajo hasta que absorba el líquido. Mientras, avanzas lo demás.</li>
+      <li data-step-slot="veg">Precalienta el horno a <strong>200°C</strong>. Corta los <strong class="veg-names">zucchinis, pimentones y brócoli</strong> en pedazos parejos. Mezcla en una bandeja con 2 cdas de aceite, sal y pimienta. Hornea <strong>20 minutos</strong>.</li>
+      <li data-step-slot="protein">Condimenta el <strong>pollo</strong> con <span class="spice-names">paprika, comino, ajo, sal y pimienta</span>. Masajea bien para que agarre sabor.</li>
+      <li data-step-slot="protein-cook">Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina el <strong>pollo 5-6 minutos por lado</strong> hasta que esté dorado.</li>
+      <li data-step-slot="protein-rest"><strong>Deja reposar el pollo 3 minutos antes de cortarlo.</strong> Este paso no es negociable.</li>
+      <li>Arma 4 tapers: <strong class="final-carb">quinoa</strong> de base, <strong class="final-protein">pollo</strong> en tiras encima, vegetales al lado. Termina cada uno con un chorrito de limón y cilantro antes de comer.</li>
     </ol>
   </section>
 
@@ -764,20 +764,20 @@
     <div class="sub-group">
       <div class="sub-original">Cambiar <strong>pechuga de pollo</strong> por:</div>
       <div class="sub-options">
-        <button class="sub-chip" data-slot="protein" data-swap="muslos de pollo deshuesados" data-amount="600" data-unit="g" data-macros='{"kcal":260,"prot":26,"fiber":0,"fat":17,"carbs":0}'>Muslos de pollo</button>
-        <button class="sub-chip" data-slot="protein" data-swap="filete de pescado blanco" data-amount="500" data-unit="g" data-macros='{"kcal":110,"prot":22,"fiber":0,"fat":2,"carbs":0}'>Pescado blanco</button>
-        <button class="sub-chip" data-slot="protein" data-swap="tofu firme en cubos" data-amount="500" data-unit="g" data-macros='{"kcal":175,"prot":20,"fiber":1.5,"fat":11,"carbs":3}'>Tofu firme</button>
-        <button class="sub-chip" data-slot="protein" data-swap="garbanzos cocidos" data-amount="400" data-unit="g" data-macros='{"kcal":164,"prot":9,"fiber":7.6,"fat":2.6,"carbs":27}'>Garbanzos</button>
+        <button class="sub-chip" data-slot="protein" data-swap="muslos de pollo deshuesados" data-amount="600" data-unit="g" data-macros='{"kcal":260,"prot":26,"fiber":0,"fat":17,"carbs":0}' data-protein-name="muslos de pollo" data-cook="6-7 minutos por lado">Muslos de pollo</button>
+        <button class="sub-chip" data-slot="protein" data-swap="filete de pescado blanco" data-amount="500" data-unit="g" data-macros='{"kcal":110,"prot":22,"fiber":0,"fat":2,"carbs":0}' data-protein-name="pescado" data-cook="3-4 minutos por lado (hasta que se desmenuce al tacto del tenedor)">Pescado blanco</button>
+        <button class="sub-chip" data-slot="protein" data-swap="tofu firme en cubos" data-amount="500" data-unit="g" data-macros='{"kcal":175,"prot":20,"fiber":1.5,"fat":11,"carbs":3}' data-protein-name="tofu" data-cook="3-4 minutos por cada cara hasta dorar">Tofu firme</button>
+        <button class="sub-chip" data-slot="protein" data-swap="garbanzos cocidos" data-amount="400" data-unit="g" data-macros='{"kcal":164,"prot":9,"fiber":7.6,"fat":2.6,"carbs":27}' data-protein-name="garbanzos" data-cook="5-6 minutos hasta dorar ligeramente">Garbanzos</button>
       </div>
     </div>
 
     <div class="sub-group">
       <div class="sub-original">Cambiar <strong>quinoa</strong> por:</div>
       <div class="sub-options">
-        <button class="sub-chip" data-slot="carb" data-swap="arroz de coliflor" data-amount="2" data-unit="tazas" data-macros='{"kcal":60,"prot":5.6,"fiber":6,"fat":0.4,"carbs":12}'>Arroz de coliflor <span class="phase-hint">· mes 1</span></button>
-        <button class="sub-chip" data-slot="carb" data-swap="zapallo horneado en cubos" data-amount="2" data-unit="tazas" data-macros='{"kcal":100,"prot":4,"fiber":4,"fat":0.4,"carbs":24}'>Zapallo <span class="phase-hint">· mes 1</span></button>
-        <button class="sub-chip" data-slot="carb" data-swap="arroz integral crudo" data-amount="1" data-unit="taza" data-macros='{"kcal":170,"prot":3.5,"fiber":1.8,"fat":1.4,"carbs":36}'>Arroz integral <span class="phase-hint">· mes 2+</span></button>
-        <button class="sub-chip" data-slot="carb" data-swap="batata horneada en cubos" data-amount="600" data-unit="g" data-macros='{"kcal":130,"prot":2.4,"fiber":4.5,"fat":0.2,"carbs":30}'>Batata <span class="phase-hint">· mes 2+</span></button>
+        <button class="sub-chip" data-slot="carb" data-swap="arroz de coliflor" data-amount="2" data-unit="tazas" data-macros='{"kcal":60,"prot":5.6,"fiber":6,"fat":0.4,"carbs":12}' data-carb-name="arroz de coliflor" data-carb-step="Pulsa el coliflor en el procesador hasta que quede tipo arroz. Saltea en sartén con 1 cda de aceite, sal y pimienta, <strong>5-7 minutos</strong> hasta que esté suave pero firme. Reserva.">Arroz de coliflor <span class="phase-hint">· mes 1</span></button>
+        <button class="sub-chip" data-slot="carb" data-swap="zapallo horneado en cubos" data-amount="2" data-unit="tazas" data-macros='{"kcal":100,"prot":4,"fiber":4,"fat":0.4,"carbs":24}' data-carb-name="zapallo" data-carb-step="Pela el zapallo y córtalo en cubos de 2 cm. Mezcla con 1 cda de aceite, sal y pimienta. Hornea a <strong>200°C por 20 minutos</strong> hasta que esté tierno y ligeramente dorado.">Zapallo <span class="phase-hint">· mes 1</span></button>
+        <button class="sub-chip" data-slot="carb" data-swap="arroz integral crudo" data-amount="1" data-unit="taza" data-macros='{"kcal":170,"prot":3.5,"fiber":1.8,"fat":1.4,"carbs":36}' data-carb-name="arroz integral" data-carb-step="Enjuaga el <strong>arroz integral</strong> y cocínalo con 2 tazas de agua y una pizca de sal, <strong>~30 minutos</strong> a fuego bajo hasta que absorba el líquido. Mientras, avanzas lo demás.">Arroz integral <span class="phase-hint">· mes 2+</span></button>
+        <button class="sub-chip" data-slot="carb" data-swap="batata horneada en cubos" data-amount="600" data-unit="g" data-macros='{"kcal":130,"prot":2.4,"fiber":4.5,"fat":0.2,"carbs":30}' data-carb-name="batata" data-carb-step="Pela la batata y córtala en cubos de 2 cm. Mezcla con 1 cda de aceite, sal y pimienta. Hornea a <strong>200°C por 25 minutos</strong> hasta que esté tierna por dentro y dorada por fuera.">Batata <span class="phase-hint">· mes 2+</span></button>
       </div>
     </div>
 
@@ -959,8 +959,76 @@
       updateIngredientDisplay(li);
       recalcMacros();
       updateSwapBanner();
+      updateStepsForSlot(slot, chip);
     });
   });
+
+  // Default step content (baseline recipe with quinoa + pollo)
+  const defaultSteps = {
+    carb: 'Enjuaga la <strong>quinoa</strong> y cocínala con 2 tazas de agua y una pizca de sal, ~15 min a fuego bajo hasta que absorba el líquido. Mientras, avanzas lo demás.',
+    proteinPrep: 'Condimenta el <strong>pollo</strong> con paprika, comino, ajo, sal y pimienta. Masajea bien para que agarre sabor.',
+    proteinCook: 'Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina el <strong>pollo 5-6 minutos por lado</strong> hasta que esté dorado.',
+    proteinRest: '<strong>Deja reposar el pollo 3 minutos antes de cortarlo.</strong> Este paso no es negociable.',
+    finalCarb: 'quinoa',
+    finalProtein: 'pollo'
+  };
+
+  function updateStepsForSlot(slot, chip) {
+    if (slot === 'carb') {
+      const stepEl = document.querySelector('.steps li[data-step-slot="carb"]');
+      const finalCarbEl = document.querySelector('.final-carb');
+      if (!stepEl) return;
+
+      if (chip.classList.contains('active')) {
+        // Swap active: use chip's custom step
+        stepEl.innerHTML = chip.dataset.carbStep || defaultSteps.carb;
+        if (finalCarbEl) finalCarbEl.textContent = chip.dataset.carbName || defaultSteps.finalCarb;
+      } else {
+        // Reverted: back to default
+        stepEl.innerHTML = defaultSteps.carb;
+        if (finalCarbEl) finalCarbEl.textContent = defaultSteps.finalCarb;
+      }
+    }
+
+    if (slot === 'protein') {
+      const prepEl = document.querySelector('.steps li[data-step-slot="protein"]');
+      const cookEl = document.querySelector('.steps li[data-step-slot="protein-cook"]');
+      const restEl = document.querySelector('.steps li[data-step-slot="protein-rest"]');
+      const finalProteinEl = document.querySelector('.final-protein');
+
+      if (chip.classList.contains('active')) {
+        const pname = chip.dataset.proteinName || 'la proteína';
+        const cookTime = chip.dataset.cook || '5-6 minutos por lado';
+
+        if (pname === 'tofu') {
+          prepEl.innerHTML = `Escurre el <strong>tofu</strong> y córtalo en cubos de 2 cm. Condimenta con paprika, comino, ajo, sal y pimienta. Mezcla bien.`;
+          cookEl.innerHTML = `Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina el <strong>tofu ${cookTime}</strong>.`;
+          restEl.innerHTML = `Retira y deja escurrir sobre papel absorbente por 1 minuto.`;
+        } else if (pname === 'garbanzos') {
+          prepEl.innerHTML = `Escurre y enjuaga los <strong>garbanzos</strong>. Condimenta con paprika, comino, ajo, sal y pimienta. Mezcla.`;
+          cookEl.innerHTML = `Calienta 2 cdas de aceite en sartén a fuego medio-alto. Saltea los <strong>garbanzos ${cookTime}</strong>.`;
+          restEl.innerHTML = `Retira del fuego. No requieren reposo — listos para servir.`;
+        } else if (pname === 'pescado') {
+          prepEl.innerHTML = `Sazona el <strong>pescado</strong> con paprika, comino, ajo, sal y pimienta. Suave, sin apretar el filete.`;
+          cookEl.innerHTML = `Calienta 1 cda de aceite en sartén a fuego medio-alto. Cocina el <strong>pescado ${cookTime}</strong>.`;
+          restEl.innerHTML = `Pasa con cuidado a un plato. <strong>No lo sobrecocines</strong> — sigue cocinándose fuera del fuego.`;
+        } else {
+          // muslos de pollo u otro tipo de pollo
+          prepEl.innerHTML = `Condimenta los <strong>${pname}</strong> con paprika, comino, ajo, sal y pimienta. Masajea bien para que agarre sabor.`;
+          cookEl.innerHTML = `Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina ${cookTime} hasta que estén dorados.`;
+          restEl.innerHTML = `<strong>Deja reposar ${pname} 3 minutos antes de cortarlos.</strong> Este paso no es negociable.`;
+        }
+
+        if (finalProteinEl) finalProteinEl.textContent = pname;
+      } else {
+        // Reverted to default pollo
+        prepEl.innerHTML = defaultSteps.proteinPrep;
+        cookEl.innerHTML = defaultSteps.proteinCook;
+        restEl.innerHTML = defaultSteps.proteinRest;
+        if (finalProteinEl) finalProteinEl.textContent = defaultSteps.finalProtein;
+      }
+    }
+  }
 
   function updateIngredientDisplay(li) {
     const base = parseFloat(li.dataset.base);

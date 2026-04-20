@@ -317,8 +317,155 @@
       "title": "Semana 3 · Aceleración",
       "subtitle": "Tu cuerpo ya lo entiende, subimos el nivel.",
       "unlocks_on_day": 15,
-      "days": [],
-      "coming_soon": true
+      "days": [
+        {
+          "day": 1,
+          "day_label": "Lunes",
+          "meals": {
+            "desayuno": {
+              "slug": "omelette-espinaca-feta",
+              "name": "Omelette de 3 huevos con espinaca y queso feta",
+              "photo_prompt": "three egg omelette folded in half filled with sautéed spinach and crumbled feta cheese on white plate, morning natural light, oregano sprinkled on top, casual iPhone food photography"
+            },
+            "almuerzo": {
+              "slug": "pescado-asado-esparragos",
+              "name": "Pescado asado con espárragos",
+              "photo_prompt": "baked white fish fillet with roasted asparagus drizzled with olive oil and lemon on white plate, natural lunch light, mediterranean home cooking photography"
+            },
+            "cena": {
+              "slug": "brochetas-pollo-vegetales",
+              "name": "Brochetas de pollo con vegetales",
+              "photo_prompt": "grilled chicken skewers with zucchini red bell pepper red onion and mushrooms on white plate with quinoa on the side, natural dinner light"
+            }
+          }
+        },
+        {
+          "day": 2,
+          "day_label": "Martes",
+          "meals": {
+            "desayuno": {
+              "slug": "huevos-rancheros",
+              "name": "Huevos rancheros",
+              "photo_prompt": "two sunny side up eggs over corn tortilla with ranchera sauce avocado slices cilantro and red onion on white plate, mexican breakfast natural light"
+            },
+            "almuerzo": {
+              "slug": "milanesa-pollo-ensalada",
+              "name": "Milanesa de pollo con ensalada verde",
+              "photo_prompt": "baked chicken milanesa breaded cutlet with almond flour next to fresh green salad with cherry tomatoes on white plate, casual lunch natural light"
+            },
+            "cena": {
+              "slug": "sufle-atun-brocoli",
+              "name": "Suflé de atún con brócoli",
+              "photo_prompt": "golden baked tuna and broccoli soufflé in ceramic ramekin risen and browned served with side salad, natural dinner light, home cooking"
+            }
+          }
+        },
+        {
+          "day": 3,
+          "day_label": "Miércoles",
+          "meals": {
+            "desayuno": {
+              "slug": "overnight-oats-week3",
+              "name": "Overnight oats",
+              "photo_prompt": "overnight oats in glass mason jar topped with sliced banana berries chia seeds and nut butter on wooden surface morning light top-down view"
+            },
+            "almuerzo": {
+              "slug": "hamburguesas-lentejas-w3",
+              "name": "Hamburguesas de lentejas",
+              "photo_prompt": "homemade lentil burger patties on lettuce wraps with carrot slaw and tahini sauce on rustic plate, natural lunch light, vegetarian home cooking"
+            },
+            "cena": {
+              "slug": "ensalada-garbanzo",
+              "name": "Ensalada de garbanzos",
+              "photo_prompt": "chickpea salad bowl with cucumber cherry tomatoes red onion kalamata olives and leafy greens with tahini lemon dressing, natural dinner light"
+            }
+          }
+        },
+        {
+          "day": 4,
+          "day_label": "Jueves",
+          "meals": {
+            "desayuno": {
+              "slug": "arepa-avena-pollo-desmechado",
+              "name": "Arepa de avena con pollo desmechado",
+              "photo_prompt": "oat flour arepa filled with shredded garlic chicken on white plate, morning natural light, venezuelan breakfast style, casual photography"
+            },
+            "almuerzo": {
+              "slug": "lomo-trapo-pure-calabaza",
+              "name": "Lomo de res al trapo con puré de calabaza",
+              "photo_prompt": "sliced rare beef tenderloin salt crust style served with creamy pumpkin puree on white plate, natural lunch light, rustic home cooking"
+            },
+            "cena": {
+              "slug": "wrap-linaza-atun",
+              "name": "Wrap de linaza con atún",
+              "photo_prompt": "flaxseed tortilla wrap filled with tuna salad avocado shredded carrots and greens cut in half on wooden board, natural dinner light"
+            }
+          }
+        },
+        {
+          "day": 5,
+          "day_label": "Viernes",
+          "meals": {
+            "desayuno": {
+              "slug": "waffles-avena-salados-poche",
+              "name": "Waffles de avena salados con huevos poché",
+              "photo_prompt": "savory oatmeal waffles topped with poached eggs dripping yolk avocado and cherry tomatoes on white plate, morning natural light, iPhone food photography"
+            },
+            "almuerzo": {
+              "slug": "goulash-arroz-coliflor",
+              "name": "Goulash de res con arroz de coliflor",
+              "photo_prompt": "hungarian goulash with beef chunks in paprika tomato sauce served over cauliflower rice garnished with parsley on white plate, natural lunch light"
+            },
+            "cena": {
+              "slug": "pollo-cacerola-vegetales",
+              "name": "Pollo a la cacerola con vegetales",
+              "photo_prompt": "chicken thighs braised in casserole with carrots onions bell peppers and herbs in broth rustic home cooking dinner photography"
+            }
+          }
+        },
+        {
+          "day": 6,
+          "day_label": "Sábado",
+          "meals": {
+            "desayuno": {
+              "slug": "wrap-linaza-huevos-aguacate",
+              "name": "Wrap de linaza con huevos y aguacate",
+              "photo_prompt": "flaxseed tortilla wrap filled with scrambled eggs avocado slices and spinach cut in half on wooden board morning natural light"
+            },
+            "almuerzo": {
+              "slug": "pasta-garbanzo-albondigas",
+              "name": "Pasta de garbanzo con albóndigas en salsa napolitana",
+              "photo_prompt": "chickpea pasta topped with beef meatballs in tomato napolitana sauce garnished with fresh basil parmesan on white plate, italian home cooking natural light"
+            },
+            "cena": {
+              "slug": "pollo-ajillo-ensalada",
+              "name": "Pechuga de pollo al ajillo con ensalada",
+              "photo_prompt": "shredded garlic chicken breast served with romaine lettuce and tomato salad on white plate, natural dinner light, casual home cooking photography"
+            }
+          }
+        },
+        {
+          "day": 7,
+          "day_label": "Domingo",
+          "meals": {
+            "desayuno": {
+              "slug": "torta-espanola-calabacin",
+              "name": "Torta española con calabacín y cebolla",
+              "photo_prompt": "spanish tortilla frittata with zucchini potatoes and onion sliced showing layers on white plate, weekend brunch natural light, rustic home cooking"
+            },
+            "almuerzo": {
+              "slug": "lasana-palmito-carne",
+              "name": "Lasaña de palmito natural con carne molida",
+              "photo_prompt": "hearts of palm lasagna layered with ground beef tomato sauce and cheese sliced showing layers on rustic plate, natural lunch light, home cooking"
+            },
+            "cena": {
+              "slug": "ensalada-camarones-aguacate",
+              "name": "Ensalada de camarones con aguacate, tomate y cebolla",
+              "photo_prompt": "cooked shrimp salad with avocado cubes cherry tomatoes red onion lime juice and cilantro in glass bowl natural dinner light"
+            }
+          }
+        }
+      ]
     },
     {
       "week": 4,
