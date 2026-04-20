@@ -1,0 +1,210 @@
+{
+  "bowl-pollo-quinoa": {
+    "id": "bowl-pollo-quinoa",
+    "nombre": "Bowl de Pollo al Horno con Quinoa y Vegetales",
+    "subtitulo": "Cocinas el domingo, comes el miércoles sin pensar.",
+    "categoria": "almuerzo",
+    "fase": "mes_1",
+    "tiempo_min": 35,
+    "dificultad": "fácil",
+    "porciones_base": 4,
+    "etiquetas": ["alta proteína", "alta fibra", "meal-prep", "balanceado", "sin gluten"],
+    "foto_verificada": true,
+    "foto_url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1400&q=85",
+    "macros_fijos": {"kcal": 150, "prot": 0.9, "fiber": 2.3, "fat": 14.2, "carbs": 7.5},
+    "ingredientes": [
+      {"slot": "protein", "amount_base": 600, "unit": "g", "descripcion": "de pechuga de pollo (4 filetes)", "macros": {"kcal": 165, "prot": 31, "fiber": 0, "fat": 3.6, "carbs": 0}},
+      {"slot": "carb", "amount_base": 1, "unit": "taza", "descripcion": "de quinoa cruda", "macros": {"kcal": 155, "prot": 6, "fiber": 3, "fat": 2.5, "carbs": 27}},
+      {"slot": "veg1", "amount_base": 2, "unit": "", "descripcion": "zucchinis medianos", "macros": {"kcal": 17, "prot": 1.2, "fiber": 1, "fat": 0.2, "carbs": 3}},
+      {"slot": null, "amount_base": 1, "unit": "", "descripcion": "pimentón rojo grande"},
+      {"slot": null, "amount_base": 1, "unit": "", "descripcion": "pimentón amarillo"},
+      {"slot": "veg2", "amount_base": 1, "unit": "", "descripcion": "brócoli mediano, en floretes", "macros": {"kcal": 34, "prot": 2.8, "fiber": 2.6, "fat": 0.4, "carbs": 7}},
+      {"slot": null, "amount_base": 4, "unit": "cdas", "descripcion": "de aceite de oliva extra virgen"},
+      {"slot": null, "amount_base": 2, "unit": "dientes", "descripcion": "de ajo, picados"},
+      {"slot": "spice", "amount_base": 1, "unit": "cdta", "descripcion": "de paprika y comino molido", "macros": {"kcal": 2, "prot": 0.1, "fiber": 0, "fat": 0, "carbs": 0.3}},
+      {"slot": null, "amount_base": 0, "unit": "", "descripcion": "sal y pimienta"},
+      {"slot": null, "amount_base": 1, "unit": "", "descripcion": "limón"},
+      {"slot": null, "amount_base": 0, "unit": "", "descripcion": "hojas de cilantro fresco"}
+    ],
+    "pasos": [
+      {"step_slot": "carb", "texto": "Enjuaga la <strong>quinoa</strong> y cocínala con 2 tazas de agua y una pizca de sal, ~15 min a fuego bajo hasta que absorba el líquido. Mientras, avanzas lo demás."},
+      {"texto": "Precalienta el horno a <strong>200°C</strong>. Corta los zucchinis, pimentones y brócoli en pedazos parejos. Mezcla en una bandeja con 2 cdas de aceite, sal y pimienta. Hornea <strong>20 minutos</strong>."},
+      {"step_slot": "protein-prep", "texto": "Condimenta el <strong>pollo</strong> con paprika, comino, ajo, sal y pimienta. Masajea bien para que agarre sabor."},
+      {"step_slot": "protein-cook", "texto": "Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina el <strong>pollo 5-6 minutos por lado</strong> hasta que esté dorado."},
+      {"step_slot": "protein-rest", "texto": "<strong>Deja reposar el pollo 3 minutos antes de cortarlo.</strong> Este paso no es negociable."},
+      {"step_slot": "final", "texto": "Arma 4 tapers: <strong class='final-carb'>quinoa</strong> de base, <strong class='final-protein'>pollo</strong> en tiras encima, vegetales al lado. Termina cada uno con un chorrito de limón y cilantro antes de comer."}
+    ],
+    "hack": "Los 3 minutos de reposo del pollo NO son opcionales — son los que hacen que los jugos se queden dentro y no termines comiendo pollo seco. Detalle pequeño que cambia el plato completo.",
+    "tip_especial": {
+      "icono": "❄",
+      "titulo": "Enfría la quinoa y le bajas el impacto glicémico",
+      "body": "Si cocinas la quinoa el domingo, la refrigeras mínimo 12-24 horas y la comes el miércoles (incluso recalentada), parte del almidón se transforma en <strong>almidón resistente tipo 3</strong>. Este almidón no se digiere en el intestino delgado: llega al colon, alimenta tu microbioma, y baja el pico glicémico de la comida hasta un <strong>20-30 %</strong>. El meal-prep no solo te ahorra tiempo — literalmente hace que tu cuerpo absorba menos glucosa.",
+      "respaldo": "Sonia et al. (2015) · Haub et al. (2011) · Birt et al. (2013)."
+    },
+    "por_que_funciona": "Proteína alta del pollo como prioridad, fibra abundante de los vegetales y la quinoa (que también aporta proteína completa), grasa buena del aceite de oliva, carbos de buena calidad. Balance completo compatible con el primer mes del programa. Cocinar el domingo 35 minutos te resuelve 4 almuerzos — no es fuerza de voluntad lo que falla a las 12:30 del miércoles, es tiempo.",
+    "sustituciones": [
+      {
+        "from_label": "pechuga de pollo",
+        "slot": "protein",
+        "options": [
+          {"name": "Muslos de pollo", "descripcion": "muslos de pollo deshuesados", "amount": 600, "unit": "g", "macros": {"kcal": 260, "prot": 26, "fiber": 0, "fat": 17, "carbs": 0}, "protein_name": "muslos de pollo", "cook_time": "6-7 minutos por lado"},
+          {"name": "Pescado blanco", "descripcion": "filete de pescado blanco", "amount": 500, "unit": "g", "macros": {"kcal": 110, "prot": 22, "fiber": 0, "fat": 2, "carbs": 0}, "protein_name": "pescado", "cook_time": "3-4 minutos por lado (hasta que se desmenuce fácilmente)"},
+          {"name": "Tofu firme", "descripcion": "tofu firme en cubos", "amount": 500, "unit": "g", "macros": {"kcal": 175, "prot": 20, "fiber": 1.5, "fat": 11, "carbs": 3}, "protein_name": "tofu", "cook_time": "3-4 minutos por cara hasta dorar"},
+          {"name": "Garbanzos", "descripcion": "garbanzos cocidos", "amount": 400, "unit": "g", "macros": {"kcal": 164, "prot": 9, "fiber": 7.6, "fat": 2.6, "carbs": 27}, "protein_name": "garbanzos", "cook_time": "5-6 minutos hasta dorar ligeramente"}
+        ]
+      },
+      {
+        "from_label": "quinoa",
+        "slot": "carb",
+        "options": [
+          {"name": "Arroz de coliflor", "descripcion": "arroz de coliflor", "amount": 2, "unit": "tazas", "macros": {"kcal": 60, "prot": 5.6, "fiber": 6, "fat": 0.4, "carbs": 12}, "carb_name": "arroz de coliflor", "carb_step": "Pulsa el coliflor en el procesador hasta que quede tipo arroz. Saltea en sartén con 1 cda de aceite, sal y pimienta, <strong>5-7 minutos</strong> hasta que esté suave pero firme. Reserva.", "phase_hint": "mes 1"},
+          {"name": "Zapallo", "descripcion": "zapallo horneado en cubos", "amount": 2, "unit": "tazas", "macros": {"kcal": 100, "prot": 4, "fiber": 4, "fat": 0.4, "carbs": 24}, "carb_name": "zapallo", "carb_step": "Pela el zapallo y córtalo en cubos de 2 cm. Mezcla con 1 cda de aceite, sal y pimienta. Hornea a <strong>200°C por 20 minutos</strong> hasta que esté tierno y ligeramente dorado.", "phase_hint": "mes 1"},
+          {"name": "Arroz integral", "descripcion": "arroz integral crudo", "amount": 1, "unit": "taza", "macros": {"kcal": 170, "prot": 3.5, "fiber": 1.8, "fat": 1.4, "carbs": 36}, "carb_name": "arroz integral", "carb_step": "Enjuaga el <strong>arroz integral</strong> y cocínalo con 2 tazas de agua y una pizca de sal, <strong>~30 minutos</strong> a fuego bajo hasta que absorba el líquido.", "phase_hint": "mes 2+"},
+          {"name": "Batata", "descripcion": "batata horneada en cubos", "amount": 600, "unit": "g", "macros": {"kcal": 130, "prot": 2.4, "fiber": 4.5, "fat": 0.2, "carbs": 30}, "carb_name": "batata", "carb_step": "Pela la batata y córtala en cubos de 2 cm. Mezcla con 1 cda de aceite, sal y pimienta. Hornea a <strong>200°C por 25 minutos</strong> hasta que esté tierna por dentro y dorada por fuera.", "phase_hint": "mes 2+"}
+        ]
+      },
+      {
+        "from_label": "zucchini",
+        "slot": "veg1",
+        "options": [
+          {"name": "Berenjena", "descripcion": "berenjenas en rodajas", "amount": 2, "unit": "", "macros": {"kcal": 25, "prot": 1, "fiber": 3, "fat": 0.2, "carbs": 6}},
+          {"name": "Espárragos", "descripcion": "espárragos en trozos", "amount": 1, "unit": "manojo", "macros": {"kcal": 15, "prot": 1.7, "fiber": 1.6, "fat": 0.1, "carbs": 3}},
+          {"name": "Calabaza", "descripcion": "calabaza en cubos", "amount": 2, "unit": "tazas", "macros": {"kcal": 25, "prot": 0.6, "fiber": 1.1, "fat": 0.1, "carbs": 6}, "phase_hint": "mes 1"}
+        ]
+      },
+      {
+        "from_label": "brócoli",
+        "slot": "veg2",
+        "options": [
+          {"name": "Coliflor", "descripcion": "coliflor en floretes", "amount": 1, "unit": "", "macros": {"kcal": 25, "prot": 2, "fiber": 2, "fat": 0.3, "carbs": 5}},
+          {"name": "Coles de bruselas", "descripcion": "coles de bruselas partidas a la mitad", "amount": 400, "unit": "g", "macros": {"kcal": 43, "prot": 3.4, "fiber": 3.8, "fat": 0.3, "carbs": 9}},
+          {"name": "Ejotes", "descripcion": "ejotes (vainica)", "amount": 400, "unit": "g", "macros": {"kcal": 31, "prot": 1.8, "fiber": 2.7, "fat": 0.2, "carbs": 7}}
+        ]
+      },
+      {
+        "from_label": "paprika + comino",
+        "slot": "spice",
+        "options": [
+          {"name": "Curry", "descripcion": "curry en polvo", "amount": 2, "unit": "cdtas", "macros": {"kcal": 3, "prot": 0.1, "fiber": 0.2, "fat": 0.1, "carbs": 0.5}},
+          {"name": "Za'atar", "descripcion": "za'atar", "amount": 2, "unit": "cdtas", "macros": {"kcal": 5, "prot": 0.2, "fiber": 0.2, "fat": 0.3, "carbs": 0.5}},
+          {"name": "Minimalista", "descripcion": "solo sal y jugo de limón", "amount": 0, "unit": "", "macros": {"kcal": 0, "prot": 0, "fiber": 0, "fat": 0, "carbs": 0}}
+        ]
+      }
+    ]
+  },
+  "huevos-revueltos-aguacate": {
+    "id": "huevos-revueltos-aguacate",
+    "nombre": "Huevos Revueltos con Aguacate y Espinacas",
+    "subtitulo": "El desayuno que no te deja tirado a las 10am.",
+    "categoria": "desayuno",
+    "fase": "mes_1",
+    "tiempo_min": 10,
+    "dificultad": "fácil",
+    "porciones_base": 1,
+    "etiquetas": ["alta proteína", "alta fibra", "antiinflamatorio", "desayuno salado"],
+    "foto_verificada": false,
+    "foto_prompt": "overhead scrambled eggs on white plate with cubed avocado wilted spinach sesame seeds and cilantro morning natural light wooden kitchen table casual iPhone food photography",
+    "macros_fijos": {"kcal": 120, "prot": 0.5, "fiber": 1, "fat": 14, "carbs": 2},
+    "ingredientes": [
+      {"slot": "protein", "amount_base": 3, "unit": "", "descripcion": "huevos grandes", "macros": {"kcal": 210, "prot": 18, "fiber": 0, "fat": 15, "carbs": 2}},
+      {"slot": "greens", "amount_base": 1, "unit": "taza", "descripcion": "de espinacas frescas", "macros": {"kcal": 7, "prot": 1, "fiber": 1, "fat": 0, "carbs": 1}},
+      {"slot": "fat", "amount_base": 0.5, "unit": "", "descripcion": "aguacate maduro", "macros": {"kcal": 120, "prot": 1.5, "fiber": 5, "fat": 11, "carbs": 6}},
+      {"slot": null, "amount_base": 1, "unit": "cda", "descripcion": "de aceite de oliva extra virgen"},
+      {"slot": null, "amount_base": 0, "unit": "", "descripcion": "sal marina y pimienta al gusto"},
+      {"slot": null, "amount_base": 1, "unit": "cdta", "descripcion": "de semillas de sésamo (opcional)"},
+      {"slot": null, "amount_base": 0, "unit": "", "descripcion": "hojas de cilantro fresco"}
+    ],
+    "pasos": [
+      {"step_slot": "protein-prep", "texto": "Rompe los <strong>huevos</strong> en un bowl, agrega la sal ANTES de batirlos (queda más esponjoso)."},
+      {"texto": "Bate con un tenedor hasta que el color sea uniforme."},
+      {"step_slot": "greens", "texto": "Calienta el aceite en una sartén a fuego medio-bajo. Echa las <strong>espinacas</strong> y mueve 30 segundos hasta que bajen."},
+      {"step_slot": "protein-cook", "texto": "Añade los <strong>huevos</strong> encima. Mueve en círculos grandes y lentos. Retira cuando aún se vean húmedos — siguen cocinándose fuera del fuego."},
+      {"step_slot": "final", "texto": "Sirve, corta el <strong class='final-fat'>aguacate</strong> en cubos encima, termina con pimienta, sésamo y cilantro."}
+    ],
+    "hack": "La sal va ANTES de batir, no después. Parece detalle pero cambia la textura completa. Si los sacas cuando todavía se ven 'medio crudos', llegan al plato perfectos.",
+    "por_que_funciona": "Proteína (huevos), fibra (espinacas), grasa buena (aguacate + aceite). Sin carbos refinados. Estabilizas el azúcar en sangre y llegas al almuerzo sin saboteando la alacena a las 10am.",
+    "sustituciones": [
+      {
+        "from_label": "huevos",
+        "slot": "protein",
+        "options": [
+          {"name": "Claras + 1 huevo", "descripcion": "claras de huevo + 1 huevo entero", "amount": 4, "unit": "claras", "macros": {"kcal": 115, "prot": 22, "fiber": 0, "fat": 5, "carbs": 1}},
+          {"name": "Tofu revuelto", "descripcion": "tofu firme desmenuzado con cúrcuma", "amount": 200, "unit": "g", "macros": {"kcal": 150, "prot": 17, "fiber": 1, "fat": 9, "carbs": 3}}
+        ]
+      },
+      {
+        "from_label": "espinacas",
+        "slot": "greens",
+        "options": [
+          {"name": "Kale baby", "descripcion": "kale baby", "amount": 1, "unit": "taza", "macros": {"kcal": 10, "prot": 1, "fiber": 1, "fat": 0, "carbs": 1}},
+          {"name": "Arúgula", "descripcion": "arúgula fresca", "amount": 1, "unit": "taza", "macros": {"kcal": 5, "prot": 0.5, "fiber": 0.3, "fat": 0, "carbs": 0.7}},
+          {"name": "Acelga", "descripcion": "acelga en tiras finas", "amount": 1, "unit": "taza", "macros": {"kcal": 7, "prot": 0.6, "fiber": 0.6, "fat": 0, "carbs": 1.3}}
+        ]
+      },
+      {
+        "from_label": "aguacate",
+        "slot": "fat",
+        "options": [
+          {"name": "Mantequilla de almendras", "descripcion": "mantequilla de almendras natural", "amount": 1, "unit": "cda", "macros": {"kcal": 100, "prot": 3.5, "fiber": 1.5, "fat": 9, "carbs": 3}},
+          {"name": "Aceitunas", "descripcion": "aceitunas kalamata", "amount": 10, "unit": "", "macros": {"kcal": 50, "prot": 0.4, "fiber": 1, "fat": 5, "carbs": 1}}
+        ]
+      }
+    ]
+  },
+  "bolitas-datil-cacao": {
+    "id": "bolitas-datil-cacao",
+    "nombre": "Bolitas de Dátil con Cacao y Chía",
+    "subtitulo": "Para el antojo de las 4pm que llega siempre.",
+    "categoria": "snack",
+    "fase": "mes_1",
+    "tiempo_min": 15,
+    "dificultad": "fácil",
+    "porciones_base": 6,
+    "porcion_descripcion": "1 porción = 2 bolitas",
+    "etiquetas": ["sin gluten", "vegano", "corta-antojo", "meal-prep", "alta fibra"],
+    "foto_verificada": false,
+    "foto_prompt": "dark chocolate cacao energy balls rolled in shredded coconut on small ceramic plate one cut open showing dense texture afternoon light wooden table with coffee cup blurred",
+    "macros_fijos": {"kcal": 0, "prot": 0, "fiber": 0, "fat": 0, "carbs": 0},
+    "ingredientes": [
+      {"slot": "base-dulce", "amount_base": 1, "unit": "taza", "descripcion": "de dátiles sin hueso (remójalos 10 min si están duros)", "macros": {"kcal": 100, "prot": 0.7, "fiber": 1.3, "fat": 0, "carbs": 27}},
+      {"slot": "base-grasa", "amount_base": 1, "unit": "taza", "descripcion": "de nueces o almendras", "macros": {"kcal": 65, "prot": 2.2, "fiber": 1.7, "fat": 6, "carbs": 2.7}},
+      {"slot": null, "amount_base": 3, "unit": "cdas", "descripcion": "de cacao puro en polvo (sin azúcar)"},
+      {"slot": null, "amount_base": 2, "unit": "cdas", "descripcion": "de semillas de chía"},
+      {"slot": null, "amount_base": 1, "unit": "cda", "descripcion": "de aceite de coco derretido"},
+      {"slot": null, "amount_base": 1, "unit": "cdta", "descripcion": "de extracto de vainilla"},
+      {"slot": null, "amount_base": 0, "unit": "", "descripcion": "pizca de sal marina"},
+      {"slot": null, "amount_base": 0, "unit": "", "descripcion": "coco rallado sin azúcar, para rebozar (opcional)"},
+      {"slot": "endulzante", "amount_base": 0, "unit": "", "descripcion": "opcional: endulzante extra", "macros": {"kcal": 30, "prot": 0, "fiber": 0, "fat": 0, "carbs": 1}}
+    ],
+    "pasos": [
+      {"texto": "Escurre los dátiles. Deben quedar blanditos pero no aguados."},
+      {"texto": "En un procesador, tritura las <strong>nueces</strong> hasta que queden tipo arena gruesa."},
+      {"texto": "Agrega dátiles, cacao, chía, aceite de coco, vainilla y sal. Procesa hasta que se forme una masa pegajosa."},
+      {"texto": "Con las manos ligeramente húmedas, forma <strong>bolitas del tamaño de una nuez</strong>."},
+      {"texto": "Opcional: rebózalas en coco rallado."},
+      {"texto": "<strong>Refrigera mínimo 30 minutos</strong> antes de comer. Duran una semana en la nevera."}
+    ],
+    "hack": "Haz doble batch. Una vez las pruebas con café en la tarde, no vas a querer volver a las galletas del supermercado. Tener siempre en la nevera es el mejor seguro contra el antojo de las 4pm.",
+    "por_que_funciona": "Las nueces aportan proteína y grasa buena, la chía y el cacao suben la fibra, los dátiles dan carbos de buena calidad con dulzor real (fibra incluida, no azúcar sin energía). Un snack que sostiene — no un pico de azúcar que te deja peor.",
+    "sustituciones": [
+      {
+        "from_label": "nueces",
+        "slot": "base-grasa",
+        "options": [
+          {"name": "Almendras", "descripcion": "almendras", "amount": 1, "unit": "taza", "macros": {"kcal": 57, "prot": 2.1, "fiber": 1.2, "fat": 5, "carbs": 2.2}},
+          {"name": "Nuez de la India (marañón)", "descripcion": "nueces de la India crudas", "amount": 1, "unit": "taza", "macros": {"kcal": 62, "prot": 2.0, "fiber": 0.7, "fat": 5, "carbs": 3.5}},
+          {"name": "Avellanas", "descripcion": "avellanas", "amount": 1, "unit": "taza", "macros": {"kcal": 66, "prot": 1.6, "fiber": 1.7, "fat": 6.4, "carbs": 1.8}}
+        ]
+      },
+      {
+        "from_label": "endulzante extra (opcional)",
+        "slot": "endulzante",
+        "options": [
+          {"name": "Alulosa", "descripcion": "alulosa", "amount": 1, "unit": "cda", "macros": {"kcal": 8, "prot": 0, "fiber": 0, "fat": 0, "carbs": 2}},
+          {"name": "Monk fruit puro", "descripcion": "monk fruit puro (sin mezclas comerciales)", "amount": 0.5, "unit": "cdta", "macros": {"kcal": 0, "prot": 0, "fiber": 0, "fat": 0, "carbs": 0}},
+          {"name": "Estevia pura", "descripcion": "estevia pura en polvo", "amount": 0.25, "unit": "cdta", "macros": {"kcal": 0, "prot": 0, "fiber": 0, "fat": 0, "carbs": 0}}
+        ]
+      }
+    ]
+  }
+}

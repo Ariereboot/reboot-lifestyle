@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="docTitle">Receta · Reboot Lifestyle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black-seed: #0f0f0f;
+    --deep-neural: #02251f;
+    --oxygen-blue: #76d3d1;
+    --earth-carrot: #e85c26;
+    --pure-reset: #f3f6fb;
+    --arie-yellow: #fae62b;
+    --text-muted: #6b6b6b;
+    --border-subtle: #e5e8ec;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--pure-reset);
+    color: var(--black-seed);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .site-header { background: var(--black-seed); padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { color: #fff; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
+  .logo span { color: var(--oxygen-blue); font-weight: 500; font-size: 12px; letter-spacing: 2px; display: block; margin-top: 2px; text-transform: uppercase; }
+  .handle { color: rgba(255,255,255,0.6); font-size: 13px; font-weight: 500; }
+
+  /* Recipe container */
+  .recipe { max-width: 760px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  .breadcrumb { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; font-weight: 600; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--oxygen-blue); }
+
+  .recipe-image { width: 100%; height: 420px; border-radius: 20px; background-size: cover; background-position: center; margin-bottom: 28px; box-shadow: 0 20px 40px -20px rgba(0,0,0,0.25); background-color: var(--deep-neural); }
+  @media (max-width: 640px) { .recipe-image { height: 280px; border-radius: 14px; } }
+
+  h1.recipe-title { font-size: 36px; line-height: 1.15; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
+  .recipe-subtitle { font-size: 17px; color: var(--text-muted); font-weight: 500; font-style: italic; margin-bottom: 14px; }
+
+  .phase-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(118, 211, 209, 0.14); color: #0a6f6d; border: 1px solid rgba(118, 211, 209, 0.4); padding: 6px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; margin-bottom: 24px; }
+  .phase-badge::before { content: '✓'; font-weight: 900; color: var(--oxygen-blue); }
+
+  .meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .badge { background: #fff; border: 1px solid var(--border-subtle); padding: 8px 14px; border-radius: 100px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--oxygen-blue); }
+  .badge.highlight { background: var(--arie-yellow); border-color: var(--arie-yellow); }
+
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+  .tag { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--oxygen-blue); background: rgba(118, 211, 209, 0.1); padding: 6px 12px; border-radius: 6px; }
+
+  /* Sections */
+  section { background: #fff; border-radius: 20px; padding: 28px; margin-bottom: 20px; border: 1px solid var(--border-subtle); }
+  section h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  section h2::before { content: ''; width: 4px; height: 24px; background: var(--oxygen-blue); border-radius: 2px; }
+
+  /* Portion selector */
+  .portion-selector { display: flex; align-items: center; justify-content: space-between; background: var(--pure-reset); padding: 14px 18px; border-radius: 12px; margin-bottom: 22px; }
+  .portion-label { font-size: 14px; font-weight: 600; }
+  .portion-controls { display: flex; align-items: center; gap: 12px; }
+  .portion-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border-subtle); background: #fff; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .portion-btn:hover { background: var(--oxygen-blue); color: #fff; border-color: var(--oxygen-blue); transform: translateY(-1px); }
+  .portion-count { font-size: 20px; font-weight: 800; min-width: 32px; text-align: center; }
+
+  /* Shopping list button */
+  .shopping-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--black-seed); color: #fff; border: none; padding: 11px 18px; border-radius: 100px; font-family: inherit; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s; margin-bottom: 18px; }
+  .shopping-btn:hover { background: var(--earth-carrot); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,92,38,0.3); }
+  .shopping-btn::before { content: '↓'; font-size: 16px; font-weight: 900; }
+  .shopping-btn.copied { background: var(--oxygen-blue); color: var(--black-seed); }
+  .shopping-btn.copied::before { content: '✓'; }
+
+  /* Ingredients */
+  .ingredient-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .ingredient-list li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--border-subtle); font-size: 15px; }
+  .ingredient-list li:last-child { border-bottom: none; }
+  .ingredient-check { width: 20px; height: 20px; border: 1.5px solid var(--border-subtle); border-radius: 6px; flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: all 0.2s; }
+  .ingredient-check.checked { background: var(--oxygen-blue); border-color: var(--oxygen-blue); position: relative; }
+  .ingredient-check.checked::after { content: '✓'; color: #fff; font-weight: 700; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 12px; }
+  .ingredient-amount { font-weight: 700; min-width: 90px; }
+
+  /* Steps */
+  .steps { counter-reset: step; list-style: none; }
+  .steps li { counter-increment: step; padding: 16px 0 16px 50px; position: relative; border-bottom: 1px solid var(--border-subtle); font-size: 15px; line-height: 1.65; }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before { content: counter(step); position: absolute; left: 0; top: 14px; width: 34px; height: 34px; background: var(--oxygen-blue); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; }
+  .steps li strong { background: linear-gradient(180deg, transparent 60%, rgba(250,230,43,0.5) 60%); font-weight: 700; }
+
+  /* Hack box */
+  .hack-box { background: var(--deep-neural); border-radius: 20px; padding: 28px; margin-bottom: 20px; color: #fff; }
+  .hack-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--oxygen-blue); font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .hack-label::before { content: ''; width: 24px; height: 1px; background: var(--oxygen-blue); }
+  .hack-body { font-size: 16px; line-height: 1.6; }
+
+  /* Tip especial */
+  .tip-especial { background: linear-gradient(135deg, #02251f 0%, #0a3e34 100%); border-radius: 20px; padding: 28px; margin-bottom: 20px; color: #fff; position: relative; overflow: hidden; }
+  .tip-especial::before { content: ''; position: absolute; top: -20px; right: -20px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(118,211,209,0.15) 0%, transparent 70%); pointer-events: none; }
+  .tip-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--oxygen-blue); color: var(--black-seed); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; }
+  .tip-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--oxygen-blue); font-weight: 700; }
+  .tip-title { font-size: 20px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.3px; }
+  .tip-body { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.88); }
+  .tip-science { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(118,211,209,0.3); font-size: 12px; color: rgba(118,211,209,0.75); font-style: italic; }
+
+  /* Why it works */
+  .why-works { background: #fff; border-left: 4px solid var(--arie-yellow); border-radius: 4px 20px 20px 4px; padding: 24px 28px; margin-bottom: 20px; border-top: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .why-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 10px; }
+  .why-body { font-size: 15px; line-height: 1.7; }
+
+  /* Subs */
+  .subs-intro { font-size: 14px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.6; }
+  .sub-group { margin-bottom: 20px; }
+  .sub-group:last-child { margin-bottom: 0; }
+  .sub-original { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 10px; }
+  .sub-original strong { color: var(--black-seed); }
+  .sub-options { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sub-chip { background: var(--pure-reset); border: 1.5px solid var(--border-subtle); border-radius: 100px; padding: 10px 16px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .sub-chip:hover { border-color: var(--oxygen-blue); background: rgba(118, 211, 209, 0.1); transform: translateY(-1px); }
+  .sub-chip.active { background: var(--oxygen-blue); border-color: var(--oxygen-blue); color: var(--black-seed); }
+  .sub-chip.active::before { content: '✓ '; font-weight: 900; }
+  .sub-chip .phase-hint { display: inline-block; margin-left: 6px; font-size: 10px; color: var(--text-muted); font-weight: 500; }
+  .sub-chip.active .phase-hint { color: rgba(15,15,15,0.6); }
+
+  .swap-banner { background: rgba(118, 211, 209, 0.1); border-left: 3px solid var(--oxygen-blue); padding: 14px 18px; border-radius: 8px; margin-bottom: 18px; font-size: 13px; display: none; }
+  .swap-banner.show { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .swap-banner button { background: transparent; border: 1px solid var(--black-seed); padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; }
+
+  /* Macros */
+  .macros-card { background: var(--black-seed); border-radius: 20px; padding: 28px; margin-bottom: 32px; color: #fff; }
+  .macros-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--oxygen-blue); font-weight: 700; margin-bottom: 18px; }
+  .macros-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .macro { text-align: center; }
+  .macro-value { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; }
+  .macro-unit { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); }
+  .macro-name { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.7); font-weight: 600; margin-top: 6px; }
+  @media (max-width: 640px) { .macros-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } .macro-value { font-size: 22px; } }
+
+  /* Loading / error */
+  .loading, .not-found { text-align: center; padding: 80px 24px; }
+  .loading h2, .not-found h2 { font-size: 22px; margin-bottom: 10px; }
+  .not-found a { color: var(--oxygen-blue); font-weight: 700; }
+
+  /* Footer */
+  footer { margin-top: 60px; padding: 32px 24px; background: var(--black-seed); color: rgba(255,255,255,0.6); font-size: 12px; line-height: 1.7; text-align: center; }
+  footer p { margin-bottom: 8px; max-width: 700px; margin-left: auto; margin-right: auto; }
+  footer p strong { color: var(--oxygen-blue); }
+
+  @media (max-width: 640px) {
+    .recipe { padding: 24px 16px 60px; }
+    h1.recipe-title { font-size: 28px; }
+    section { padding: 22px 20px; }
+    .ingredient-amount { min-width: auto; }
+    .ingredient-list li { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">Reboot Lifestyle<span>by @ariereboot</span></div>
+  <div class="handle">rebootlifestyle.com</div>
+</header>
+
+<div id="content">
+  <div class="loading">
+    <h2>Cargando receta…</h2>
+  </div>
+</div>
+
+<footer>
+  <p><strong>Reboot Lifestyle</strong> · by @ariereboot</p>
+  <p>Contenido educativo con fines informativos. No sustituye diagnóstico, tratamiento ni consejo médico profesional. Consulta a tu médico antes de hacer cambios en tu alimentación o estilo de vida, especialmente si tienes condiciones de salud. Los resultados varían según cada persona.</p>
+  <p>© 2026 ReBoot Lifestyle · Arie Schwartz. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const recipeId = params.get('id');
+
+  let recipe = null;
+  let currentPortions = 0;
+  let basePortions = 0;
+  const fixedMacros = {};
+  const activeSlotMacros = {};
+  const defaultSlotMacros = {};
+  const originalIngredients = {};
+  const activeSwaps = {};
+  const defaultSteps = {};
+
+  if (!recipeId) {
+    renderNotFound('Falta el ID de receta en la URL.');
+  } else {
+    fetch('./data/recetas-full.json')
+      .then(r => r.json())
+      .then(data => {
+        if (!data[recipeId]) {
+          // Check if it exists in meal-plan.json as a name-only reference
+          return tryMealPlanFallback(recipeId);
+        }
+        recipe = data[recipeId];
+        renderRecipe();
+      })
+      .catch(err => {
+        console.error(err);
+        renderNotFound('Error cargando la receta.');
+      });
+  }
+
+  function tryMealPlanFallback(id) {
+    return fetch('../reboot-lab/meal-plan.json')
+      .then(r => r.json())
+      .then(mp => {
+        for (const w of mp.weeks) {
+          if (!w.days) continue;
+          for (const d of w.days) {
+            for (const type of ['desayuno', 'almuerzo', 'cena']) {
+              const m = d.meals && d.meals[type];
+              if (m && m.slug === id) {
+                renderStub(m);
+                return;
+              }
+            }
+          }
+        }
+        renderNotFound('No encontramos esta receta.');
+      })
+      .catch(() => renderNotFound('Error cargando la receta.'));
+  }
+
+  function renderNotFound(msg) {
+    document.getElementById('content').innerHTML = `
+      <div class="recipe">
+        <div class="not-found">
+          <h2>${msg}</h2>
+          <p style="margin-bottom: 20px; color: var(--text-muted);">Puede que esta receta todavía esté en desarrollo.</p>
+          <a href="./">← Volver al recetario</a>
+        </div>
+      </div>`;
+  }
+
+  function renderStub(meal) {
+    document.title = `${meal.name} · Reboot Lifestyle`;
+    const photoUrl = photoFor(meal);
+    document.getElementById('content').innerHTML = `
+      <article class="recipe">
+        <div class="breadcrumb"><a href="./">Recetario</a> · <a href="../reboot-lab/">Programa</a></div>
+        <div class="recipe-image" style="background-image: url('${photoUrl}')"></div>
+        <h1 class="recipe-title">${meal.name}</h1>
+        <div class="phase-badge">Compatible con el primer mes</div>
+        <div style="background: #fff; border: 1px solid var(--border-subtle); border-radius: 20px; padding: 40px 28px; text-align: center; margin-top: 20px;">
+          <h2 style="font-size: 20px; font-weight: 900; margin-bottom: 10px;">Receta en desarrollo</h2>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">Esta receta está en la fase de producción del recetario completo. Mientras tanto, podés ver una receta completa de ejemplo.</p>
+          <a href="./receta.html?id=bowl-pollo-quinoa" style="display:inline-block; background: var(--oxygen-blue); color: var(--black-seed); padding: 14px 24px; border-radius: 100px; font-weight: 800; text-decoration: none; letter-spacing: 0.3px;">Ver ejemplo completo →</a>
+        </div>
+      </article>`;
+  }
+
+  function photoFor(meal) {
+    if (meal.foto_url) return meal.foto_url;
+    const prompt = encodeURIComponent(meal.photo_prompt || meal.foto_prompt || meal.name || meal.nombre);
+    const seed = Math.abs(hashCode(meal.slug || meal.id)) % 10000;
+    return `https://image.pollinations.ai/prompt/${prompt}?width=1200&height=750&seed=${seed}&nologo=true&model=flux`;
+  }
+
+  function hashCode(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
+    return h;
+  }
+
+  function renderRecipe() {
+    document.title = `${recipe.nombre} · Reboot Lifestyle`;
+    basePortions = recipe.porciones_base || 1;
+    currentPortions = basePortions;
+
+    // Init macros
+    Object.assign(fixedMacros, recipe.macros_fijos || {kcal: 0, prot: 0, fiber: 0, fat: 0, carbs: 0});
+    recipe.ingredientes.forEach(ing => {
+      if (ing.slot && ing.macros) {
+        defaultSlotMacros[ing.slot] = { ...ing.macros };
+        activeSlotMacros[ing.slot] = { ...ing.macros };
+      }
+    });
+
+    // Init default steps
+    (recipe.pasos || []).forEach((p, i) => {
+      if (p.step_slot) defaultSteps[p.step_slot] = p.texto;
+    });
+
+    const photoUrl = photoFor(recipe);
+    const metaBadges = [
+      `<span class="badge"><span class="dot"></span>${recipe.tiempo_min} min</span>`,
+      `<span class="badge"><span class="dot"></span>${cap(recipe.dificultad)}</span>`,
+      recipe.etiquetas && recipe.etiquetas.includes('meal-prep') ? `<span class="badge"><span class="dot"></span>Meal-prep</span>` : '',
+      `<span class="badge highlight">${recipe.porciones_base} ${recipe.porciones_base === 1 ? 'porción' : 'porciones'}${recipe.porcion_descripcion ? ' · ' + recipe.porcion_descripcion : ''}</span>`
+    ].filter(Boolean).join('');
+
+    const tags = (recipe.etiquetas || []).filter(t => t !== 'meal-prep').map(t => `<span class="tag">${t}</span>`).join('');
+
+    const ingredientsHtml = recipe.ingredientes.map(ing => {
+      const checkId = `chk-${Math.random().toString(36).slice(2, 8)}`;
+      const amountDisplay = ing.amount_base === 0
+        ? `<span class="amt">al gusto</span>`
+        : `<span class="amt">${formatNumber(ing.amount_base)}</span>${ing.unit ? ' ' + ing.unit : ''}`;
+      const slotAttr = ing.slot ? ` data-slot="${ing.slot}"` : '';
+      return `<li data-base="${ing.amount_base}" data-unit="${ing.unit}"${slotAttr}>
+        <span class="ingredient-check" onclick="toggleCheck(this)"></span>
+        <span class="ingredient-amount">${amountDisplay}</span>
+        <span class="ing-desc">${ing.descripcion}</span>
+      </li>`;
+    }).join('');
+
+    const stepsHtml = recipe.pasos.map(p => {
+      const slotAttr = p.step_slot ? ` data-step-slot="${p.step_slot}"` : '';
+      return `<li${slotAttr}>${p.texto}</li>`;
+    }).join('');
+
+    const tipHtml = recipe.tip_especial ? `
+      <div class="tip-especial">
+        <div class="tip-header">
+          <div class="tip-icon">${recipe.tip_especial.icono || '★'}</div>
+          <div class="tip-label">Tip especial · Hack científico</div>
+        </div>
+        <div class="tip-title">${recipe.tip_especial.titulo}</div>
+        <div class="tip-body">${recipe.tip_especial.body}</div>
+        ${recipe.tip_especial.respaldo ? `<div class="tip-science">Respaldo: ${recipe.tip_especial.respaldo}</div>` : ''}
+      </div>` : '';
+
+    const subsHtml = (recipe.sustituciones || []).map(group => {
+      const options = group.options.map(opt => {
+        const phaseHint = opt.phase_hint ? `<span class="phase-hint">· ${opt.phase_hint}</span>` : '';
+        const dataAttrs = [
+          `data-slot="${group.slot}"`,
+          `data-swap="${escapeAttr(opt.descripcion)}"`,
+          `data-amount="${opt.amount}"`,
+          `data-unit="${opt.unit || ''}"`,
+          `data-macros='${JSON.stringify(opt.macros || {})}'`
+        ];
+        if (opt.protein_name) dataAttrs.push(`data-protein-name="${escapeAttr(opt.protein_name)}"`);
+        if (opt.cook_time) dataAttrs.push(`data-cook="${escapeAttr(opt.cook_time)}"`);
+        if (opt.carb_name) dataAttrs.push(`data-carb-name="${escapeAttr(opt.carb_name)}"`);
+        if (opt.carb_step) dataAttrs.push(`data-carb-step="${escapeAttr(opt.carb_step)}"`);
+        return `<button class="sub-chip" ${dataAttrs.join(' ')}>${opt.name}${phaseHint}</button>`;
+      }).join('');
+      return `<div class="sub-group">
+        <div class="sub-original">Cambiar <strong>${group.from_label}</strong> por:</div>
+        <div class="sub-options">${options}</div>
+      </div>`;
+    }).join('');
+
+    const totalMacros = computeTotals();
+
+    document.getElementById('content').innerHTML = `
+      <article class="recipe">
+        <div class="breadcrumb"><a href="./">Recetario</a> · <a href="../reboot-lab/">Programa</a></div>
+        <div class="recipe-image" style="background-image: url('${photoUrl}')"></div>
+        <h1 class="recipe-title">${recipe.nombre}</h1>
+        ${recipe.subtitulo ? `<p class="recipe-subtitle">${recipe.subtitulo}</p>` : ''}
+        ${recipe.fase === 'mes_1' ? `<div class="phase-badge">Compatible con el primer mes</div>` : ''}
+        <div class="meta-row">${metaBadges}</div>
+        ${tags ? `<div class="tags">${tags}</div>` : ''}
+
+        <section>
+          <h2>Ingredientes</h2>
+          <div class="portion-selector">
+            <div class="portion-label">Ajusta las porciones</div>
+            <div class="portion-controls">
+              <button class="portion-btn" onclick="updatePortions(-1)">−</button>
+              <div class="portion-count" id="portionCount">${basePortions}</div>
+              <button class="portion-btn" onclick="updatePortions(1)">+</button>
+            </div>
+          </div>
+          <button class="shopping-btn" id="shoppingBtn" onclick="copyShoppingList()">Copiar lista de compras</button>
+          <ul class="ingredient-list" id="ingredients">${ingredientsHtml}</ul>
+        </section>
+
+        <section>
+          <h2>Preparación</h2>
+          <ol class="steps">${stepsHtml}</ol>
+        </section>
+
+        ${recipe.hack ? `
+          <div class="hack-box">
+            <div class="hack-label">Hack de Arie</div>
+            <div class="hack-body">${recipe.hack}</div>
+          </div>` : ''}
+
+        ${tipHtml}
+
+        ${recipe.por_que_funciona ? `
+          <div class="why-works">
+            <div class="why-label">Por qué funciona</div>
+            <div class="why-body">${recipe.por_que_funciona}</div>
+          </div>` : ''}
+
+        ${subsHtml ? `
+          <section>
+            <h2>Sustituciones</h2>
+            <p class="subs-intro">Toca cualquier opción y te la cambio en la receta. Ingredientes, pasos y macros se actualizan solos.</p>
+            <div class="swap-banner" id="swapBanner">
+              <span id="swapBannerText"></span>
+              <button onclick="resetSwaps()">Deshacer todo</button>
+            </div>
+            ${subsHtml}
+          </section>` : ''}
+
+        <div class="macros-card">
+          <div class="macros-label">Información nutricional · por porción</div>
+          <div class="macros-grid">
+            <div class="macro" data-macro="kcal"><div class="macro-value">${Math.round(totalMacros.kcal)}</div><div class="macro-unit">kcal</div><div class="macro-name">Calorías</div></div>
+            <div class="macro" data-macro="prot"><div class="macro-value">${Math.round(totalMacros.prot)}<span class="macro-unit">g</span></div><div class="macro-name">Proteína</div></div>
+            <div class="macro" data-macro="fiber"><div class="macro-value">${Math.round(totalMacros.fiber)}<span class="macro-unit">g</span></div><div class="macro-name">Fibra</div></div>
+            <div class="macro" data-macro="fat"><div class="macro-value">${Math.round(totalMacros.fat)}<span class="macro-unit">g</span></div><div class="macro-name">Grasa</div></div>
+            <div class="macro" data-macro="carbs"><div class="macro-value">${Math.round(totalMacros.carbs)}<span class="macro-unit">g</span></div><div class="macro-name">Carbos</div></div>
+          </div>
+          <div id="macrosHint" style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:18px; text-align:center; letter-spacing:0.3px;">Valores aproximados · se actualizan automáticamente al cambiar sustituciones</div>
+        </div>
+      </article>`;
+
+    // Save original ingredients for undo
+    document.querySelectorAll('#ingredients li[data-slot]').forEach(li => {
+      originalIngredients[li.dataset.slot] = {
+        desc: li.querySelector('.ing-desc').textContent,
+        amount: parseFloat(li.dataset.base),
+        unit: li.dataset.unit
+      };
+    });
+
+    setupChipHandlers();
+  }
+
+  function computeTotals() {
+    const totals = { kcal: 0, prot: 0, fiber: 0, fat: 0, carbs: 0 };
+    for (const k in fixedMacros) totals[k] += fixedMacros[k];
+    for (const slot in activeSlotMacros) {
+      for (const k in activeSlotMacros[slot]) totals[k] += activeSlotMacros[slot][k];
+    }
+    return totals;
+  }
+
+  function setupChipHandlers() {
+    document.querySelectorAll('.sub-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const slot = chip.dataset.slot;
+        const swapDesc = chip.dataset.swap;
+        const newAmount = parseFloat(chip.dataset.amount);
+        const newUnit = chip.dataset.unit;
+        const newMacros = chip.dataset.macros ? JSON.parse(chip.dataset.macros) : null;
+
+        const li = document.querySelector(`#ingredients li[data-slot="${slot}"]`);
+        if (!li) return;
+
+        if (chip.classList.contains('active')) {
+          chip.classList.remove('active');
+          const orig = originalIngredients[slot];
+          li.querySelector('.ing-desc').textContent = orig.desc;
+          li.dataset.base = orig.amount;
+          li.dataset.unit = orig.unit;
+          delete activeSwaps[slot];
+          activeSlotMacros[slot] = { ...defaultSlotMacros[slot] };
+        } else {
+          document.querySelectorAll(`.sub-chip[data-slot="${slot}"]`).forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          li.querySelector('.ing-desc').textContent = swapDesc;
+          li.dataset.base = newAmount;
+          li.dataset.unit = newUnit;
+          activeSwaps[slot] = chip.textContent.trim();
+          if (newMacros) activeSlotMacros[slot] = newMacros;
+        }
+
+        updateIngredientDisplay(li);
+        recalcMacros();
+        updateSwapBanner();
+        updateStepsForSlot(slot, chip);
+      });
+    });
+  }
+
+  function updateStepsForSlot(slot, chip) {
+    if (slot === 'carb') {
+      const stepEl = document.querySelector('.steps li[data-step-slot="carb"]');
+      const finalCarbEl = document.querySelector('.final-carb');
+      if (!stepEl) return;
+      if (chip.classList.contains('active')) {
+        stepEl.innerHTML = chip.dataset.carbStep || defaultSteps['carb'];
+        if (finalCarbEl) finalCarbEl.textContent = chip.dataset.carbName || 'carb';
+      } else {
+        stepEl.innerHTML = defaultSteps['carb'] || stepEl.innerHTML;
+        if (finalCarbEl && recipe) {
+          // Find the default carb ingredient
+          const defaultCarb = (recipe.ingredientes.find(i => i.slot === 'carb') || {}).descripcion || 'quinoa';
+          finalCarbEl.textContent = defaultCarb.replace(/^de /, '').split(' ')[0];
+        }
+      }
+    }
+
+    if (slot === 'protein') {
+      const prepEl = document.querySelector('.steps li[data-step-slot="protein-prep"]');
+      const cookEl = document.querySelector('.steps li[data-step-slot="protein-cook"]');
+      const restEl = document.querySelector('.steps li[data-step-slot="protein-rest"]');
+      const finalProteinEl = document.querySelector('.final-protein');
+
+      if (chip.classList.contains('active')) {
+        const pname = chip.dataset.proteinName || 'la proteína';
+        const cookTime = chip.dataset.cook || '5-6 minutos por lado';
+
+        if (pname === 'tofu') {
+          if (prepEl) prepEl.innerHTML = `Escurre el <strong>tofu</strong> y córtalo en cubos de 2 cm. Condimenta con paprika, comino, ajo, sal y pimienta. Mezcla bien.`;
+          if (cookEl) cookEl.innerHTML = `Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina el <strong>tofu ${cookTime}</strong>.`;
+          if (restEl) restEl.innerHTML = `Retira y deja escurrir sobre papel absorbente por 1 minuto.`;
+        } else if (pname === 'garbanzos') {
+          if (prepEl) prepEl.innerHTML = `Escurre y enjuaga los <strong>garbanzos</strong>. Condimenta con paprika, comino, ajo, sal y pimienta. Mezcla.`;
+          if (cookEl) cookEl.innerHTML = `Calienta 2 cdas de aceite en sartén a fuego medio-alto. Saltea los <strong>garbanzos ${cookTime}</strong>.`;
+          if (restEl) restEl.innerHTML = `Retira del fuego. No requieren reposo — listos para servir.`;
+        } else if (pname === 'pescado') {
+          if (prepEl) prepEl.innerHTML = `Sazona el <strong>pescado</strong> con paprika, comino, ajo, sal y pimienta. Suave, sin apretar el filete.`;
+          if (cookEl) cookEl.innerHTML = `Calienta 1 cda de aceite en sartén a fuego medio-alto. Cocina el <strong>pescado ${cookTime}</strong>.`;
+          if (restEl) restEl.innerHTML = `Pasa con cuidado a un plato. <strong>No lo sobrecocines</strong> — sigue cocinándose fuera del fuego.`;
+        } else {
+          if (prepEl) prepEl.innerHTML = `Condimenta los <strong>${pname}</strong> con paprika, comino, ajo, sal y pimienta. Masajea bien para que agarre sabor.`;
+          if (cookEl) cookEl.innerHTML = `Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina ${cookTime} hasta que estén dorados.`;
+          if (restEl) restEl.innerHTML = `<strong>Deja reposar ${pname} 3 minutos antes de cortarlos.</strong>`;
+        }
+
+        if (finalProteinEl) finalProteinEl.textContent = pname;
+      } else {
+        if (prepEl && defaultSteps['protein-prep']) prepEl.innerHTML = defaultSteps['protein-prep'];
+        if (cookEl && defaultSteps['protein-cook']) cookEl.innerHTML = defaultSteps['protein-cook'];
+        if (restEl && defaultSteps['protein-rest']) restEl.innerHTML = defaultSteps['protein-rest'];
+        if (finalProteinEl && recipe) {
+          const defaultProt = (recipe.ingredientes.find(i => i.slot === 'protein') || {}).descripcion || 'pollo';
+          finalProteinEl.textContent = defaultProt.replace(/^de /, '').split(' ').slice(0, 2).join(' ');
+        }
+      }
+    }
+  }
+
+  function updateIngredientDisplay(li) {
+    const base = parseFloat(li.dataset.base);
+    const unit = li.dataset.unit;
+    const multiplier = currentPortions / basePortions;
+    const amountSpan = li.querySelector('.ingredient-amount');
+    if (base === 0 || isNaN(base)) {
+      amountSpan.innerHTML = `<span class="amt">al gusto</span>`;
+      return;
+    }
+    const newVal = base * multiplier;
+    const unitStr = unit ? ` ${unit}` : '';
+    amountSpan.innerHTML = `<span class="amt">${formatNumber(newVal)}</span>${unitStr}`;
+  }
+
+  function updatePortions(delta) {
+    const newPortions = currentPortions + delta;
+    if (newPortions < 1 || newPortions > 20) return;
+    currentPortions = newPortions;
+    document.getElementById('portionCount').textContent = currentPortions;
+    document.querySelectorAll('#ingredients li').forEach(li => updateIngredientDisplay(li));
+  }
+
+  function formatNumber(n) {
+    if (Number.isInteger(n)) return n.toString();
+    const rounded = Math.round(n * 4) / 4;
+    if (Number.isInteger(rounded)) return rounded.toString();
+    const whole = Math.floor(rounded);
+    const frac = rounded - whole;
+    const fracStr = { 0.25: '¼', 0.5: '½', 0.75: '¾' }[frac] || frac.toFixed(2);
+    return whole > 0 ? `${whole} ${fracStr}` : fracStr;
+  }
+
+  function recalcMacros() {
+    const totals = computeTotals();
+    updateMacroCard('kcal', Math.round(totals.kcal));
+    updateMacroCard('prot', Math.round(totals.prot));
+    updateMacroCard('fiber', Math.round(totals.fiber));
+    updateMacroCard('fat', Math.round(totals.fat));
+    updateMacroCard('carbs', Math.round(totals.carbs));
+
+    const hint = document.getElementById('macrosHint');
+    const swapsActive = Object.keys(activeSwaps).length;
+    if (swapsActive > 0) {
+      hint.innerHTML = `✓ Macros actualizados con tus ${swapsActive} sustitución${swapsActive > 1 ? 'es' : ''}`;
+      hint.style.color = 'var(--oxygen-blue)';
+    } else {
+      hint.textContent = 'Valores aproximados · se actualizan automáticamente al cambiar sustituciones';
+      hint.style.color = 'rgba(255,255,255,0.5)';
+    }
+  }
+
+  function updateMacroCard(macro, value) {
+    const card = document.querySelector(`.macro[data-macro="${macro}"] .macro-value`);
+    if (!card) return;
+    const unitSpan = card.querySelector('.macro-unit');
+    card.firstChild.textContent = value;
+    if (unitSpan) card.appendChild(unitSpan);
+  }
+
+  function updateSwapBanner() {
+    const banner = document.getElementById('swapBanner');
+    if (!banner) return;
+    const text = document.getElementById('swapBannerText');
+    const count = Object.keys(activeSwaps).length;
+    if (count === 0) { banner.classList.remove('show'); return; }
+    banner.classList.add('show');
+    text.textContent = count === 1 ? `Receta modificada · 1 sustitución activa` : `Receta modificada · ${count} sustituciones activas`;
+  }
+
+  function resetSwaps() {
+    document.querySelectorAll('.sub-chip.active').forEach(chip => chip.click());
+  }
+
+  function toggleCheck(el) { el.classList.toggle('checked'); }
+
+  function copyShoppingList() {
+    const items = document.querySelectorAll('#ingredients li');
+    let list = `🛒 LISTA DE COMPRAS · ${recipe.nombre}\nPara ${currentPortions} ${currentPortions === 1 ? 'porción' : 'porciones'}\n\n`;
+    items.forEach(li => {
+      const amount = li.querySelector('.ingredient-amount').innerText.trim();
+      const desc = li.querySelector('.ing-desc').textContent;
+      list += `• ${amount} ${desc}\n`;
+    });
+    list += `\n— Reboot Lifestyle · @ariereboot`;
+    navigator.clipboard.writeText(list).then(() => {
+      const btn = document.getElementById('shoppingBtn');
+      const original = btn.textContent;
+      btn.classList.add('copied');
+      btn.textContent = '¡Copiado! Pégalo donde quieras';
+      setTimeout(() => { btn.classList.remove('copied'); btn.textContent = original; }, 2200);
+    });
+  }
+
+  function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
+  function escapeAttr(s) { return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+</script>
+
+</body>
+</html>

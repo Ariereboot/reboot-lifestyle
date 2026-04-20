@@ -13,7 +13,7 @@
     "imagen": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1400&q=85",
     "foto_verificada": true,
     "tiene_pagina": true,
-    "url": "../receta-preview.html"
+    "url": "./receta.html?id=bowl-pollo-quinoa"
   },
   {
     "id": "huevos-revueltos-aguacate",
@@ -27,7 +27,8 @@
     "etiquetas": ["alta-proteína", "alta-fibra", "antiinflamatorio", "desayuno-salado"],
     "macros": {"kcal": 340, "prot": 22, "fiber": 7, "fat": 26, "carbs": 9},
     "imagen": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1400&q=85",
-    "tiene_pagina": false
+    "tiene_pagina": true,
+    "url": "./receta.html?id=huevos-revueltos-aguacate"
   },
   {
     "id": "tortilla-claras-queso-cabra",
@@ -97,7 +98,8 @@
     "etiquetas": ["sin-gluten", "vegano", "corta-antojo", "meal-prep", "alta-fibra"],
     "macros": {"kcal": 195, "prot": 5, "fiber": 5, "fat": 13, "carbs": 17},
     "imagen": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1400&q=85",
-    "tiene_pagina": false
+    "tiene_pagina": true,
+    "url": "./receta.html?id=bolitas-datil-cacao"
   },
   {
     "id": "sopa-coliflor-jengibre",

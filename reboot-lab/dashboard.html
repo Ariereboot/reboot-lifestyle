@@ -544,15 +544,10 @@
   }
 
   function openMeal(slug) {
-    // For now, open the recetario or show "coming soon" based on whether recipe page exists
-    const mapping = {
-      'bowl-pollo-quinoa': '../receta-preview.html'
-    };
-    if (mapping[slug]) {
-      location.href = mapping[slug];
-    } else {
-      alert('Esta receta va a tener su página completa pronto. Mientras podés ver el Bowl de Pollo como ejemplo del formato.');
-    }
+    // Todas las recetas van al template dinámico.
+    // Si tiene data completa en recetas-full.json, muestra la receta.
+    // Si no, el template muestra un fallback "en desarrollo" con link al ejemplo.
+    location.href = `../recetario/receta.html?id=${slug}`;
   }
 
   function formatDate(d) {

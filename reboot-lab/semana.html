@@ -420,14 +420,7 @@
   }
 
   function openMeal(slug) {
-    const mapping = {
-      'bowl-pollo-quinoa': '../receta-preview.html'
-    };
-    if (mapping[slug]) {
-      location.href = mapping[slug];
-    } else {
-      alert('Esta receta va a tener su página completa pronto. Mientras podés ver el Bowl de Pollo como ejemplo del formato.');
-    }
+    location.href = `../recetario/receta.html?id=${slug}`;
   }
 </script>
 
