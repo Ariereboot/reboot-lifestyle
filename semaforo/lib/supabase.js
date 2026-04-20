@@ -115,3 +115,27 @@ export async function attributeAnalysis({
 export function sha256Hex(input) {
   return crypto.createHash('sha256').update(input).digest('hex');
 }
+
+/**
+ * Looks up the most recent successful analysis for this exact image hash.
+ * Returns { id, analysis_json } or null. Never throws — caller should treat
+ * null as "no cache, proceed with new analysis".
+ */
+export async function findCachedByHash(imageHash) {
+  if (!imageHash) return null;
+  try {
+    const client = getSupabase();
+    const { data, error } = await client
+      .from('menu_analyses')
+      .select('id, analysis_json')
+      .eq('image_hash', imageHash)
+      .eq('is_menu', true)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (error || !data) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}

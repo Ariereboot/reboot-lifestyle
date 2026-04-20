@@ -125,7 +125,7 @@ describe('analyzeMenu', () => {
     await analyzeMenu({ fileBase64: 'abc123', mediaType: 'image/png', apiKey: 'sk-ant-test' });
 
     const call = mockCreate.mock.calls[0][0];
-    expect(call.model).toBe('claude-sonnet-4-6');
+    expect(call.model).toBe('claude-haiku-4-5');
     expect(call.messages[0].content[0]).toEqual({
       type: 'image',
       source: { type: 'base64', media_type: 'image/png', data: 'abc123' },

@@ -1,10 +1,10 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { SEMAFORO_SYSTEM_PROMPT } from './prompt.js';
 
-const MODEL = 'claude-sonnet-4-6';
-// 4096 covers ~20 dishes with full explanations and fits within the
-// 60s Vercel Hobby timeout. When we move to Pro we can raise it back
-// to 8192 for full-menu analysis.
+// Haiku 4.5: 3-5x faster than Sonnet for image-based menu analysis.
+// Quality is more than sufficient for our 20-dish coach-tone task.
+// If we ever need Sonnet's nuance back, flip this constant.
+const MODEL = 'claude-haiku-4-5';
 const MAX_TOKENS = 4096;
 
 const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);

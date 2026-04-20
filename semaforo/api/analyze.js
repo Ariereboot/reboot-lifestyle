@@ -1,6 +1,6 @@
 import { analyzeMenu } from '../lib/analyzeMenu.js';
 import { checkRateLimit } from '../lib/rateLimit.js';
-import { logAnalysis, sha256Hex } from '../lib/supabase.js';
+import { logAnalysis, sha256Hex, findCachedByHash } from '../lib/supabase.js';
 
 const ACCEPTED_MEDIA = new Set([
   'image/jpeg',
@@ -53,6 +53,21 @@ export default async function handler(req, res) {
 
   const t0 = Date.now();
   const payloadKB = Math.round(dataB64.length / 1024);
+  const imageHash = sha256Hex(dataB64);
+
+  // CACHE: if we've analyzed this exact image before, return it instantly.
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const cached = await findCachedByHash(imageHash);
+    if (cached) {
+      return res.status(200).json({
+        ...cached.analysis_json,
+        analysisId: cached.id,
+        cached: true,
+        _timing: { totalMs: Date.now() - t0, payloadKB, mediaType, source: 'cache' },
+      });
+    }
+  }
+
   try {
     const result = await analyzeMenu({
       fileBase64: dataB64,
@@ -66,7 +81,7 @@ export default async function handler(req, res) {
     if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
       const logged = await logAnalysis({
         analysisJson: result,
-        imageHash: sha256Hex(dataB64),
+        imageHash,
         imageBytes: Math.round(dataB64.length * 0.75),
         userAgent: req.headers['user-agent']?.slice(0, 300) || null,
         ipHash: sha256Hex(ip + IP_HASH_SALT),
