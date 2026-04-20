@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recetario · Reboot Lifestyle</title>
+<meta name="description" content="Recetas simples, balanceadas y compatibles con el programa Reboot 30. Por @ariereboot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black-seed: #0f0f0f;
+    --deep-neural: #02251f;
+    --oxygen-blue: #76d3d1;
+    --earth-carrot: #e85c26;
+    --pure-reset: #f3f6fb;
+    --arie-yellow: #fae62b;
+    --text-muted: #6b6b6b;
+    --border-subtle: #e5e8ec;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--pure-reset);
+    color: var(--black-seed);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .site-header {
+    background: var(--black-seed);
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo {
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+  .logo span {
+    color: var(--oxygen-blue);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 2px;
+    display: block;
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+  .handle {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(180deg, var(--black-seed) 0%, #1a1a1a 100%);
+    padding: 60px 24px 50px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(118,211,209,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(250,230,43,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--arie-yellow);
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding: 6px 14px;
+    background: rgba(250,230,43,0.1);
+    border-radius: 100px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 span {
+    color: var(--oxygen-blue);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin: 0 auto;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--oxygen-blue);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Filters */
+  .filters {
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    position: sticky;
+    top: 12px;
+    z-index: 50;
+  }
+  .filters-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .filter-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+  .filter-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .filter-chip {
+    background: var(--pure-reset);
+    border: 1px solid var(--border-subtle);
+    padding: 7px 13px;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black-seed);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-chip:hover {
+    border-color: var(--oxygen-blue);
+    background: rgba(118,211,209,0.1);
+  }
+  .filter-chip.active {
+    background: var(--black-seed);
+    color: #fff;
+    border-color: var(--black-seed);
+  }
+  .search-box {
+    flex: 1;
+    min-width: 220px;
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border: 1.5px solid var(--border-subtle);
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--pure-reset);
+    outline: none;
+    transition: all 0.2s;
+  }
+  .search-input:focus { border-color: var(--oxygen-blue); background: #fff; }
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--text-muted);
+  }
+  .clear-filters {
+    background: transparent;
+    border: none;
+    color: var(--earth-carrot);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    text-decoration: underline;
+  }
+
+  /* Results count */
+  .results-count {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .results-count strong { color: var(--black-seed); }
+
+  /* Grid */
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .recipe-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .recipe-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.25);
+    border-color: var(--oxygen-blue);
+  }
+  .card-image {
+    aspect-ratio: 16/10;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .card-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .card-badge {
+    background: rgba(15,15,15,0.85);
+    color: #fff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .card-badge.phase-1 {
+    background: var(--oxygen-blue);
+    color: var(--black-seed);
+  }
+  .card-time {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black-seed);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .card-macros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    margin-bottom: 14px;
+    padding: 12px 8px;
+    background: var(--pure-reset);
+    border-radius: 12px;
+  }
+  .card-macro {
+    text-align: center;
+  }
+  .card-macro-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--black-seed);
+    line-height: 1;
+  }
+  .card-macro-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 3px;
+    font-weight: 600;
+  }
+  .card-macro-kcal .card-macro-value {
+    color: var(--earth-carrot);
+  }
+  .card-tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  .card-tag {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--oxygen-blue);
+    background: rgba(118, 211, 209, 0.1);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+
+  .coming-soon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(250, 230, 43, 0.95);
+    color: var(--black-seed);
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Empty state */
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 24px;
+    color: var(--text-muted);
+  }
+  .empty-state h3 {
+    font-size: 18px;
+    color: var(--black-seed);
+    margin-bottom: 8px;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 80px;
+    padding: 40px 24px;
+    background: var(--black-seed);
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    line-height: 1.7;
+    text-align: center;
+  }
+  footer p { margin-bottom: 8px; max-width: 700px; margin-left: auto; margin-right: auto; }
+  footer p strong { color: var(--oxygen-blue); }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero { padding: 44px 20px 36px; }
+    .hero h1 { font-size: 32px; }
+    .hero-stats { gap: 20px; }
+    .container { padding: 24px 16px 40px; }
+    .filters { padding: 18px; position: static; }
+    .filters-row { gap: 16px; }
+    .recipes-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .card-title { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="logo">
+    Reboot Lifestyle
+    <span>by @ariereboot</span>
+  </div>
+  <div class="handle">rebootlifestyle.com</div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">Recetario</div>
+  <h1>Comida real, <span>sabor real</span><br>cero complicaciones.</h1>
+  <p class="hero-sub">Recetas simples, balanceadas y 100% compatibles con el programa Reboot 30. Ajustables a tus porciones. Con sustituciones que funcionan.</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num" id="statCount">—</div>
+      <div class="hero-stat-label">Recetas</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num" id="statAvg">—</div>
+      <div class="hero-stat-label">Min promedio</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">0</div>
+      <div class="hero-stat-label">Azúcar refinado</div>
+    </div>
+  </div>
+</section>
+
+<!-- Main -->
+<main class="container">
+
+  <!-- Filters -->
+  <div class="filters">
+    <div class="filters-row">
+
+      <div class="search-box">
+        <span class="search-icon">⌕</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Buscar receta, ingrediente, etiqueta…">
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">Categoría</div>
+        <div class="filter-chips" data-filter="categoria">
+          <button class="filter-chip active" data-value="all">Todas</button>
+          <button class="filter-chip" data-value="desayuno">Desayuno</button>
+          <button class="filter-chip" data-value="almuerzo">Almuerzo</button>
+          <button class="filter-chip" data-value="cena">Cena</button>
+          <button class="filter-chip" data-value="snack">Snack</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">Fase</div>
+        <div class="filter-chips" data-filter="fase">
+          <button class="filter-chip active" data-value="all">Todas</button>
+          <button class="filter-chip" data-value="mes_1">Mes 1</button>
+          <button class="filter-chip" data-value="mes_2_plus">Mes 2+</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">Tiempo</div>
+        <div class="filter-chips" data-filter="tiempo">
+          <button class="filter-chip active" data-value="all">Cualquiera</button>
+          <button class="filter-chip" data-value="15">≤ 15 min</button>
+          <button class="filter-chip" data-value="30">≤ 30 min</button>
+        </div>
+      </div>
+
+      <button class="clear-filters" onclick="clearFilters()">Limpiar filtros</button>
+    </div>
+  </div>
+
+  <div class="results-count"><strong id="resultsNum">—</strong> recetas</div>
+
+  <div class="recipes-grid" id="recipesGrid"></div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <p><strong>Reboot Lifestyle</strong> · by @ariereboot</p>
+  <p>Contenido educativo con fines informativos. No sustituye diagnóstico, tratamiento ni consejo médico profesional. Consulta a tu médico antes de hacer cambios en tu alimentación o estilo de vida, especialmente si tienes condiciones de salud. Los resultados varían según cada persona.</p>
+  <p>© 2026 ReBoot Lifestyle · Arie Schwartz. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  let allRecipes = [];
+  let filters = {
+    categoria: 'all',
+    fase: 'all',
+    tiempo: 'all',
+    search: ''
+  };
+
+  // Load recipes from JSON
+  fetch('./recetas.json')
+    .then(r => r.json())
+    .then(data => {
+      allRecipes = data;
+      updateStats();
+      renderRecipes();
+      setupFilters();
+    })
+    .catch(err => {
+      console.error('Error loading recipes:', err);
+      document.getElementById('recipesGrid').innerHTML =
+        '<div class="empty-state"><h3>Error cargando recetas</h3><p>Revisa la consola.</p></div>';
+    });
+
+  function updateStats() {
+    document.getElementById('statCount').textContent = allRecipes.length;
+    const avgTime = Math.round(
+      allRecipes.reduce((sum, r) => sum + r.tiempo_min, 0) / allRecipes.length
+    );
+    document.getElementById('statAvg').textContent = avgTime;
+  }
+
+  function renderRecipes() {
+    const filtered = allRecipes.filter(r => {
+      if (filters.categoria !== 'all' && r.categoria !== filters.categoria) return false;
+      if (filters.fase !== 'all' && r.fase !== filters.fase) return false;
+      if (filters.tiempo !== 'all') {
+        const maxTime = parseInt(filters.tiempo);
+        if (r.tiempo_min > maxTime) return false;
+      }
+      if (filters.search) {
+        const q = filters.search.toLowerCase();
+        const haystack = [
+          r.nombre,
+          r.subtitulo,
+          r.categoria,
+          ...(r.etiquetas || [])
+        ].join(' ').toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+      return true;
+    });
+
+    document.getElementById('resultsNum').textContent = filtered.length;
+
+    const grid = document.getElementById('recipesGrid');
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <h3>Sin resultados</h3>
+          <p>Probá con otros filtros o limpialos para ver todas las recetas.</p>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(r => renderCard(r)).join('');
+  }
+
+  function renderCard(r) {
+    const faseLabel = r.fase === 'mes_1' ? 'Mes 1' : 'Mes 2+';
+    const faseClass = r.fase === 'mes_1' ? 'phase-1' : '';
+    const comingSoon = !r.tiene_pagina ? '<div class="coming-soon">Próximamente</div>' : '';
+    const href = r.tiene_pagina ? r.url : 'javascript:void(0)';
+    const onClick = r.tiene_pagina ? '' : `onclick="alert('Esta receta abrirá su página pronto. Por ahora puedes abrir la del Bowl de Pollo para ver el formato completo.'); event.preventDefault();"`;
+
+    const tags = (r.etiquetas || []).slice(0, 3).map(t =>
+      `<span class="card-tag">${t.replace(/-/g, ' ')}</span>`
+    ).join('');
+
+    return `
+      <a href="${href}" class="recipe-card" ${onClick}>
+        <div class="card-image" style="background-image: url('${r.imagen}')">
+          <div class="card-badges">
+            <span class="card-badge">${r.categoria}</span>
+            <span class="card-badge ${faseClass}">${faseLabel}</span>
+          </div>
+          ${comingSoon}
+          <div class="card-time">${r.tiempo_min} min</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">${r.nombre}</div>
+          <div class="card-subtitle">${r.subtitulo}</div>
+          <div class="card-macros">
+            <div class="card-macro card-macro-kcal">
+              <div class="card-macro-value">${r.macros.kcal}</div>
+              <div class="card-macro-label">kcal</div>
+            </div>
+            <div class="card-macro">
+              <div class="card-macro-value">${r.macros.prot}g</div>
+              <div class="card-macro-label">Prot</div>
+            </div>
+            <div class="card-macro">
+              <div class="card-macro-value">${r.macros.fiber}g</div>
+              <div class="card-macro-label">Fibra</div>
+            </div>
+            <div class="card-macro">
+              <div class="card-macro-value">${r.macros.carbs}g</div>
+              <div class="card-macro-label">Carb</div>
+            </div>
+          </div>
+          <div class="card-tags">${tags}</div>
+        </div>
+      </a>
+    `;
+  }
+
+  function setupFilters() {
+    document.querySelectorAll('.filter-chips').forEach(group => {
+      const filterName = group.dataset.filter;
+      group.addEventListener('click', e => {
+        if (!e.target.classList.contains('filter-chip')) return;
+        group.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        e.target.classList.add('active');
+        filters[filterName] = e.target.dataset.value;
+        renderRecipes();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+      filters.search = e.target.value.trim();
+      renderRecipes();
+    });
+  }
+
+  function clearFilters() {
+    filters = { categoria: 'all', fase: 'all', tiempo: 'all', search: '' };
+    document.getElementById('searchInput').value = '';
+    document.querySelectorAll('.filter-chips').forEach(group => {
+      group.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      group.querySelector('.filter-chip[data-value="all"]').classList.add('active');
+    });
+    renderRecipes();
+  }
+</script>
+
+</body>
+</html>
