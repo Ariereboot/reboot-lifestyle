@@ -1,13 +1,161 @@
 {
   "program_days": 30,
+  "dietary_rules": "No cerdo en ninguna receta. Todo compatible con filosofía Reboot mes 1.",
   "weeks": [
     {
       "week": 1,
       "title": "Semana 1 · Arranque",
       "subtitle": "Rompes con el azúcar, estabilizas energía, sientes el cambio.",
       "unlocks_on_day": 1,
-      "days": [],
-      "coming_soon": true
+      "days": [
+        {
+          "day": 1,
+          "day_label": "Lunes",
+          "meals": {
+            "desayuno": {
+              "slug": "arepa-calabaza-reina-pepiada",
+              "name": "Arepa de calabaza (con avena) con relleno de reina pepiada",
+              "photo_prompt": "orange pumpkin arepa made with oat flour filled with reina pepiada chicken avocado salad on white plate, natural morning light, rustic wooden table, casual iPhone food photography"
+            },
+            "almuerzo": {
+              "slug": "noquis-espinaca-pollo",
+              "name": "Ñoquis de espinaca con pollo",
+              "photo_prompt": "homemade green spinach gnocchi served with grilled chicken pieces in light sauce, garnished with parmesan on white plate, natural light, iPhone food photography"
+            },
+            "cena": {
+              "slug": "crema-brocoli-pollo-desmenuzado",
+              "name": "Crema de brócoli con pechuga de pollo desmenuzada",
+              "photo_prompt": "creamy green broccoli soup in white bowl topped with shredded chicken breast and fresh herbs, natural dinner light, wooden table, casual food photography"
+            }
+          }
+        },
+        {
+          "day": 2,
+          "day_label": "Martes",
+          "meals": {
+            "desayuno": {
+              "slug": "huevos-cocidos-cottage-tostada",
+              "name": "Huevos cocidos con queso cottage y tostada",
+              "photo_prompt": "hard boiled eggs cut in halves with cottage cheese and oat bread toast on white plate, bright morning light, simple breakfast scene, iPhone food photography"
+            },
+            "almuerzo": {
+              "slug": "lomo-res-pure-coliflor",
+              "name": "Lomo de res con puré de coliflor",
+              "photo_prompt": "sliced grilled beef tenderloin steak served next to creamy cauliflower puree on white plate, natural lunch light, home cooking, casual iPhone photography"
+            },
+            "cena": {
+              "slug": "pescado-plancha-rugula-aceitunas",
+              "name": "Pescado a la plancha con ensalada de rúgula y aceitunas",
+              "photo_prompt": "grilled white fish fillet served with arugula salad kalamata olives and cherry tomatoes on white plate, dinner natural light, mediterranean style"
+            }
+          }
+        },
+        {
+          "day": 3,
+          "day_label": "Miércoles",
+          "meals": {
+            "desayuno": {
+              "slug": "huevos-revueltos-espinaca",
+              "name": "Huevos revueltos con espinaca",
+              "photo_prompt": "scrambled eggs mixed with wilted baby spinach on white plate, morning natural light, wooden breakfast table, casual iPhone food photography"
+            },
+            "almuerzo": {
+              "slug": "camarones-ajillo-zucchini-quinoa",
+              "name": "Camarones al ajillo con zucchini salteado y quinoa",
+              "photo_prompt": "garlic shrimp served over quinoa with sauteed zucchini slices on white plate, lunch natural light, iPhone home cooking photography"
+            },
+            "cena": {
+              "slug": "nuggets-pollo-yogurt",
+              "name": "Nuggets de pollo con crema (aderezo de yogurt)",
+              "photo_prompt": "homemade baked chicken nuggets served with greek yogurt dipping sauce in small ramekin on white plate, casual dinner natural light"
+            }
+          }
+        },
+        {
+          "day": 4,
+          "day_label": "Jueves",
+          "meals": {
+            "desayuno": {
+              "slug": "avena-cocida-proteina",
+              "name": "Avena cocida con proteína en polvo",
+              "photo_prompt": "warm cooked oatmeal in ceramic bowl topped with fresh berries and a scoop of protein powder mixed in, morning natural light, casual food photography"
+            },
+            "almuerzo": {
+              "slug": "pechuga-rellena-queso-espinaca-zanahoria",
+              "name": "Pechuga rellena de queso y espinaca con bastones de zanahoria",
+              "photo_prompt": "stuffed chicken breast filled with melted cheese and spinach sliced open showing filling, served with carrot sticks on white plate, natural light"
+            },
+            "cena": {
+              "slug": "ceviche-jueves",
+              "name": "Ceviche",
+              "photo_prompt": "fresh peruvian style fish ceviche with lime juice red onion cilantro corn and sweet potato in glass bowl, vibrant natural light"
+            }
+          }
+        },
+        {
+          "day": 5,
+          "day_label": "Viernes",
+          "meals": {
+            "desayuno": {
+              "slug": "tostada-hummus-champinones",
+              "name": "Tostada con hummus y champiñones salteados",
+              "photo_prompt": "oat bread toast spread with creamy hummus topped with sauteed mushrooms and fresh thyme, morning natural light, casual food photography"
+            },
+            "almuerzo": {
+              "slug": "costillas-res-horno-ensalada",
+              "name": "Costillas de res al horno con ensalada fresca",
+              "photo_prompt": "oven roasted beef short ribs with fresh mixed green salad cherry tomatoes on white plate, natural lunch light, rustic home cooking"
+            },
+            "cena": {
+              "slug": "berenjenas-horneadas-pollo-plancha",
+              "name": "Berenjenas horneadas con pollo a la plancha",
+              "photo_prompt": "roasted eggplant slices topped with grilled chicken breast garnished with fresh basil on white plate, natural dinner light, mediterranean home cooking"
+            }
+          }
+        },
+        {
+          "day": 6,
+          "day_label": "Sábado",
+          "meals": {
+            "desayuno": {
+              "slug": "aguacate-relleno-atun",
+              "name": "Aguacate relleno de ensalada de atún",
+              "photo_prompt": "halved avocado filled with tuna salad garnished with lime and cilantro on white plate, bright natural weekend light, casual breakfast photography"
+            },
+            "almuerzo": {
+              "slug": "salmon-hierbas-esparragos",
+              "name": "Filete de salmón con mantequilla de hierbas y espárragos",
+              "photo_prompt": "pan seared salmon fillet topped with herb butter served with roasted asparagus on white plate, lunch natural light, elegant home cooking photography"
+            },
+            "cena": {
+              "slug": "bowl-tofu",
+              "name": "Bowl de tofu",
+              "photo_prompt": "bowl with cubed crispy tofu over greens and vegetables with sesame seeds and ginger sauce, wooden table, natural dinner light, top-down view"
+            }
+          }
+        },
+        {
+          "day": 7,
+          "day_label": "Domingo",
+          "meals": {
+            "desayuno": {
+              "slug": "tofu-revuelto-tostada",
+              "name": "Tofu revuelto con tostada",
+              "photo_prompt": "scrambled tofu with turmeric and spinach served with oat bread toast on white plate, sunday morning natural light, casual breakfast photography"
+            },
+            "almuerzo": {
+              "slug": "hamburguesa-lentejas-ensalada",
+              "name": "Hamburguesa de lentejas con ensalada fresca",
+              "photo_prompt": "homemade lentil burger patty on plate next to fresh mixed greens salad with cherry tomatoes, natural light, rustic vegetarian home cooking"
+            },
+            "cena": {
+              "slug": "pizza-coliflor-pollo",
+              "name": "Pizza de coliflor con topping de pollo",
+              "photo_prompt": "cauliflower crust pizza topped with grilled chicken mozzarella cheese tomato sauce and fresh basil on wooden board, rustic dinner photography"
+            }
+          }
+        }
+      ]
     },
     {
       "week": 2,
@@ -17,6 +165,7 @@
       "days": [
         {
           "day": 1,
+          "day_label": "Lunes",
           "meals": {
             "desayuno": {
               "slug": "omelette-caprese",
@@ -29,14 +178,15 @@
               "photo_prompt": "chicken breast fillet with creamed spinach sauce next to cauliflower mash puree on white plate, natural lunch light, home cooking photography iPhone style"
             },
             "cena": {
-              "slug": "wrap-lechuga-lomo",
-              "name": "Wrap de lechuga con lomo salteado",
-              "photo_prompt": "lettuce leaf wraps filled with sauteed beef strips and vegetables on white plate, dinner natural light, casual home cooking photography"
+              "slug": "wrap-lechuga-lomo-res",
+              "name": "Wrap de lechuga con lomo de res salteado",
+              "photo_prompt": "lettuce leaf wraps filled with sauteed beef tenderloin strips and vegetables on white plate, dinner natural light, casual home cooking photography"
             }
           }
         },
         {
           "day": 2,
+          "day_label": "Martes",
           "meals": {
             "desayuno": {
               "slug": "waffles-huevos-poche",
@@ -57,6 +207,7 @@
         },
         {
           "day": 3,
+          "day_label": "Miércoles",
           "meals": {
             "desayuno": {
               "slug": "huevos-cremosos-tostada-avena",
@@ -77,6 +228,7 @@
         },
         {
           "day": 4,
+          "day_label": "Jueves",
           "meals": {
             "desayuno": {
               "slug": "pancakes-fresas",
@@ -97,6 +249,7 @@
         },
         {
           "day": 5,
+          "day_label": "Viernes",
           "meals": {
             "desayuno": {
               "slug": "muffins-huevo-aguacate",
@@ -117,6 +270,7 @@
         },
         {
           "day": 6,
+          "day_label": "Sábado",
           "meals": {
             "desayuno": {
               "slug": "avena-trasnochada-yogurt-frutos-rojos",
@@ -137,6 +291,7 @@
         },
         {
           "day": 7,
+          "day_label": "Domingo",
           "meals": {
             "desayuno": {
               "slug": "arepa-zanahoria-huevos-aguacate",
