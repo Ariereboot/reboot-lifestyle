@@ -78,109 +78,20 @@
   .breadcrumb a { color: var(--text-muted); text-decoration: none; }
   .breadcrumb a:hover { color: var(--oxygen-blue); }
 
-  /* Hero carousel */
-  .media-carousel {
-    position: relative;
+  /* Hero image */
+  .recipe-image {
+    width: 100%;
+    height: 420px;
     border-radius: 20px;
-    overflow: hidden;
+    background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1400&q=85');
+    background-size: cover;
+    background-position: center;
     margin-bottom: 28px;
     box-shadow: 0 20px 40px -20px rgba(0,0,0,0.25);
-    background: var(--black-seed);
   }
-  .media-track {
-    display: flex;
-    scroll-snap-type: x mandatory;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+  @media (max-width: 640px) {
+    .recipe-image { height: 280px; border-radius: 14px; }
   }
-  .media-track::-webkit-scrollbar { display: none; }
-  .media-slide {
-    flex: 0 0 100%;
-    height: 420px;
-    scroll-snap-align: start;
-    position: relative;
-    background: var(--black-seed);
-  }
-  .media-slide img,
-  .media-slide video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .media-label {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: rgba(15,15,15,0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 8px 12px;
-    border-radius: 100px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .media-label.video-label::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: #ff4d4d;
-    border-radius: 50%;
-    animation: blink 1.5s ease-in-out infinite;
-  }
-  @keyframes blink { 50% { opacity: 0.3; } }
-
-  .carousel-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.95);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--black-seed);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    transition: all 0.2s;
-    z-index: 2;
-  }
-  .carousel-nav:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
-  .carousel-nav.prev { left: 16px; }
-  .carousel-nav.next { right: 16px; }
-
-  .carousel-dots {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 2;
-  }
-  .dot-indicator {
-    width: 32px;
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.4);
-    cursor: pointer;
-    transition: all 0.3s;
-    border: none;
-  }
-  .dot-indicator.active { background: var(--oxygen-blue); width: 48px; }
 
   /* Title */
   h1.recipe-title {
@@ -660,38 +571,7 @@
     <a href="#">Recetario</a> · <a href="#">Almuerzos</a>
   </div>
 
-  <div class="media-carousel">
-    <div class="media-track" id="mediaTrack">
-
-      <div class="media-slide">
-        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1400&q=85" alt="Bowl servido">
-        <div class="media-label">1 · Plato servido</div>
-      </div>
-
-      <div class="media-slide">
-        <video
-          src="https://videos.pexels.com/video-files/3015510/3015510-hd_1280_720_24fps.mp4"
-          poster="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=1400&q=85"
-          autoplay muted loop playsinline></video>
-        <div class="media-label video-label">Video · Preparación</div>
-      </div>
-
-      <div class="media-slide">
-        <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=1400&q=85" alt="Ingredientes crudos">
-        <div class="media-label">3 · Mise en place</div>
-      </div>
-
-    </div>
-
-    <button class="carousel-nav prev" onclick="scrollCarousel(-1)" aria-label="Anterior">‹</button>
-    <button class="carousel-nav next" onclick="scrollCarousel(1)" aria-label="Siguiente">›</button>
-
-    <div class="carousel-dots">
-      <button class="dot-indicator active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
-      <button class="dot-indicator" onclick="goToSlide(1)" aria-label="Slide 2"></button>
-      <button class="dot-indicator" onclick="goToSlide(2)" aria-label="Slide 3"></button>
-    </div>
-  </div>
+  <div class="recipe-image"></div>
 
   <h1 class="recipe-title">Bowl de Pollo al Horno con Vegetales y Arroz Integral</h1>
   <p class="recipe-subtitle">Cocinas el domingo, comes el miércoles sin pensar.</p>
@@ -710,34 +590,6 @@
     <span class="tag">Alta fibra</span>
     <span class="tag">Sin gluten</span>
     <span class="tag">Balanceado</span>
-  </div>
-
-  <!-- Macros -->
-  <div class="macros-card">
-    <div class="macros-label">Macros por porción</div>
-    <div class="macros-grid">
-      <div class="macro">
-        <div class="macro-value">510</div>
-        <div class="macro-unit">kcal</div>
-        <div class="macro-name">Calorías</div>
-      </div>
-      <div class="macro">
-        <div class="macro-value">38<span class="macro-unit">g</span></div>
-        <div class="macro-name">Proteína</div>
-      </div>
-      <div class="macro">
-        <div class="macro-value">9<span class="macro-unit">g</span></div>
-        <div class="macro-name">Fibra</div>
-      </div>
-      <div class="macro">
-        <div class="macro-value">17<span class="macro-unit">g</span></div>
-        <div class="macro-name">Grasa</div>
-      </div>
-      <div class="macro">
-        <div class="macro-value">48<span class="macro-unit">g</span></div>
-        <div class="macro-name">Carbos</div>
-      </div>
-    </div>
   </div>
 
   <!-- Ingredients section -->
@@ -819,6 +671,37 @@
     </ul>
   </section>
 
+  <!-- Macros (al final como referencia) -->
+  <div class="macros-card">
+    <div class="macros-label">Información nutricional · por porción</div>
+    <div class="macros-grid">
+      <div class="macro">
+        <div class="macro-value">510</div>
+        <div class="macro-unit">kcal</div>
+        <div class="macro-name">Calorías</div>
+      </div>
+      <div class="macro">
+        <div class="macro-value">38<span class="macro-unit">g</span></div>
+        <div class="macro-name">Proteína</div>
+      </div>
+      <div class="macro">
+        <div class="macro-value">9<span class="macro-unit">g</span></div>
+        <div class="macro-name">Fibra</div>
+      </div>
+      <div class="macro">
+        <div class="macro-value">17<span class="macro-unit">g</span></div>
+        <div class="macro-name">Grasa</div>
+      </div>
+      <div class="macro">
+        <div class="macro-value">48<span class="macro-unit">g</span></div>
+        <div class="macro-name">Carbos</div>
+      </div>
+    </div>
+    <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:18px; text-align:center; letter-spacing:0.3px;">
+      Valores aproximados. Se ajustan automáticamente a tus requerimientos si activas tu perfil.
+    </div>
+  </div>
+
 </article>
 
 <!-- Footer -->
@@ -867,26 +750,6 @@
   function toggleCheck(el) {
     el.classList.toggle('checked');
   }
-
-  // Carousel navigation
-  const track = document.getElementById('mediaTrack');
-  const dots = document.querySelectorAll('.dot-indicator');
-
-  function scrollCarousel(direction) {
-    const slideWidth = track.querySelector('.media-slide').offsetWidth;
-    track.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
-  }
-
-  function goToSlide(index) {
-    const slideWidth = track.querySelector('.media-slide').offsetWidth;
-    track.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
-  }
-
-  track.addEventListener('scroll', () => {
-    const slideWidth = track.querySelector('.media-slide').offsetWidth;
-    const activeIndex = Math.round(track.scrollLeft / slideWidth);
-    dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
-  });
 
   // Copy shopping list
   function copyShoppingList() {
