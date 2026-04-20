@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bowl de Pollo al Horno con Vegetales — Reboot Lifestyle</title>
+<title>Bowl de Pollo al Horno con Quinoa y Vegetales — Reboot Lifestyle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -107,7 +107,26 @@
     color: var(--text-muted);
     font-weight: 500;
     font-style: italic;
+    margin-bottom: 14px;
+  }
+  .phase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(118, 211, 209, 0.14);
+    color: #0a6f6d;
+    border: 1px solid rgba(118, 211, 209, 0.4);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
     margin-bottom: 24px;
+  }
+  .phase-badge::before {
+    content: '✓';
+    font-weight: 900;
+    color: var(--oxygen-blue);
   }
 
   /* Meta badges */
@@ -442,89 +461,157 @@
     color: var(--black-seed);
   }
 
-  /* Chef note */
-  .chef-note {
-    background: #fff;
-    border: 1px solid var(--border-subtle);
+  /* Tip especial (ciencia detrás de la receta) */
+  .tip-especial {
+    background: linear-gradient(135deg, #02251f 0%, #0a3e34 100%);
     border-radius: 20px;
     padding: 28px;
     margin-bottom: 20px;
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
   }
-  .chef-avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: var(--black-seed);
-    color: var(--arie-yellow);
+  .tip-especial::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(118,211,209,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .tip-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .tip-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--oxygen-blue);
+    color: var(--black-seed);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 18px;
     font-weight: 900;
-    font-size: 22px;
-    flex-shrink: 0;
-    border: 2px solid var(--arie-yellow);
   }
-  .chef-content { flex: 1; }
-  .chef-label {
+  .tip-label {
     font-size: 11px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--oxygen-blue);
     font-weight: 700;
-    margin-bottom: 6px;
   }
-  .chef-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--black-seed);
-    margin-bottom: 10px;
+  .tip-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
   }
-  .chef-body {
+  .tip-body {
     font-size: 15px;
     line-height: 1.65;
-    color: var(--black-seed);
+    color: rgba(255,255,255,0.88);
+    position: relative;
+  }
+  .tip-science {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(118,211,209,0.3);
+    font-size: 12px;
+    color: rgba(118,211,209,0.75);
+    letter-spacing: 0.3px;
+    font-style: italic;
   }
 
-  /* Sustituciones */
-  .subs-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .subs-list li {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 14px;
-    align-items: center;
-    padding: 14px 16px;
-    background: var(--pure-reset);
-    border-radius: 12px;
+  /* Sustituciones clickeables */
+  .subs-intro {
     font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    line-height: 1.6;
   }
-  .subs-list .from {
-    font-weight: 600;
+  .sub-group {
+    margin-bottom: 20px;
+  }
+  .sub-group:last-child { margin-bottom: 0; }
+  .sub-original {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .sub-original strong {
     color: var(--black-seed);
   }
-  .subs-list .arrow {
-    color: var(--oxygen-blue);
+  .sub-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .sub-chip {
+    background: var(--pure-reset);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: 100px;
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black-seed);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  .sub-chip:hover {
+    border-color: var(--oxygen-blue);
+    background: rgba(118, 211, 209, 0.1);
+    transform: translateY(-1px);
+  }
+  .sub-chip.active {
+    background: var(--oxygen-blue);
+    border-color: var(--oxygen-blue);
+    color: var(--black-seed);
+  }
+  .sub-chip.active::before {
+    content: '✓ ';
     font-weight: 900;
-    font-size: 18px;
   }
-  .subs-list .to {
+  .sub-chip .phase-hint {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 10px;
     color: var(--text-muted);
+    font-weight: 500;
   }
-  @media (max-width: 640px) {
-    .subs-list li {
-      grid-template-columns: 1fr;
-      gap: 4px;
-      text-align: left;
-    }
-    .subs-list .arrow { display: none; }
-    .subs-list .to::before { content: '→ '; color: var(--oxygen-blue); font-weight: 900; }
+  .sub-chip.active .phase-hint { color: rgba(15,15,15,0.6); }
+
+  .swap-banner {
+    background: rgba(118, 211, 209, 0.1);
+    border-left: 3px solid var(--oxygen-blue);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: var(--black-seed);
+    display: none;
+  }
+  .swap-banner.show { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .swap-banner button {
+    background: transparent;
+    border: 1px solid var(--black-seed);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
   }
 
   /* Footer disclaimer */
@@ -573,8 +660,9 @@
 
   <div class="recipe-image"></div>
 
-  <h1 class="recipe-title">Bowl de Pollo al Horno con Vegetales y Arroz Integral</h1>
+  <h1 class="recipe-title">Bowl de Pollo al Horno con Quinoa y Vegetales</h1>
   <p class="recipe-subtitle">Cocinas el domingo, comes el miércoles sin pensar.</p>
+  <div class="phase-badge">Compatible con el primer mes</div>
 
   <!-- Meta badges -->
   <div class="meta-row">
@@ -608,19 +696,18 @@
     <button class="shopping-btn" id="shoppingBtn" onclick="copyShoppingList()">Copiar lista de compras</button>
 
     <ul class="ingredient-list" id="ingredients">
-      <li data-base="600" data-unit="g"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">600</span> g</span> de pechuga de pollo (4 filetes)</li>
-      <li data-base="1" data-unit="taza"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span> taza</span> de arroz integral crudo (o quinoa)</li>
-      <li data-base="2" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">2</span></span> zucchinis medianos</li>
-      <li data-base="1" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span></span> pimentón rojo grande</li>
-      <li data-base="1" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span></span> pimentón amarillo</li>
-      <li data-base="1" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span></span> brócoli mediano, en floretes</li>
-      <li data-base="4" data-unit="cdas"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">4</span> cdas</span> de aceite de oliva extra virgen</li>
-      <li data-base="2" data-unit="dientes"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">2</span> dientes</span> de ajo, picados</li>
-      <li data-base="1" data-unit="cdta"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span> cdta</span> de paprika</li>
-      <li data-base="1" data-unit="cdta"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span> cdta</span> de comino molido</li>
-      <li data-base="0" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount">al gusto</span> sal y pimienta</li>
-      <li data-base="1" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span></span> limón</li>
-      <li data-base="0" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount">al gusto</span> hojas de cilantro fresco</li>
+      <li data-base="600" data-unit="g" data-slot="protein"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">600</span> g</span> <span class="ing-desc">de pechuga de pollo (4 filetes)</span></li>
+      <li data-base="1" data-unit="taza" data-slot="carb"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span> taza</span> <span class="ing-desc">de quinoa cruda</span></li>
+      <li data-base="2" data-unit="" data-slot="veg1"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">2</span></span> <span class="ing-desc">zucchinis medianos</span></li>
+      <li data-base="1" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span></span> <span class="ing-desc">pimentón rojo grande</span></li>
+      <li data-base="1" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span></span> <span class="ing-desc">pimentón amarillo</span></li>
+      <li data-base="1" data-unit="" data-slot="veg2"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span></span> <span class="ing-desc">brócoli mediano, en floretes</span></li>
+      <li data-base="4" data-unit="cdas"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">4</span> cdas</span> <span class="ing-desc">de aceite de oliva extra virgen</span></li>
+      <li data-base="2" data-unit="dientes"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">2</span> dientes</span> <span class="ing-desc">de ajo, picados</span></li>
+      <li data-base="1" data-unit="cdta" data-slot="spice"><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span> cdta</span> <span class="ing-desc">de paprika y comino molido</span></li>
+      <li data-base="0" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount">al gusto</span> <span class="ing-desc">sal y pimienta</span></li>
+      <li data-base="1" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount"><span class="amt">1</span></span> <span class="ing-desc">limón</span></li>
+      <li data-base="0" data-unit=""><span class="ingredient-check" onclick="toggleCheck(this)"></span><span class="ingredient-amount">al gusto</span> <span class="ing-desc">hojas de cilantro fresco</span></li>
     </ul>
   </section>
 
@@ -628,7 +715,7 @@
   <section>
     <h2>Preparación</h2>
     <ol class="steps">
-      <li>Cocina el arroz integral según el paquete (<strong>~30 min</strong>). Mientras se cocina, avanzas lo demás.</li>
+      <li>Enjuaga la <strong>quinoa</strong> y cocínala con 2 tazas de agua y una pizca de sal, ~15 min a fuego bajo hasta que absorba el líquido. Mientras, avanzas lo demás.</li>
       <li>Precalienta el horno a <strong>200°C</strong>. Corta los zucchinis, pimentones y brócoli en pedazos parejos. Mezcla en una bandeja con 2 cdas de aceite, sal y pimienta. Hornea <strong>20 minutos</strong>.</li>
       <li>Condimenta el pollo con paprika, comino, ajo, sal y pimienta. Masajea bien para que agarre sabor.</li>
       <li>Calienta 2 cdas de aceite en sartén grande a fuego medio-alto. Cocina el pollo <strong>5-6 minutos por lado</strong> hasta que esté dorado.</li>
@@ -646,29 +733,81 @@
   <!-- Why it works -->
   <div class="why-works">
     <div class="why-label">Por qué funciona</div>
-    <div class="why-body">Proteína alta del pollo es la prioridad, fibra abundante viene de los vegetales y el arroz integral, la grasa buena la pone el aceite de oliva, y los carbos son de buena calidad. Balance completo. Cocinar el domingo 35 minutos te resuelve 4 almuerzos de la semana — no es fuerza de voluntad lo que falla a las 12:30 del miércoles, es tiempo.</div>
+    <div class="why-body">Proteína alta del pollo como prioridad, fibra abundante de los vegetales y la quinoa (que también aporta proteína completa), grasa buena del aceite de oliva, carbos de buena calidad. Balance completo compatible con el primer mes del programa. Cocinar el domingo 35 minutos te resuelve 4 almuerzos — no es fuerza de voluntad lo que falla a las 12:30 del miércoles, es tiempo.</div>
   </div>
 
-  <!-- Chef note -->
-  <div class="chef-note">
-    <div class="chef-avatar">AR</div>
-    <div class="chef-content">
-      <div class="chef-label">Nota del chef</div>
-      <div class="chef-name">Arie Reboot</div>
-      <div class="chef-body">Esta receta nació porque los lunes eran un desastre en mi casa. Llegaba tarde del gym, tenía hambre, y terminaba comiendo lo que fuera. Un domingo me senté, cocinaba una vez, dividía en 4, y listo. Te aseguro que el miércoles al mediodía vas a agradecer el yo-del-domingo.</div>
+  <!-- Tip especial: hack científico -->
+  <div class="tip-especial">
+    <div class="tip-header">
+      <div class="tip-icon">❄</div>
+      <div class="tip-label">Tip especial · Hack científico</div>
+    </div>
+    <div class="tip-title">Enfría la quinoa y le bajas el impacto glicémico</div>
+    <div class="tip-body">
+      Si cocinas la quinoa el domingo, la refrigeras mínimo 12-24 horas y la comes el miércoles (incluso recalentada), parte del almidón se transforma en <strong>almidón resistente tipo 3</strong>. Este almidón no se digiere en el intestino delgado: llega al colon, alimenta tu microbioma, y baja el pico glicémico de la comida hasta un <strong>20-30 %</strong>. El meal-prep no solo te ahorra tiempo — literalmente hace que tu cuerpo absorba menos glucosa.
+    </div>
+    <div class="tip-science">
+      Respaldo: Sonia et al. (2015) · Haub et al. (2011) · Birt et al. (2013).
     </div>
   </div>
 
-  <!-- Sustituciones -->
+  <!-- Sustituciones clickeables -->
   <section>
     <h2>Sustituciones</h2>
-    <ul class="subs-list">
-      <li><span class="from">Pechuga de pollo</span><span class="arrow">→</span><span class="to">Muslos deshuesados, pescado blanco, tofu firme o garbanzos cocidos</span></li>
-      <li><span class="from">Arroz integral</span><span class="arrow">→</span><span class="to">Quinoa, arroz de coliflor (low-carb) o camote horneado</span></li>
-      <li><span class="from">Zucchini</span><span class="arrow">→</span><span class="to">Berenjena, espárragos o calabaza</span></li>
-      <li><span class="from">Brócoli</span><span class="arrow">→</span><span class="to">Coliflor, coles de bruselas o ejotes</span></li>
-      <li><span class="from">Paprika + comino</span><span class="arrow">→</span><span class="to">Curry en polvo, za'atar o solo sal y limón</span></li>
-    </ul>
+    <p class="subs-intro">Toca cualquier opción y te la cambio en la receta. Ingredientes y pasos se actualizan solos.</p>
+
+    <div class="swap-banner" id="swapBanner">
+      <span id="swapBannerText"></span>
+      <button onclick="resetSwaps()">Deshacer todo</button>
+    </div>
+
+    <div class="sub-group">
+      <div class="sub-original">Cambiar <strong>pechuga de pollo</strong> por:</div>
+      <div class="sub-options">
+        <button class="sub-chip" data-slot="protein" data-swap="muslos de pollo deshuesados" data-amount="600" data-unit="g">Muslos de pollo</button>
+        <button class="sub-chip" data-slot="protein" data-swap="filete de pescado blanco" data-amount="500" data-unit="g">Pescado blanco</button>
+        <button class="sub-chip" data-slot="protein" data-swap="tofu firme en cubos" data-amount="500" data-unit="g">Tofu firme</button>
+        <button class="sub-chip" data-slot="protein" data-swap="garbanzos cocidos" data-amount="400" data-unit="g">Garbanzos</button>
+      </div>
+    </div>
+
+    <div class="sub-group">
+      <div class="sub-original">Cambiar <strong>quinoa</strong> por:</div>
+      <div class="sub-options">
+        <button class="sub-chip" data-slot="carb" data-swap="avena cortada en acero cruda" data-amount="1" data-unit="taza" data-phase="mes 1">Avena <span class="phase-hint">· mes 1</span></button>
+        <button class="sub-chip" data-slot="carb" data-swap="arroz de coliflor" data-amount="2" data-unit="tazas" data-phase="mes 1">Arroz de coliflor <span class="phase-hint">· mes 1</span></button>
+        <button class="sub-chip" data-slot="carb" data-swap="zapallo horneado en cubos" data-amount="2" data-unit="tazas" data-phase="mes 1">Zapallo <span class="phase-hint">· mes 1</span></button>
+        <button class="sub-chip" data-slot="carb" data-swap="arroz integral crudo" data-amount="1" data-unit="taza" data-phase="mes 2+">Arroz integral <span class="phase-hint">· mes 2+</span></button>
+        <button class="sub-chip" data-slot="carb" data-swap="batata horneada en cubos" data-amount="600" data-unit="g" data-phase="mes 2+">Batata <span class="phase-hint">· mes 2+</span></button>
+      </div>
+    </div>
+
+    <div class="sub-group">
+      <div class="sub-original">Cambiar <strong>zucchini</strong> por:</div>
+      <div class="sub-options">
+        <button class="sub-chip" data-slot="veg1" data-swap="berenjenas en rodajas" data-amount="2" data-unit="">Berenjena</button>
+        <button class="sub-chip" data-slot="veg1" data-swap="espárragos en trozos" data-amount="1" data-unit="manojo">Espárragos</button>
+        <button class="sub-chip" data-slot="veg1" data-swap="calabaza en cubos" data-amount="2" data-unit="tazas" data-phase="mes 1">Calabaza</button>
+      </div>
+    </div>
+
+    <div class="sub-group">
+      <div class="sub-original">Cambiar <strong>brócoli</strong> por:</div>
+      <div class="sub-options">
+        <button class="sub-chip" data-slot="veg2" data-swap="coliflor en floretes" data-amount="1" data-unit="">Coliflor</button>
+        <button class="sub-chip" data-slot="veg2" data-swap="coles de bruselas partidas a la mitad" data-amount="400" data-unit="g">Coles de bruselas</button>
+        <button class="sub-chip" data-slot="veg2" data-swap="ejotes (vainica)" data-amount="400" data-unit="g">Ejotes</button>
+      </div>
+    </div>
+
+    <div class="sub-group">
+      <div class="sub-original">Cambiar <strong>paprika + comino</strong> por:</div>
+      <div class="sub-options">
+        <button class="sub-chip" data-slot="spice" data-swap="curry en polvo" data-amount="2" data-unit="cdtas">Curry</button>
+        <button class="sub-chip" data-slot="spice" data-swap="za'atar" data-amount="2" data-unit="cdtas">Za'atar</button>
+        <button class="sub-chip" data-slot="spice" data-swap="solo sal y jugo de limón" data-amount="0" data-unit="">Minimalista</button>
+      </div>
+    </div>
   </section>
 
   <!-- Macros (al final como referencia) -->
@@ -676,16 +815,16 @@
     <div class="macros-label">Información nutricional · por porción</div>
     <div class="macros-grid">
       <div class="macro">
-        <div class="macro-value">510</div>
+        <div class="macro-value">495</div>
         <div class="macro-unit">kcal</div>
         <div class="macro-name">Calorías</div>
       </div>
       <div class="macro">
-        <div class="macro-value">38<span class="macro-unit">g</span></div>
+        <div class="macro-value">42<span class="macro-unit">g</span></div>
         <div class="macro-name">Proteína</div>
       </div>
       <div class="macro">
-        <div class="macro-value">9<span class="macro-unit">g</span></div>
+        <div class="macro-value">10<span class="macro-unit">g</span></div>
         <div class="macro-name">Fibra</div>
       </div>
       <div class="macro">
@@ -693,7 +832,7 @@
         <div class="macro-name">Grasa</div>
       </div>
       <div class="macro">
-        <div class="macro-value">48<span class="macro-unit">g</span></div>
+        <div class="macro-value">42<span class="macro-unit">g</span></div>
         <div class="macro-name">Carbos</div>
       </div>
     </div>
@@ -722,13 +861,16 @@
     currentPortions = newPortions;
     document.getElementById('portionCount').textContent = currentPortions;
 
-    // Recalculate ingredients
-    const multiplier = currentPortions / basePortions;
+    // Recalculate all ingredients (includes swapped ones)
     document.querySelectorAll('#ingredients li').forEach(li => {
       const base = parseFloat(li.dataset.base);
-      if (base === 0) return; // "al gusto" items
       const amtEl = li.querySelector('.amt');
       if (!amtEl) return;
+      if (base === 0 || isNaN(base)) {
+        amtEl.textContent = 'al gusto';
+        return;
+      }
+      const multiplier = currentPortions / basePortions;
       const newVal = base * multiplier;
       amtEl.textContent = formatNumber(newVal);
     });
@@ -749,6 +891,90 @@
   // Ingredient checkboxes
   function toggleCheck(el) {
     el.classList.toggle('checked');
+  }
+
+  // Substitution swaps
+  const originalIngredients = {};
+  document.querySelectorAll('#ingredients li[data-slot]').forEach(li => {
+    const slot = li.dataset.slot;
+    originalIngredients[slot] = {
+      desc: li.querySelector('.ing-desc').textContent,
+      amount: parseFloat(li.dataset.base),
+      unit: li.dataset.unit
+    };
+  });
+
+  const activeSwaps = {};
+
+  document.querySelectorAll('.sub-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const slot = chip.dataset.slot;
+      const swapDesc = chip.dataset.swap;
+      const newAmount = parseFloat(chip.dataset.amount);
+      const newUnit = chip.dataset.unit;
+
+      // Find the ingredient li
+      const li = document.querySelector(`#ingredients li[data-slot="${slot}"]`);
+      if (!li) return;
+
+      // Toggle: if this chip is already active, revert to original
+      if (chip.classList.contains('active')) {
+        chip.classList.remove('active');
+        const orig = originalIngredients[slot];
+        li.querySelector('.ing-desc').textContent = orig.desc;
+        li.dataset.base = orig.amount;
+        li.dataset.unit = orig.unit;
+        delete activeSwaps[slot];
+      } else {
+        // Remove active from sibling chips in same slot
+        document.querySelectorAll(`.sub-chip[data-slot="${slot}"]`).forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        li.querySelector('.ing-desc').textContent = swapDesc;
+        li.dataset.base = newAmount;
+        li.dataset.unit = newUnit;
+        activeSwaps[slot] = chip.textContent.trim();
+      }
+
+      // Recalculate amount display based on current portion multiplier
+      updateIngredientDisplay(li);
+
+      updateSwapBanner();
+    });
+  });
+
+  function updateIngredientDisplay(li) {
+    const base = parseFloat(li.dataset.base);
+    const unit = li.dataset.unit;
+    const multiplier = currentPortions / basePortions;
+    const amtEl = li.querySelector('.amt');
+    const amountSpan = li.querySelector('.ingredient-amount');
+
+    if (base === 0 || isNaN(base)) {
+      amountSpan.innerHTML = `<span class="amt">al gusto</span>`;
+      return;
+    }
+
+    const newVal = base * multiplier;
+    const unitStr = unit ? ` ${unit}` : '';
+    amountSpan.innerHTML = `<span class="amt">${formatNumber(newVal)}</span>${unitStr}`;
+  }
+
+  function updateSwapBanner() {
+    const banner = document.getElementById('swapBanner');
+    const text = document.getElementById('swapBannerText');
+    const count = Object.keys(activeSwaps).length;
+    if (count === 0) {
+      banner.classList.remove('show');
+      return;
+    }
+    banner.classList.add('show');
+    text.textContent = count === 1
+      ? `Receta modificada · 1 sustitución activa`
+      : `Receta modificada · ${count} sustituciones activas`;
+  }
+
+  function resetSwaps() {
+    document.querySelectorAll('.sub-chip.active').forEach(chip => chip.click());
   }
 
   // Copy shopping list
