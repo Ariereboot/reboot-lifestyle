@@ -70,7 +70,7 @@ export function renderAttribution() {
   return `
     <section class="attribution-card" aria-label="Atribución del restaurante">
       <h3 class="attribution-card__title">📍 Ayúdanos a crecer la biblioteca</h3>
-      <p class="attribution-card__copy">Si nos dices qué restaurante es, el próximo que lo busque ya no tiene que subir foto.</p>
+      <p class="attribution-card__copy">Ponle el nombre del restaurante para que quede disponible en la búsqueda y otros puedan encontrarlo sin subir foto.</p>
 
       <div class="attribution-actions">
         <button type="button" id="attr-name-btn" class="attr-btn">Escribir nombre</button>

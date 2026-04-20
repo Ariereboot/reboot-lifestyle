@@ -1,6 +1,7 @@
-import { renderResult, renderAttribution, prepareFile } from '/clientUtils.js';
+import { renderResult, renderAttribution, prepareFile, escapeHtml } from '/clientUtils.js';
 
 let currentAnalysisId = null;
+let loadingTimerInterval = null;
 
 const loadingMessages = [
   'Leyendo el menú…',
@@ -15,6 +16,9 @@ const resultSection = $('#result-section');
 const errorSection = $('#error-section');
 const cameraInput = $('#camera-input');
 const galleryInput = $('#gallery-input');
+const searchInput = $('#search-input');
+const searchResults = $('#search-results');
+const loadingTimer = $('#loading-timer');
 const resultContainer = $('#result-container');
 const loadingText = $('#loading-text');
 const errorMessage = $('#error-message');
@@ -36,6 +40,22 @@ function cycleLoadingMessages() {
     i = (i + 1) % loadingMessages.length;
     loadingText.textContent = loadingMessages[i];
   }, 2500);
+}
+
+function startLoadingTimer() {
+  const start = Date.now();
+  if (loadingTimer) loadingTimer.textContent = '0 s';
+  if (loadingTimerInterval) clearInterval(loadingTimerInterval);
+  loadingTimerInterval = setInterval(() => {
+    if (loadingTimer) loadingTimer.textContent = `${Math.floor((Date.now() - start) / 1000)} s`;
+  }, 1000);
+  return loadingTimerInterval;
+}
+function stopLoadingTimer() {
+  if (loadingTimerInterval) {
+    clearInterval(loadingTimerInterval);
+    loadingTimerInterval = null;
+  }
 }
 
 function trackEvent(name, data = {}) {
@@ -61,6 +81,7 @@ async function handleFile(file) {
 
   showSection(loadingSection);
   const loadingInterval = cycleLoadingMessages();
+  const timerInterval = startLoadingTimer();
   trackEvent('analysis_started', { kind: isPdf ? 'pdf' : 'image' });
 
   try {
@@ -73,6 +94,7 @@ async function handleFile(file) {
     });
 
     clearInterval(loadingInterval);
+    stopLoadingTimer();
 
     if (!response.ok) {
       const errBody = await response.json().catch(() => ({}));
@@ -93,6 +115,7 @@ async function handleFile(file) {
     trackEvent('analysis_completed', { total: data.summary?.total ?? 0 });
   } catch (err) {
     clearInterval(loadingInterval);
+    stopLoadingTimer();
     console.error(err);
     showError('No pudimos procesar la imagen. Intenta de nuevo.');
   }
@@ -124,6 +147,107 @@ shareBtn.addEventListener('click', async () => {
 });
 
 ctaBtn?.addEventListener('click', () => trackEvent('cta_reboot30_clicked'));
+
+// --- Restaurant search (pre-upload lookup in the library) ---
+let searchDebounce = null;
+
+function renderSearchResults(results, query) {
+  if (!searchResults) return;
+  searchResults.innerHTML = '';
+
+  if (!query || query.length < 2) {
+    searchResults.hidden = true;
+    return;
+  }
+
+  if (results.length === 0) {
+    searchResults.innerHTML = '<li class="search-empty">No lo tenemos en la biblioteca todavía. Sube foto del menú y lo agregamos.</li>';
+    searchResults.hidden = false;
+    return;
+  }
+
+  for (const r of results) {
+    const total = r.summary?.total ?? '?';
+    const li = document.createElement('li');
+    li.className = 'search-result';
+    li.tabIndex = 0;
+    li.setAttribute('role', 'button');
+    li.dataset.id = r.id;
+    li.innerHTML = `
+      <span class="search-result__name">${escapeHtml(r.name)}</span>
+      <span class="search-result__meta">${total} platos</span>
+    `;
+    const open = () => openSavedMenu(r.id);
+    li.addEventListener('click', open);
+    li.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+    searchResults.appendChild(li);
+  }
+  searchResults.hidden = false;
+}
+
+async function runSearch(query) {
+  if (!query || query.length < 2) {
+    renderSearchResults([], query);
+    return;
+  }
+  try {
+    const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+    if (!res.ok) throw new Error('server');
+    const data = await res.json();
+    renderSearchResults(data.results || [], query);
+  } catch {
+    // silent fail — no mostramos error para search
+    renderSearchResults([], query);
+  }
+}
+
+searchInput?.addEventListener('input', (e) => {
+  const q = e.target.value.trim();
+  if (searchDebounce) clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(() => runSearch(q), 250);
+});
+
+searchInput?.addEventListener('focus', () => {
+  const q = searchInput.value.trim();
+  if (q.length >= 2) runSearch(q);
+});
+
+document.addEventListener('click', (e) => {
+  if (!searchInput || !searchResults) return;
+  if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+    searchResults.hidden = true;
+  }
+});
+
+async function openSavedMenu(id) {
+  if (!id) return;
+  trackEvent('library_hit', { id });
+  showSection(loadingSection);
+  loadingText.textContent = 'Trayendo el análisis guardado…';
+  startLoadingTimer();
+
+  try {
+    const res = await fetch(`/api/menu?id=${encodeURIComponent(id)}`);
+    stopLoadingTimer();
+    if (!res.ok) {
+      showError('No encontramos ese análisis. Sube foto del menú para crearlo.');
+      return;
+    }
+    const data = await res.json();
+    currentAnalysisId = null; // ya está guardado, no necesita atribución nueva
+    const banner = `<div class="saved-banner">
+      <strong>${escapeHtml(data.name || 'Restaurante')}</strong>
+      <span>· Análisis de la biblioteca Reboot</span>
+    </div>`;
+    resultContainer.innerHTML = banner + renderResult(data.analysis || {});
+    showSection(resultSection);
+  } catch {
+    stopLoadingTimer();
+    showError('No pudimos traer el análisis. Intenta de nuevo.');
+  }
+}
 
 // --- Attribution (restaurant name / geolocation) ---
 function wireAttribution() {

@@ -53,12 +53,25 @@
     </div>
   </header>
 
-  <!-- SECTION 1: Upload / Hero (full-width, fondo negro) -->
+  <!-- SECTION 1: Entry / Hero (full-width, fondo negro) -->
   <section id="upload-section" class="hero-screen">
     <div class="hero-screen__inner">
       <span class="badge">NUEVO · BETA</span>
       <h1>Te ayudo a elegir <span class="hl">qué pedir</span></h1>
-      <p class="subtitle">Escanea el menú de cualquier restaurante y recibe el análisis Reboot en segundos. Cada plato con su semáforo: verde, amarillo o rojo.</p>
+      <p class="subtitle">Busca tu restaurante en nuestra biblioteca o escanea el menú. El análisis llega en segundos, plato por plato.</p>
+
+      <!-- Search: look up restaurant already in the library -->
+      <div class="search-block" role="search">
+        <label for="search-input" class="search-label">¿En qué restaurante estás?</label>
+        <div class="search-input-wrap">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="search-input" type="text" autocomplete="off" placeholder="Ej: Maito, Napoli, Fonda Lo Que Hay..." maxlength="100" />
+        </div>
+        <ul id="search-results" class="search-results" hidden></ul>
+      </div>
+
+      <!-- Divider -->
+      <p class="divider-text"><span>o escanea el menú si no está</span></p>
 
       <div class="upload-row">
         <label for="camera-input" class="upload-btn upload-btn--primary">
@@ -74,7 +87,7 @@
         <input id="gallery-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,application/pdf" hidden />
       </div>
 
-      <p class="hint">Tip: asegúrate de que el menú se lea bien y haya buena luz.</p>
+      <p class="hint">Tip: una foto nítida del menú con buena luz analiza mejor.</p>
     </div>
   </section>
 
@@ -84,6 +97,8 @@
       <div class="loading">
         <div class="loading__spinner" aria-hidden="true"></div>
         <p class="loading__text" id="loading-text">Leyendo el menú…</p>
+        <p class="loading__timer" id="loading-timer" aria-live="polite">0 s</p>
+        <p class="loading__hint">La primera vez puede tardar hasta 60 s · después queda guardado para todos</p>
       </div>
     </section>
 
