@@ -683,10 +683,13 @@
 
 <script>
 // ============================================
-// FORMULARIO REBOOT 30 - ENVÍO A SUPABASE (via Vercel)
+// FORMULARIO REBOOT 30 - Conecta con Reboot Master API
 // ============================================
 
-const REGISTER_ENDPOINT = 'https://reboot-lifestyle-semaforo.vercel.app/api/register';
+const REGISTER_ENDPOINT = 'https://reboot-master-api.vercel.app/api/register';
+const PRODUCT_SLUG = 'reboot_30';
+const CONSENT_VERSION = '1.0';
+const CONSENT_TEXT = 'Acepto que Reboot Lifestyle procese mis datos personales para entregarme el contenido que solicito, contactarme sobre el programa Reboot 30, y mejorar el servicio. Puedo retirar mi consentimiento en cualquier momento escribiendo a privacidad@rebootlifestyle.com. Versión 1.0 de la política de privacidad.';
 
 const form = document.getElementById('reboot30-form');
 const submitBtn = document.getElementById('submit-btn');
@@ -695,11 +698,10 @@ const messageBox = document.getElementById('form-message');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Ocultar mensajes previos
     messageBox.className = 'form-message';
     messageBox.textContent = '';
 
-    // Validar campos obligatorios vacíos (antes de cualquier otra cosa)
+    // Validación campos obligatorios
     const requiredFields = [
         { id: 'nombre', label: 'Nombre' },
         { id: 'apellido', label: 'Apellido' },
@@ -715,7 +717,6 @@ form.addEventListener('submit', async (e) => {
         messageBox.className = 'form-message error';
         messageBox.textContent = 'Debes llenar todos los espacios obligatorios para continuar.';
         messageBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Marcar visualmente el primer campo vacío
         const firstEmpty = document.getElementById(emptyFields[0].id);
         if (firstEmpty) firstEmpty.focus();
         return;
@@ -733,12 +734,11 @@ form.addEventListener('submit', async (e) => {
     // Validar consentimiento
     if (!document.getElementById('consentimiento').checked) {
         messageBox.className = 'form-message error';
-        messageBox.textContent = 'Debes aceptar las comunicaciones para continuar.';
+        messageBox.textContent = 'Debes aceptar el procesamiento de datos para continuar.';
         messageBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
     }
 
-    // Deshabilitar botón
     submitBtn.disabled = true;
     submitBtn.textContent = 'Guardando...';
 
@@ -750,23 +750,39 @@ form.addEventListener('submit', async (e) => {
     const telefono = document.getElementById('telefono').value.trim();
     const pais = document.getElementById('pais').value;
     const retos = Array.from(retosChecked).map(cb => cb.value);
-    const consentimiento = document.getElementById('consentimiento').checked;
 
     // UTM tracking
     const urlParams = new URLSearchParams(window.location.search);
-    const payload = {
-        nombre,
-        apellido,
-        email,
-        codigo,
-        telefono,
-        pais,
-        retos,
-        consentimiento,
-        source: urlParams.get('source') || urlParams.get('fuente') || 'directo',
+    const utm_data = {
         utm_source: urlParams.get('utm_source') || '',
         utm_medium: urlParams.get('utm_medium') || '',
         utm_campaign: urlParams.get('utm_campaign') || '',
+        utm_content: urlParams.get('utm_content') || '',
+        utm_term: urlParams.get('utm_term') || '',
+        referrer: document.referrer || '',
+    };
+
+    // Payload al Master API
+    const payload = {
+        email,
+        name: nombre,
+        last_name: apellido,
+        phone: (codigo && telefono) ? `${codigo}${telefono}` : telefono,
+        country: pais,
+        product_slug: PRODUCT_SLUG,
+        source: urlParams.get('source') || urlParams.get('fuente') || 'landing_direct',
+        source_campaign: urlParams.get('utm_campaign') || '',
+        utm_data,
+        form_data: {
+            retos,
+            codigo_telefono: codigo,
+            telefono_raw: telefono,
+        },
+        consent_data_processing: true,
+        consent_text: CONSENT_TEXT,
+        consent_version: CONSENT_VERSION,
+        consent_marketing: true,   // checkbox del form acepta marketing también
+        consent_whatsapp: true,    // implícito al unirse al grupo
     };
 
     try {
@@ -778,10 +794,10 @@ form.addEventListener('submit', async (e) => {
 
         if (!response.ok) {
             const err = await response.json().catch(() => ({}));
-            throw new Error(err.message || 'Error en el servidor');
+            throw new Error(err.error || err.message || 'Error en el servidor');
         }
 
-        // Tracking Pixel Meta (cuando esté activo)
+        // Meta Pixel
         if (typeof fbq !== 'undefined') {
             fbq('track', 'Lead', {
                 content_name: 'Reboot 30 Registration',
