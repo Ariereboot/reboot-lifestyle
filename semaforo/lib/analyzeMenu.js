@@ -13,32 +13,49 @@ const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 const PDF_TYPE = 'application/pdf';
 
 /**
- * Analyze a menu (image or PDF) via Claude multimodal.
- * Images use the `image` content block; PDFs use the `document` block.
- * @param {{fileBase64: string, mediaType: string, apiKey: string}} params
+ * Analyze a menu (one or more images/PDFs) via Claude multimodal.
+ * Accepts:
+ *   - files: [{ base64, mediaType }, ...]  (preferred, supports multi-page menus)
+ *   - fileBase64 + mediaType                (single file, backward compat)
+ *   - imageBase64 + mediaType               (legacy)
+ * Images become `image` blocks; PDFs become `document` blocks.
  * @returns {Promise<object>} parsed JSON matching the schema defined in the system prompt
  */
-export async function analyzeMenu({ fileBase64, mediaType, apiKey, imageBase64 }) {
-  // Backward compat: old callers pass imageBase64 instead of fileBase64.
-  const data = fileBase64 ?? imageBase64;
-  const client = new Anthropic({ apiKey });
-
-  let primaryBlock;
-  if (IMAGE_TYPES.has(mediaType)) {
-    primaryBlock = {
-      type: 'image',
-      source: { type: 'base64', media_type: mediaType, data },
-    };
-  } else if (mediaType === PDF_TYPE) {
-    primaryBlock = {
-      type: 'document',
-      source: { type: 'base64', media_type: mediaType, data },
-    };
+export async function analyzeMenu({ files, fileBase64, mediaType, apiKey, imageBase64 }) {
+  // Normalize input to a files[] array
+  let fileList = [];
+  if (Array.isArray(files) && files.length > 0) {
+    fileList = files;
   } else {
-    const err = new Error(`UNSUPPORTED_MEDIA_TYPE: ${mediaType}`);
+    const data = fileBase64 ?? imageBase64;
+    if (data) fileList = [{ base64: data, mediaType }];
+  }
+  if (fileList.length === 0) {
+    const err = new Error('UNSUPPORTED_MEDIA_TYPE: no file provided');
     err.code = 'UNSUPPORTED_MEDIA_TYPE';
     throw err;
   }
+
+  const client = new Anthropic({ apiKey });
+
+  // Build content blocks: one per file, then the user prompt text
+  const contentBlocks = fileList.map((f) => {
+    if (IMAGE_TYPES.has(f.mediaType)) {
+      return { type: 'image', source: { type: 'base64', media_type: f.mediaType, data: f.base64 } };
+    }
+    if (f.mediaType === PDF_TYPE) {
+      return { type: 'document', source: { type: 'base64', media_type: f.mediaType, data: f.base64 } };
+    }
+    const err = new Error(`UNSUPPORTED_MEDIA_TYPE: ${f.mediaType}`);
+    err.code = 'UNSUPPORTED_MEDIA_TYPE';
+    throw err;
+  });
+
+  const instruction = fileList.length > 1
+    ? `Analiza este menú. Son ${fileList.length} páginas/imágenes del mismo menú — trátalas como un solo menú continuo y numera los platos sin repetir.`
+    : 'Analiza este menú.';
+
+  contentBlocks.push({ type: 'text', text: instruction });
 
   const response = await client.messages.create({
     model: MODEL,
@@ -53,10 +70,7 @@ export async function analyzeMenu({ fileBase64, mediaType, apiKey, imageBase64 }
     messages: [
       {
         role: 'user',
-        content: [
-          primaryBlock,
-          { type: 'text', text: 'Analiza este menú.' },
-        ],
+        content: contentBlocks,
       },
     ],
   });

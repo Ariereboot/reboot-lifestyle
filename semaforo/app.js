@@ -64,33 +64,44 @@ function trackEvent(name, data = {}) {
   console.log('[event]', name, data);
 }
 
-async function handleFile(file) {
-  if (!file) return;
-  const isImage = file.type.startsWith('image/');
-  const isPdf = file.type === 'application/pdf';
-  if (!isImage && !isPdf) {
-    showError('Archivo no soportado. Sube una foto (JPG/PNG) o un PDF del menú.');
-    return;
-  }
-  if (file.size > 10 * 1024 * 1024) {
-    showError(isPdf
-      ? 'El PDF pesa más de 10MB. Prueba con un PDF más pequeño o toma foto de las páginas.'
-      : 'La imagen pesa más de 10MB. Tómale otra foto más pequeña.');
-    return;
+async function handleFiles(fileList) {
+  const files = Array.from(fileList || []).slice(0, 8);
+  if (files.length === 0) return;
+
+  for (const file of files) {
+    const isImage = file.type.startsWith('image/');
+    const isPdf = file.type === 'application/pdf';
+    if (!isImage && !isPdf) {
+      showError('Archivo no soportado. Sube foto (JPG/PNG) o PDF.');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      showError('Uno de los archivos pesa más de 10MB. Prueba con más compresión o menos páginas.');
+      return;
+    }
   }
 
   showSection(loadingSection);
+  if (files.length > 1) {
+    loadingText.textContent = `Leyendo ${files.length} páginas del menú…`;
+  }
   const loadingInterval = cycleLoadingMessages();
-  const timerInterval = startLoadingTimer();
-  trackEvent('analysis_started', { kind: isPdf ? 'pdf' : 'image' });
+  startLoadingTimer();
+  trackEvent('analysis_started', { pages: files.length });
 
   try {
-    const { base64, mediaType } = await prepareFile(file);
+    // Prepare all files (images compressed, PDFs pass-through)
+    const prepared = await Promise.all(files.map((f) => prepareFile(f)));
+    const payloadFiles = prepared.map((p) => ({ base64: p.base64, mediaType: p.mediaType }));
+
+    const headers = { 'Content-Type': 'application/json' };
+    const vip = getVipKey();
+    if (vip) headers['X-Reboot-VIP'] = vip;
 
     const response = await fetch('/api/analyze', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fileBase64: base64, mediaType }),
+      headers,
+      body: JSON.stringify({ files: payloadFiles }),
     });
 
     clearInterval(loadingInterval);
@@ -136,11 +147,32 @@ function showError(msg) {
 
 [cameraInput, galleryInput].forEach((input) => {
   input.addEventListener('change', (e) => {
-    const file = e.target.files?.[0];
+    const files = e.target.files;
+    const list = files ? Array.from(files) : [];
     e.target.value = '';
-    if (file) handleFile(file);
+    if (list.length > 0) handleFiles(list);
   });
 });
+
+// --- VIP key handling (URL ?vip=... -> localStorage -> header on every request) ---
+const VIP_STORAGE_KEY = 'reboot_vip_key';
+function getVipKey() {
+  try { return localStorage.getItem(VIP_STORAGE_KEY) || null; }
+  catch { return null; }
+}
+(function hydrateVip() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const vipFromUrl = params.get('vip');
+    if (vipFromUrl && vipFromUrl.length >= 4) {
+      localStorage.setItem(VIP_STORAGE_KEY, vipFromUrl);
+      // Clean URL without reloading
+      const clean = window.location.origin + window.location.pathname;
+      history.replaceState({}, '', clean);
+      console.log('[semaforo] VIP mode enabled (cached in this browser)');
+    }
+  } catch {}
+})();
 
 retryBtn.addEventListener('click', () => showSection(uploadSection));
 newAnalysisBtn.addEventListener('click', () => showSection(uploadSection));
