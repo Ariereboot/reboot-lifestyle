@@ -428,6 +428,85 @@
         .action-btn.danger { color: var(--error); border-color: rgba(220,38,38,0.25); }
         .action-btn.danger:hover { background: rgba(220,38,38,0.04); border-color: var(--error); }
 
+        /* ============ INVITE BANNER ============ */
+        .invite-banner {
+            background: linear-gradient(135deg, var(--black-seed) 0%, #1a1a1a 100%);
+            color: white;
+            border-radius: 18px;
+            padding: 26px 24px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--arie-yellow);
+        }
+        .invite-banner::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(250,230,43,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .invite-banner__header {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 14px;
+            position: relative; z-index: 1;
+        }
+        .invite-banner__icon { font-size: 32px; line-height: 1; }
+        .invite-banner__eyebrow {
+            font-size: 10px; font-weight: 800; letter-spacing: 2px;
+            color: var(--arie-yellow);
+            margin-bottom: 4px;
+        }
+        .invite-banner__title {
+            font-size: 20px; font-weight: 900;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+        }
+        .invite-banner__desc {
+            font-size: 13px; line-height: 1.55;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 14px;
+            position: relative; z-index: 1;
+            max-width: 560px;
+        }
+        .invite-codes {
+            display: flex; flex-wrap: wrap; gap: 10px;
+            position: relative; z-index: 1;
+        }
+        .invite-code-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex; align-items: center; gap: 12px;
+            flex: 1; min-width: 260px;
+        }
+        .invite-code-card .code {
+            font-family: 'Montserrat', monospace;
+            font-size: 18px; font-weight: 900;
+            letter-spacing: 2.5px;
+            color: var(--arie-yellow);
+            flex: 1;
+            user-select: all;
+        }
+        .invite-code-card .copy-btn {
+            background: var(--earth-carrot);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 100px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px; font-weight: 800;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.15s;
+        }
+        .invite-code-card .copy-btn:hover { background: #d34f1f; }
+        .invite-code-card .copy-btn.copied { background: var(--success); }
+
         /* ============ LOADING ============ */
         .loading {
             display: flex;
@@ -531,6 +610,23 @@
             <div class="dashboard-header">
                 <div class="greeting">Bienvenido de vuelta</div>
                 <h1 id="user-greeting">Hola</h1>
+            </div>
+
+            <!-- Escáner Invite Banner (solo si tiene invites disponibles) -->
+            <div id="invite-banner" class="invite-banner" hidden>
+                <div class="invite-banner__header">
+                    <div class="invite-banner__icon">🎟️</div>
+                    <div>
+                        <div class="invite-banner__eyebrow">TIENES <span id="invite-count">1</span> INVITACIÓN AL ESCÁNER</div>
+                        <h3 class="invite-banner__title">Invita a <span id="invite-count-text">1 amigo</span></h3>
+                    </div>
+                </div>
+                <p class="invite-banner__desc">
+                    Quien uses tu código se inscribe al Reboot 30 y recibe acceso al Escáner. Ganas karma, amigos, y cuando validen ellos — tú recibes otra invitación.
+                </p>
+                <div class="invite-codes" id="invite-codes">
+                    <!-- injected dynamically -->
+                </div>
             </div>
 
             <div class="section-title">Tus servicios activos</div>
@@ -780,6 +876,7 @@ async function loadDashboard(session) {
     }
 
     renderAccount(data.user);
+    renderInvites(data.invites || []);
 
     // Also fetch full catalog for "Explora más" section
     const catalog = await apiCall('/api/products');
@@ -787,6 +884,52 @@ async function loadDashboard(session) {
 
     renderProducts(data.products, allProducts);
     showScreen('dashboard-screen');
+}
+
+function renderInvites(invites) {
+    const banner = $('invite-banner');
+    const codesEl = $('invite-codes');
+    if (!invites || invites.length === 0) {
+        banner.hidden = true;
+        return;
+    }
+    banner.hidden = false;
+    $('invite-count').textContent = invites.length;
+    $('invite-count-text').textContent = invites.length === 1 ? '1 amigo' : `${invites.length} amigos`;
+
+    codesEl.innerHTML = '';
+    const origin = window.location.origin;
+    const formPath = '/reboot-lifestyle/reboot30.html';
+    invites.forEach(inv => {
+        const shareUrl = `${origin}${formPath}?invite=${inv.code}&utm_source=escaner_invite`;
+        const card = document.createElement('div');
+        card.className = 'invite-code-card';
+        card.innerHTML = `
+            <div class="code">${inv.code}</div>
+            <button class="copy-btn" data-code="${inv.code}" data-url="${shareUrl}">Copiar link</button>
+        `;
+        codesEl.appendChild(card);
+    });
+
+    // Copy buttons
+    codesEl.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const url = btn.dataset.url;
+            const text = `Hey, te invito al Reboot 30. Te regalo mi invitación al Escáner (beta): ${url}`;
+            try {
+                await navigator.clipboard.writeText(text);
+                const orig = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = orig;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (e) {
+                alert(`Copia este link:\n\n${url}`);
+            }
+        });
+    });
 }
 
 async function init() {

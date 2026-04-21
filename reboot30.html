@@ -528,7 +528,28 @@
                 <p>Te agregamos al grupo exclusivo de WhatsApp y te mandamos todos los recursos.</p>
             </div>
 
+            <!-- Banner de invitación al Escáner (solo si llegó con ?invite=) -->
+            <div id="invite-banner-form" style="display:none; background: linear-gradient(135deg,#0f0f0f,#1a1a1a); color:#fff; padding:18px 20px; border-radius:14px; margin-bottom:24px; border:2px solid #fae62b;">
+                <div style="font-size:11px; letter-spacing:2px; color:#fae62b; font-weight:800; margin-bottom:6px;">🎟️ INVITACIÓN VÁLIDA</div>
+                <div style="font-size:16px; font-weight:800; margin-bottom:6px;">Alguien te invitó al Escáner (beta).</div>
+                <div style="font-size:13px; color:rgba(255,255,255,0.75); line-height:1.5;">Completa tu registro al Reboot 30 y recibes acceso al Escáner inmediatamente. Código: <strong id="invite-code-display" style="color:#fae62b; letter-spacing:2px;"></strong></div>
+            </div>
+
             <div id="form-message" class="form-message"></div>
+            <script>
+                // Show invite banner if ?invite= in URL
+                (function() {
+                    const code = (new URLSearchParams(window.location.search).get('invite') || '').toUpperCase().trim();
+                    if (code) {
+                        const banner = document.getElementById('invite-banner-form');
+                        const display = document.getElementById('invite-code-display');
+                        if (banner && display) {
+                            display.textContent = code;
+                            banner.style.display = 'block';
+                        }
+                    }
+                })();
+            </script>
 
             <form id="reboot30-form" novalidate>
 
@@ -753,8 +774,9 @@ form.addEventListener('submit', async (e) => {
     const pais = document.getElementById('pais').value;
     const retos = Array.from(retosChecked).map(cb => cb.value);
 
-    // UTM tracking
+    // UTM tracking + invite code from viral loop
     const urlParams = new URLSearchParams(window.location.search);
+    const inviteCode = (urlParams.get('invite') || '').toUpperCase().trim();
     const utm_data = {
         utm_source: urlParams.get('utm_source') || '',
         utm_medium: urlParams.get('utm_medium') || '',
@@ -772,13 +794,14 @@ form.addEventListener('submit', async (e) => {
         phone: (codigo && telefono) ? `${codigo}${telefono}` : telefono,
         country: pais,
         product_slug: PRODUCT_SLUG,
-        source: urlParams.get('source') || urlParams.get('fuente') || 'landing_direct',
-        source_campaign: urlParams.get('utm_campaign') || '',
+        source: inviteCode ? 'invite_escaner' : (urlParams.get('source') || urlParams.get('fuente') || 'landing_direct'),
+        source_campaign: urlParams.get('utm_campaign') || (inviteCode ? 'escaner_viral' : ''),
         utm_data,
         form_data: {
             retos,
             codigo_telefono: codigo,
             telefono_raw: telefono,
+            invite_code: inviteCode || null,
         },
         consent_data_processing: true,
         consent_text: CONSENT_TEXT,
