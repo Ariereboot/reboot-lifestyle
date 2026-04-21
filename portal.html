@@ -642,9 +642,10 @@ async function loadDashboard(session) {
             body: {},
         });
         if (!complete.ok) {
-            console.error('onboarding failed:', complete.data);
+            console.error('onboarding failed:', complete);
             showScreen('login-screen');
-            showMessage('login-message', 'No pudimos completar tu perfil. Intenta más tarde.');
+            const errMsg = complete.data?.details || complete.data?.error || `HTTP ${complete.status}`;
+            showMessage('login-message', `Error completando perfil: ${errMsg}`);
             return;
         }
         return loadDashboard(session); // retry
