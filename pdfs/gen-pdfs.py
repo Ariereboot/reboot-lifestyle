@@ -283,75 +283,65 @@ def draw_intro(c, data):
 # ==============================================================
 
 def draw_recipe(c, recipe, number, total, magnet_title):
+    import re
     # White-ish bg
     c.setFillColor(PURE_RESET)
     c.rect(0, 0, W, H, fill=1, stroke=0)
 
-    # Header bar
+    # Header bar (fixed)
     c.setFillColor(BLACK)
-    c.rect(0, H - 70, W, 70, fill=1, stroke=0)
+    c.rect(0, H - 50, W, 50, fill=1, stroke=0)
     c.setFillColor(OXYGEN)
     c.setFont('Helvetica-Bold', 9)
-    c.drawString(50, H - 34, 'REBOOT LIFESTYLE  ·  BY @ARIEREBOOT')
+    c.drawString(50, H - 28, 'REBOOT LIFESTYLE  ·  BY @ARIEREBOOT')
     c.setFillColor(HexColor('#999999'))
     c.setFont('Helvetica', 8)
-    c.drawRightString(W - 50, H - 34, magnet_title)
+    c.drawRightString(W - 50, H - 28, magnet_title)
 
-    # Photo (if exists)
+    # Photo (if exists) - fixed height, cleaner
     slug = recipe['id']
     photo_path = FOTOS / f'{slug}.jpg'
-    y_after_photo = H - 90
+    photo_top = H - 70
+    img_h = 170
+    y_after_photo = photo_top - img_h - 28
     if photo_path.exists():
         try:
-            img_h = 180
-            c.drawImage(str(photo_path), 50, H - 90 - img_h, width=W - 100, height=img_h,
+            c.drawImage(str(photo_path), 50, photo_top - img_h, width=W - 100, height=img_h,
                        preserveAspectRatio=True, mask='auto')
-            y_after_photo = H - 90 - img_h - 20
-        except Exception as e:
-            y_after_photo = H - 100
+        except Exception:
+            pass
 
-    # Number circle
-    circle_size = 42
-    circle_x = 50 + circle_size / 2
-    circle_y = y_after_photo - circle_size / 2
+    # === TITLE BLOCK (below photo) ===
+    # Eyebrow: "RECETA 01 · DE 10"
+    eyebrow_y = y_after_photo
     c.setFillColor(OXYGEN)
-    c.circle(circle_x, circle_y, circle_size / 2, fill=1, stroke=0)
-    c.setFillColor(BLACK)
-    c.setFont('Helvetica-Bold', 18)
-    num_str = f'{number:02d}'
-    tw = c.stringWidth(num_str, 'Helvetica-Bold', 18)
-    c.drawString(circle_x - tw / 2, circle_y - 6, num_str)
+    c.setFont('Helvetica-Bold', 10)
+    c.drawString(50, eyebrow_y, f'RECETA {number:02d}  ·  DE {total:02d}')
 
-    # Count label
-    c.setFillColor(TEXT_MUTED)
-    c.setFont('Helvetica', 9)
-    c.drawString(50 + circle_size + 12, circle_y + 6, f'DE {total:02d}')
-
-    # Recipe title
-    title_x = 50 + circle_size + 12
-    title_y = y_after_photo - circle_size - 6
+    # Title — large, wraps if needed
+    title_y = eyebrow_y - 28
+    title_font_size = 22
+    title_lines = wrap_text(c, recipe['nombre'], W - 100, 'Helvetica-Bold', title_font_size)
     c.setFillColor(BLACK)
-    # Wrap title if too long
-    title_lines = wrap_text(c, recipe['nombre'], W - title_x - 50, 'Helvetica-Bold', 20)
-    c.setFont('Helvetica-Bold', 20)
-    ty = y_after_photo - 6
+    c.setFont('Helvetica-Bold', title_font_size)
     for line in title_lines:
-        c.drawString(title_x, ty, line)
-        ty -= 24
-    title_y = ty - 6
+        c.drawString(50, title_y, line)
+        title_y -= 26
+    title_y += 26  # back to last line position
 
-    # Subtitle
+    # Subtitle (italic)
+    sub_y = title_y - 22
     if recipe.get('subtitulo'):
         c.setFillColor(TEXT_MUTED)
         c.setFont('Helvetica-Oblique', 11)
         sublines = wrap_text(c, recipe['subtitulo'], W - 100, 'Helvetica-Oblique', 11)
         for line in sublines:
-            c.drawString(50, title_y, line)
-            title_y -= 14
-    title_y -= 6
+            c.drawString(50, sub_y, line)
+            sub_y -= 14
+        sub_y += 14
 
     # Meta pills
-    meta_y = title_y - 4
+    meta_y = sub_y - 22
     x = 50
     for label, value in [
         ('Tiempo', f"{recipe.get('tiempo_min', '—')} min"),
@@ -369,22 +359,25 @@ def draw_recipe(c, recipe, number, total, magnet_title):
         c.drawString(x + 9, meta_y - 12, pill_text)
         x += tw + 26
 
-    col_y = meta_y - 42
-
     # Two columns: ingredients | preparation
+    col_top = meta_y - 38
     col_w = (W - 120) / 2
+    hack_reserve = 110  # reserved at bottom for hack + page number
+    col_bottom = hack_reserve + 40  # safety margin so text NEVER touches hack box
 
-    # INGREDIENTS
+    # INGREDIENTS column
     c.setFillColor(OXYGEN)
     c.setFont('Helvetica-Bold', 10)
-    c.drawString(50, col_y, 'INGREDIENTES')
+    c.drawString(50, col_top, 'INGREDIENTES')
     c.setStrokeColor(OXYGEN)
     c.setLineWidth(1.5)
-    c.line(50, col_y - 4, 50 + col_w - 30, col_y - 4)
+    c.line(50, col_top - 4, 50 + 90, col_top - 4)
 
-    ing_y = col_y - 24
+    ing_y = col_top - 22
     c.setFillColor(BLACK)
     for ing in recipe.get('ingredientes', []):
+        if ing_y < col_bottom:
+            break
         amt = ing.get('amount_base', 0)
         unit = ing.get('unit', '')
         desc = ing.get('descripcion', '')
@@ -395,50 +388,51 @@ def draw_recipe(c, recipe, number, total, magnet_title):
         lines = wrap_text(c, label, col_w - 10, 'Helvetica', 9)
         c.setFont('Helvetica', 9)
         for line in lines:
-            if ing_y < 120:
+            if ing_y < col_bottom:
                 break
             c.drawString(50, ing_y, line)
             ing_y -= 12
+        ing_y -= 2
 
-    # PREPARATION (right column)
+    # PREPARATION column
     prep_x = 50 + col_w + 20
     c.setFillColor(OXYGEN)
     c.setFont('Helvetica-Bold', 10)
-    c.drawString(prep_x, col_y, 'PREPARACIÓN')
+    c.drawString(prep_x, col_top, 'PREPARACIÓN')
     c.setStrokeColor(OXYGEN)
-    c.line(prep_x, col_y - 4, prep_x + col_w - 30, col_y - 4)
+    c.line(prep_x, col_top - 4, prep_x + 90, col_top - 4)
 
-    prep_y = col_y - 24
+    prep_y = col_top - 22
     c.setFillColor(BLACK)
     for i, step in enumerate(recipe.get('pasos', []), 1):
+        if prep_y < col_bottom:
+            break
         texto = step.get('texto', '') if isinstance(step, dict) else str(step)
-        # Strip HTML tags
-        import re
         texto_clean = re.sub(r'<[^>]+>', '', texto)
         label = f'{i}. {texto_clean}'
         lines = wrap_text(c, label, col_w - 10, 'Helvetica', 9)
         c.setFont('Helvetica', 9)
         for line in lines:
-            if prep_y < 120:
+            if prep_y < col_bottom:
                 break
             c.drawString(prep_x, prep_y, line)
             prep_y -= 12
-        prep_y -= 4
+        prep_y -= 5
 
     # Hack de Arie at bottom
     hack_text = recipe.get('hack', '')
     if hack_text:
         hack_box_y = 60
-        hack_h = 62
+        hack_h = 72
         c.setFillColor(DEEP_NEURAL)
         c.roundRect(50, hack_box_y, W - 100, hack_h, 10, fill=1, stroke=0)
         c.setFillColor(OXYGEN)
         c.setFont('Helvetica-Bold', 9)
-        c.drawString(64, hack_box_y + hack_h - 18, 'HACK DE ARIE')
+        c.drawString(64, hack_box_y + hack_h - 20, 'HACK DE ARIE')
         c.setFillColor(white)
-        c.setFont('Helvetica', 10)
-        hack_lines = wrap_text(c, hack_text, W - 128, 'Helvetica', 10)
-        hy = hack_box_y + hack_h - 34
+        c.setFont('Helvetica', 9.5)
+        hack_lines = wrap_text(c, hack_text, W - 128, 'Helvetica', 9.5)
+        hy = hack_box_y + hack_h - 36
         for line in hack_lines[:3]:
             c.drawString(64, hy, line)
             hy -= 13
