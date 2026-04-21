@@ -437,7 +437,7 @@
           <span class="meal-tag ${type}">${type}</span>
           <div class="meal-photo-icon">${icon}</div>
           <div class="meal-photo-label">${meal.name}</div>
-          <img class="meal-photo-img" loading="lazy" src="${photo}" alt="${meal.name}" onload="this.classList.add('loaded')" onerror="this.style.display='none'">
+          <img class="meal-photo-img" loading="lazy" src="${photo}" alt="${meal.name}" data-fallback="${fallbackPhoto(meal)}" onload="this.classList.add('loaded')" onerror="handlePhotoError(this)">
         </div>
         <div class="meal-info">
           <div class="meal-name">${meal.name}</div>
@@ -451,9 +451,17 @@
   }
 
   function photoFor(meal) {
+    return `../recetario/fotos/${meal.slug}.jpg`;
+  }
+  function fallbackPhoto(meal) {
     const prompt = encodeURIComponent(meal.photo_prompt || meal.name);
     const seed = Math.abs(hashCode(meal.slug)) % 10000;
     return `https://image.pollinations.ai/prompt/${prompt}?width=800&height=600&seed=${seed}&nologo=true&model=flux`;
+  }
+  function handlePhotoError(img) {
+    const fb = img.dataset.fallback;
+    if (fb && img.src !== fb) { img.src = fb; return; }
+    img.style.display = 'none';
   }
 
   function hashCode(str) {

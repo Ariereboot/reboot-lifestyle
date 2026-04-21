@@ -506,7 +506,7 @@
             <span class="meal-tag ${type}">${type}</span>
             <div class="meal-photo-icon">${icon}</div>
             <div class="meal-photo-label">${meal.name}</div>
-            <img class="meal-photo-img" loading="lazy" src="${photoUrl}" alt="${meal.name}" onload="this.classList.add('loaded')" onerror="this.style.display='none'">
+            <img class="meal-photo-img" loading="lazy" src="${photoUrl}" alt="${meal.name}" data-fallback="${fallbackPhoto(meal)}" onload="this.classList.add('loaded')" onerror="handlePhotoError(this)">
           </div>
           <div class="meal-info">
             <div class="meal-name">${meal.name}</div>
@@ -563,7 +563,11 @@
   }
 
   function photoFor(meal) {
-    // Pollinations AI image generation from prompt
+    // Primary: static pre-generated photo in repo
+    return `../recetario/fotos/${meal.slug}.jpg`;
+  }
+  function fallbackPhoto(meal) {
+    // Fallback if local missing: Pollinations generates on demand
     const prompt = encodeURIComponent(meal.photo_prompt || meal.name);
     const seed = Math.abs(hashCode(meal.slug)) % 10000;
     return `https://image.pollinations.ai/prompt/${prompt}?width=1200&height=750&seed=${seed}&nologo=true&model=flux`;
@@ -576,6 +580,12 @@
       h |= 0;
     }
     return h;
+  }
+
+  function handlePhotoError(img) {
+    const fb = img.dataset.fallback;
+    if (fb && img.src !== fb) { img.src = fb; return; }
+    img.style.display = 'none';
   }
 
   function categoryIcon(type) {

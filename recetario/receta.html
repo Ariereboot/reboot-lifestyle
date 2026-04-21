@@ -302,7 +302,7 @@
         <div class="recipe-image">
           <div class="recipe-image-icon">${categoryIconLg(meal.categoria || 'receta')}</div>
           <div class="recipe-image-label">${meal.name}</div>
-          <img class="recipe-image-img" loading="lazy" src="${photoUrl}" alt="${meal.name}" onload="this.classList.add('loaded')" onerror="this.style.display='none'">
+          <img class="recipe-image-img" loading="lazy" src="${photoUrl}" alt="${meal.name}" data-fallback="${fallbackPhoto(meal)}" onload="this.classList.add('loaded')" onerror="handlePhotoError(this)">
         </div>
         <h1 class="recipe-title">${meal.name}</h1>
         <div class="phase-badge">Compatible con el primer mes</div>
@@ -316,9 +316,19 @@
 
   function photoFor(meal) {
     if (meal.foto_url) return meal.foto_url;
+    // Primary: local static photo
+    const slug = meal.slug || meal.id;
+    return `./fotos/${slug}.jpg`;
+  }
+  function fallbackPhoto(meal) {
     const prompt = encodeURIComponent(meal.photo_prompt || meal.foto_prompt || meal.name || meal.nombre);
     const seed = Math.abs(hashCode(meal.slug || meal.id)) % 10000;
     return `https://image.pollinations.ai/prompt/${prompt}?width=1200&height=750&seed=${seed}&nologo=true&model=flux`;
+  }
+  function handlePhotoError(img) {
+    const fb = img.dataset.fallback;
+    if (fb && img.src !== fb) { img.src = fb; return; }
+    img.style.display = 'none';
   }
 
   function hashCode(str) {
@@ -415,7 +425,7 @@
         <div class="recipe-image">
           <div class="recipe-image-icon">${categoryIconLg(recipe.categoria)}</div>
           <div class="recipe-image-label">${recipe.nombre}</div>
-          <img class="recipe-image-img" loading="lazy" src="${photoUrl}" alt="${recipe.nombre}" onload="this.classList.add('loaded')" onerror="this.style.display='none'">
+          <img class="recipe-image-img" loading="lazy" src="${photoUrl}" alt="${recipe.nombre}" data-fallback="${fallbackPhoto(recipe)}" onload="this.classList.add('loaded')" onerror="handlePhotoError(this)">
         </div>
         <h1 class="recipe-title">${recipe.nombre}</h1>
         ${recipe.subtitulo ? `<p class="recipe-subtitle">${recipe.subtitulo}</p>` : ''}
