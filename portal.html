@@ -617,8 +617,8 @@
                 <div class="invite-banner__header">
                     <div class="invite-banner__icon">🚦</div>
                     <div>
-                        <div class="invite-banner__eyebrow">TIENES <span id="invite-count">1</span> INVITACIÓN AL SEMÁFORO</div>
-                        <h3 class="invite-banner__title">Invita a <span id="invite-count-text">1 amigo</span></h3>
+                        <div class="invite-banner__eyebrow"><span id="invite-eyebrow">TIENES 1 INVITACIÓN AL SEMÁFORO</span></div>
+                        <h3 class="invite-banner__title"><span id="invite-title">Invita a 1 amigo</span></h3>
                     </div>
                 </div>
                 <p class="invite-banner__desc">
@@ -894,8 +894,13 @@ function renderInvites(invites) {
         return;
     }
     banner.hidden = false;
-    $('invite-count').textContent = invites.length;
-    $('invite-count-text').textContent = invites.length === 1 ? '1 amigo' : `${invites.length} amigos`;
+    const n = invites.length;
+    const eyebrow = n === 1
+        ? 'TIENES 1 INVITACIÓN AL SEMÁFORO'
+        : `TIENES ${n} INVITACIONES AL SEMÁFORO`;
+    const title = n === 1 ? 'Invita a 1 amigo' : `Invita a ${n} amigos`;
+    $('invite-eyebrow').textContent = eyebrow;
+    $('invite-title').textContent = title;
 
     codesEl.innerHTML = '';
     const origin = window.location.origin;
