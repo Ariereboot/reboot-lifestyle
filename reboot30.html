@@ -47,6 +47,32 @@
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2240890496716069&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
 
+    <!-- ============================================= -->
+    <!-- Google Analytics 4 · Reboot Lifestyle Web (ID G-G0Y7BFP5PK) -->
+    <!-- ============================================= -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G0Y7BFP5PK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G0Y7BFP5PK', {
+        page_title: 'Reboot 30 - Formulario Registro',
+        page_path: '/reboot30.html',
+        funnel_step: 'form'
+      });
+    </script>
+
+    <!-- ============================================= -->
+    <!-- Microsoft Clarity · Reboot Lifestyle (ID wfhwti8zjj) -->
+    <!-- ============================================= -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wfhwti8zjj");
+    </script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -822,14 +848,35 @@ form.addEventListener('submit', async (e) => {
             throw new Error(err.error || err.message || 'Error en el servidor');
         }
 
+        // Multi-plataforma analytics: form submitted con éxito
+        const isPanama = (pais || '').toLowerCase() === 'panamá' || (pais || '').toLowerCase() === 'panama';
+        const eventParams = {
+            content_name: 'Reboot 30 Registration',
+            pais: pais || 'unknown',
+            is_panama: isPanama,
+            retos_count: Array.isArray(payload.retos) ? payload.retos.length : 0,
+            value: 0.00,
+            currency: 'USD'
+        };
+
         // Meta Pixel
         if (typeof fbq !== 'undefined') {
-            fbq('track', 'Lead', {
-                content_name: 'Reboot 30 Registration',
-                value: 0.00,
-                currency: 'USD'
-            });
-            fbq('track', 'CompleteRegistration');
+            fbq('track', 'Lead', eventParams);
+            fbq('track', 'CompleteRegistration', eventParams);
+            fbq('trackCustom', 'form_submit_success', eventParams);
+        }
+        // GA4
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_submit_success', eventParams);
+            gtag('event', 'generate_lead', eventParams); // GA4 recommended event
+            gtag('event', 'sign_up', { method: 'reboot30_form', ...eventParams });
+        }
+        // Clarity
+        if (typeof clarity !== 'undefined') {
+            clarity('event', 'form_submit_success');
+            clarity('set', 'pais', pais || 'unknown');
+            clarity('set', 'is_panama', String(isPanama));
+            clarity('upgrade', 'form_submitted'); // escalate session priority in Clarity
         }
 
         // Redirect a thank-you page con params
@@ -840,6 +887,16 @@ form.addEventListener('submit', async (e) => {
 
     } catch (error) {
         console.error('Error:', error);
+
+        // Tracking del error — vital para detectar roturas del backend
+        const errorParams = {
+            error_message: String(error.message || error).slice(0, 200),
+            pais: pais || 'unknown'
+        };
+        if (typeof fbq !== 'undefined') fbq('trackCustom', 'form_submit_error', errorParams);
+        if (typeof gtag !== 'undefined') gtag('event', 'form_submit_error', errorParams);
+        if (typeof clarity !== 'undefined') { clarity('event', 'form_submit_error'); clarity('upgrade', 'form_error'); }
+
         submitBtn.disabled = false;
         submitBtn.textContent = 'Guardar mi cupo →';
         messageBox.className = 'form-message error';
@@ -847,6 +904,32 @@ form.addEventListener('submit', async (e) => {
         messageBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 });
+
+// ============================================
+// Analytics extra: form engagement tracking
+// ============================================
+(function(){
+  function track(ev, p){
+    p = p || {};
+    if (typeof fbq !== 'undefined') fbq('trackCustom', ev, p);
+    if (typeof gtag !== 'undefined') gtag('event', ev, p);
+    if (typeof clarity !== 'undefined') clarity('event', ev);
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var form = document.getElementById('reboot30-form');
+    if (!form) return;
+    var firstInteraction = false;
+    // Dispara 1 vez cuando el usuario empieza a llenar el form
+    form.addEventListener('focusin', function(){
+      if (firstInteraction) return; firstInteraction = true;
+      track('form_start');
+    }, {once: false});
+    // Track validación fallida (form no pasa)
+    form.addEventListener('invalid', function(e){
+      track('form_validation_error', { field: (e.target && e.target.name) || 'unknown' });
+    }, true);
+  });
+})();
 </script>
 
 </body>

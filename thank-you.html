@@ -321,6 +321,43 @@
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2240890496716069&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
+
+    <!-- ============================================= -->
+    <!-- Google Analytics 4 · Reboot Lifestyle Web (ID G-G0Y7BFP5PK) -->
+    <!-- ============================================= -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G0Y7BFP5PK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G0Y7BFP5PK', {
+        page_title: 'Reboot 30 - Thank You',
+        page_path: '/thank-you.html',
+        funnel_step: 'thank_you'
+      });
+      // Conversión disparada también a GA4 (Meta ya dispara CompleteRegistration arriba)
+      gtag('event', 'sign_up_complete', {
+        method: 'reboot30_form',
+        funnel_step: 'thank_you'
+      });
+      gtag('event', 'conversion', { send_to: 'G-G0Y7BFP5PK' });
+    </script>
+
+    <!-- ============================================= -->
+    <!-- Microsoft Clarity · Reboot Lifestyle (ID wfhwti8zjj) -->
+    <!-- ============================================= -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wfhwti8zjj");
+      // Marcar esta sesión como "registered" — Clarity prioriza recordings de usuarios convertidos
+      if (typeof clarity !== 'undefined') {
+        clarity('set', 'funnel_step', 'thank_you');
+        clarity('upgrade', 'registered');
+      }
+    </script>
 </head>
 <body>
 
@@ -408,18 +445,47 @@
         if (nameEl) nameEl.textContent = nombre;
     }
 
-    // Tracking: clic en botón WhatsApp = Contact event (intención de unirse al grupo)
+    // Tracking: clic en botón WhatsApp = conversión FINAL del funnel
+    // (dispara en Meta Pixel + GA4 + Clarity)
     if (waLink) {
         waLink.addEventListener('click', () => {
+            const eventParams = {
+                content_name: 'Click WhatsApp Group Join',
+                content_category: esPanama ? 'WhatsApp Panama' : 'WhatsApp Internacional',
+                group_region: esPanama ? 'panama' : 'internacional',
+                group_url: linkCorrecto,
+                pais: pais || 'unknown',
+                status: 'clicked'
+            };
+
+            // Meta Pixel
             if (typeof fbq !== 'undefined') {
-                fbq('track', 'Contact', {
-                    content_name: 'Click WhatsApp Group Join',
-                    content_category: esPanama ? 'WhatsApp Panama' : 'WhatsApp Internacional',
-                    status: 'clicked'
-                });
+                fbq('track', 'Contact', eventParams);
+                fbq('trackCustom', 'click_whatsapp_group', eventParams);
+            }
+            // GA4
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click_whatsapp_group', eventParams);
+                gtag('event', 'join_group', eventParams);
+            }
+            // Clarity
+            if (typeof clarity !== 'undefined') {
+                clarity('event', 'click_whatsapp_group');
+                clarity('set', 'whatsapp_clicked', 'true');
+                clarity('set', 'group_region', esPanama ? 'panama' : 'internacional');
+                clarity('upgrade', 'whatsapp_joined'); // máxima prioridad en Clarity
             }
         });
     }
+
+    // Track si el usuario llegó pero NO hizo click al WhatsApp en 15 segundos
+    setTimeout(function(){
+        if (!waLink || !waLink.dataset.clicked) {
+            if (typeof fbq !== 'undefined') fbq('trackCustom', 'thank_you_no_whatsapp_15s', { pais: pais || 'unknown' });
+            if (typeof gtag !== 'undefined') gtag('event', 'thank_you_no_whatsapp_15s', { pais: pais || 'unknown' });
+        }
+    }, 15000);
+    if (waLink) waLink.addEventListener('click', function(){ waLink.dataset.clicked = '1'; });
 })();
 </script>
 
