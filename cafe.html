@@ -1039,54 +1039,56 @@
         if (typeof clarity !== 'undefined') clarity('event', 'share_copy_link');
     }
 
-    // TRACKING META PIXEL - eventos clave
+    // TRACKING + FORCE NAVIGATION (fix for Instagram/FB/TikTok in-app browsers
+    // that sometimes swallow the default <a href> click on iOS/Android)
     document.querySelectorAll('.cta-button').forEach(btn => {
-        btn.addEventListener('click', () => {
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Lead', {
-                    content_name: 'Click CTA Guardar Cupo - Landing Café',
-                    content_category: 'CTA',
-                    value: 0.00,
-                    currency: 'USD'
-                });
-            }
-                        if (typeof gtag !== 'undefined') {
-                gtag('event', 'click_cta_guardar_cupo', {
-                    resource: 'cafe',
-                    resource_name: 'Recurso Café',
-                    cta_destination: 'reboot30.html'
-                });
-                gtag('event', 'generate_lead', { resource: 'cafe' });
-            }
-            if (typeof clarity !== 'undefined') {
-                clarity('event', 'click_cta_guardar_cupo');
-                clarity('upgrade', 'cta_clicked');
-            }
-            console.log('CTA click: Guardar mi cupo (cafe)');
-            // Beacon to Supabase /api/events (powers live dashboard)
+        btn.addEventListener('click', (e) => {
+            // Don't intercept modified clicks (cmd/ctrl/shift/middle-click)
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+
+            const targetHref = btn.getAttribute('href');
+
+            // Track in parallel — non-blocking
             try {
-                const _beaconBody = JSON.stringify({
-                    event_name: 'click_cta_guardar_cupo',
-                    product_slug: 'reboot_30',
-                    properties: {
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', {
+                        content_name: 'Click CTA Guardar Cupo - Landing Café',
+                        content_category: 'CTA',
+                        value: 0.00,
+                        currency: 'USD'
+                    });
+                }
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'click_cta_guardar_cupo', {
                         resource: 'cafe',
+                        resource_name: 'Recurso Café',
                         cta_destination: 'reboot30.html'
-                    }
-                });
+                    });
+                    gtag('event', 'generate_lead', { resource: 'cafe' });
+                }
+                if (typeof clarity !== 'undefined') {
+                    clarity('event', 'click_cta_guardar_cupo');
+                    clarity('upgrade', 'cta_clicked');
+                }
                 if (navigator.sendBeacon) {
+                    const _beaconBody = JSON.stringify({
+                        event_name: 'click_cta_guardar_cupo',
+                        product_slug: 'reboot_30',
+                        properties: { resource: 'cafe', cta_destination: 'reboot30.html' }
+                    });
                     navigator.sendBeacon(
                         'https://reboot-master-api.vercel.app/api/events',
                         new Blob([_beaconBody], { type: 'application/json' })
                     );
-                } else {
-                    fetch('https://reboot-master-api.vercel.app/api/events', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: _beaconBody,
-                        keepalive: true
-                    }).catch(() => {});
                 }
-            } catch(e) {}
+            } catch(err) {}
+
+            console.log('CTA click: Guardar mi cupo (cafe) → forcing navigation');
+            // Force navigation — Instagram in-app browser sometimes blocks default <a href>
+            if (targetHref) {
+                e.preventDefault();
+                window.location.href = targetHref;
+            }
         });
     });
     document.querySelectorAll('.share-wa').forEach(btn => {
