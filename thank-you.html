@@ -538,10 +538,15 @@
         if (nameEl) nameEl.textContent = nombre;
     }
 
-    // Tracking: clic en botón WhatsApp = conversión FINAL del funnel
-    // (dispara en Meta Pixel + GA4 + Clarity)
+    // Tracking + FORCE NAVIGATION (fix Instagram/FB in-app browser nav bug)
+    // The same bug that affected cafe.html → reboot30.html applies here:
+    // in-app browsers sometimes swallow the default <a href> click on
+    // chat.whatsapp.com URLs. Force navigation via JS.
     if (waLink) {
-        waLink.addEventListener('click', () => {
+        waLink.addEventListener('click', (e) => {
+            // Don't intercept modified clicks (cmd/ctrl/shift/middle)
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+
             const eventParams = {
                 content_name: 'Click WhatsApp Group Join',
                 content_category: esPanama ? 'WhatsApp Panama' : 'WhatsApp Internacional',
@@ -551,47 +556,43 @@
                 status: 'clicked'
             };
 
-            // Meta Pixel
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Contact', eventParams);
-                fbq('trackCustom', 'click_whatsapp_group', eventParams);
-            }
-            // GA4
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'click_whatsapp_group', eventParams);
-                gtag('event', 'join_group', eventParams);
-            }
-            // Clarity
-            if (typeof clarity !== 'undefined') {
-                clarity('event', 'click_whatsapp_group');
-                clarity('set', 'whatsapp_clicked', 'true');
-                clarity('set', 'group_region', esPanama ? 'panama' : 'internacional');
-                clarity('upgrade', 'whatsapp_joined'); // máxima prioridad en Clarity
-            }
-            // Supabase events (powers /api/dashboard "north star" metric)
+            // Track in parallel — non-blocking
             try {
-                const beaconBody = JSON.stringify({
-                    event_name: 'click_whatsapp_group',
-                    product_slug: 'reboot_30',
-                    properties: {
-                        group_region: esPanama ? 'panama' : 'internacional',
-                        pais: pais || 'unknown'
-                    }
-                });
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Contact', eventParams);
+                    fbq('trackCustom', 'click_whatsapp_group', eventParams);
+                }
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'click_whatsapp_group', eventParams);
+                    gtag('event', 'join_group', eventParams);
+                }
+                if (typeof clarity !== 'undefined') {
+                    clarity('event', 'click_whatsapp_group');
+                    clarity('set', 'whatsapp_clicked', 'true');
+                    clarity('set', 'group_region', esPanama ? 'panama' : 'internacional');
+                    clarity('upgrade', 'whatsapp_joined');
+                }
                 if (navigator.sendBeacon) {
+                    const beaconBody = JSON.stringify({
+                        event_name: 'click_whatsapp_group',
+                        product_slug: 'reboot_30',
+                        properties: {
+                            group_region: esPanama ? 'panama' : 'internacional',
+                            pais: pais || 'unknown'
+                        }
+                    });
                     navigator.sendBeacon(
                         'https://reboot-master-api.vercel.app/api/events',
                         new Blob([beaconBody], { type: 'application/json' })
                     );
-                } else {
-                    fetch('https://reboot-master-api.vercel.app/api/events', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: beaconBody,
-                        keepalive: true
-                    }).catch(() => {});
                 }
-            } catch(e) {}
+            } catch(err) {}
+
+            console.log('WhatsApp click → forcing navigation to', linkCorrecto);
+            // Force navigation — Instagram/FB in-app browsers sometimes
+            // block <a href> for chat.whatsapp.com URLs
+            e.preventDefault();
+            window.location.href = linkCorrecto;
         });
     }
 
