@@ -820,7 +820,7 @@ form.addEventListener('submit', async (e) => {
         phone: (codigo && telefono) ? `${codigo}${telefono}` : telefono,
         country: pais,
         product_slug: PRODUCT_SLUG,
-        source: inviteCode ? 'invite_escaner' : (urlParams.get('source') || urlParams.get('fuente') || 'landing_direct'),
+        source: inviteCode ? 'invite_escaner' : (urlParams.get('source') || urlParams.get('utm_source') || urlParams.get('fuente') || 'landing_direct'),
         source_campaign: urlParams.get('utm_campaign') || (inviteCode ? 'escaner_viral' : ''),
         utm_data,
         form_data: {
