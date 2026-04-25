@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Reboot 30 · Dashboard de lanzamiento</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f0f0f'/%3E%3Ctext x='50' y='72' font-family='Montserrat,sans-serif' font-size='62' font-weight='900' fill='%23fae62b' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --black-seed:#0f0f0f;
+      --deep-neural:#02251f;
+      --deep-neural-2:#0a3b30;
+      --oxygen-blue:#76d3d1;
+      --earth-carrot:#e85c26;
+      --pure-reset:#f3f6fb;
+      --arie-yellow:#fae62b;
+      --line:#1a2c27;
+      --text-soft:#9aa5a1;
+    }
+    html,body{margin:0;padding:0;background:var(--black-seed);color:white;font-family:'Montserrat',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+    .wrap{max-width:1280px;margin:0 auto;padding:24px 20px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+    .brand{font-weight:900;font-size:18px;letter-spacing:-0.3px;text-transform:uppercase}
+    .brand .dot{color:rgba(255,255,255,.4);font-weight:400;margin:0 4px}
+    .brand .yellow{color:var(--arie-yellow)}
+    .live-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(118,211,209,.12);color:var(--oxygen-blue);padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(118,211,209,.3)}
+    .live-pill .pulse{width:8px;height:8px;background:var(--oxygen-blue);border-radius:50%;animation:pulse 1.5s infinite}
+    @keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+    .meta{font-size:11px;color:var(--text-soft);letter-spacing:.5px;text-transform:uppercase}
+
+    /* Hero metric (north star) */
+    .hero-metric{background:linear-gradient(135deg,var(--deep-neural),var(--deep-neural-2));border-radius:20px;padding:32px;margin-bottom:24px;border:1px solid var(--line);position:relative;overflow:hidden}
+    .hero-metric::before{content:"";position:absolute;top:-100px;right:-100px;width:240px;height:240px;background:radial-gradient(circle,rgba(118,211,209,.18) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+    .hero-label{font-size:11px;color:var(--oxygen-blue);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+    .hero-number{font-size:72px;font-weight:900;line-height:1;letter-spacing:-0.03em;color:#fff;font-feature-settings:"tnum"}
+    .hero-sub{margin-top:8px;font-size:14px;color:var(--text-soft)}
+
+    /* Stat grid */
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+    .stat-card{background:#0a0a0a;border:1px solid var(--line);border-radius:14px;padding:20px;position:relative}
+    .stat-card.accent{border-color:rgba(232,92,38,.3)}
+    .stat-label{font-size:10px;color:var(--text-soft);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+    .stat-value{font-size:32px;font-weight:800;line-height:1;letter-spacing:-0.02em;font-feature-settings:"tnum"}
+    .stat-value.orange{color:var(--earth-carrot)}
+    .stat-value.turquoise{color:var(--oxygen-blue)}
+    .stat-value.yellow{color:var(--arie-yellow)}
+    .stat-sub{margin-top:6px;font-size:11px;color:var(--text-soft)}
+
+    /* Section title */
+    h2{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--oxygen-blue);margin-bottom:14px;margin-top:32px}
+
+    /* Funnel */
+    .funnel{background:#0a0a0a;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:24px}
+    .funnel-row{display:grid;grid-template-columns:170px 1fr 80px;gap:14px;align-items:center;padding:10px 0}
+    .funnel-row+.funnel-row{border-top:1px solid var(--line)}
+    .funnel-name{font-size:13px;font-weight:600}
+    .funnel-bar-wrap{height:24px;background:#000;border-radius:6px;overflow:hidden;position:relative}
+    .funnel-bar{height:100%;background:linear-gradient(90deg,var(--oxygen-blue),var(--earth-carrot));transition:width 0.6s ease}
+    .funnel-count{font-size:14px;font-weight:700;text-align:right;font-feature-settings:"tnum"}
+
+    /* Two-col */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+    @media (max-width:720px){.two-col{grid-template-columns:1fr}}
+    .breakdown{background:#0a0a0a;border:1px solid var(--line);border-radius:14px;padding:20px}
+    .row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}
+    .row:last-child{border-bottom:none}
+    .row .label{color:#fff;text-transform:capitalize;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .row .label.mono{font-family:ui-monospace,Menlo,Monaco,monospace;font-size:11.5px;text-transform:none}
+    .row .count{font-weight:700;color:var(--oxygen-blue);font-feature-settings:"tnum";margin-left:12px}
+    .empty{color:var(--text-soft);font-style:italic;padding:8px 0;font-size:12px}
+
+    /* Hourly chart */
+    .chart{background:#0a0a0a;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:24px}
+    .chart-bars{display:flex;align-items:flex-end;gap:3px;height:140px;margin-top:12px}
+    .chart-bar{flex:1;background:linear-gradient(180deg,var(--oxygen-blue),rgba(118,211,209,.3));border-radius:3px 3px 0 0;min-height:3px;position:relative;cursor:pointer;transition:opacity .2s}
+    .chart-bar:hover{opacity:.7}
+    .chart-bar.peak{background:linear-gradient(180deg,var(--earth-carrot),rgba(232,92,38,.3))}
+    .chart-bar .tooltip{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;white-space:nowrap;display:none;margin-bottom:4px;font-feature-settings:"tnum"}
+    .chart-bar:hover .tooltip{display:block}
+    .chart-axis{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--text-soft);letter-spacing:.5px}
+
+    /* Footer */
+    footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:11px;color:var(--text-soft);text-align:center;letter-spacing:.3px}
+
+    /* Loading */
+    .loading{padding:40px;text-align:center;color:var(--text-soft)}
+    .err{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);color:#fca5a5;padding:16px;border-radius:10px;margin:20px 0;font-size:13px}
+
+    /* Auth screen */
+    .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .auth-card{max-width:420px;width:100%;background:#0a0a0a;border:1px solid var(--line);border-radius:20px;padding:36px;text-align:center}
+    .auth-card h1{font-size:24px;font-weight:900;margin-bottom:8px;letter-spacing:-0.02em}
+    .auth-card p{font-size:14px;color:var(--text-soft);margin-bottom:24px}
+    .auth-card input{width:100%;background:#000;border:1px solid var(--line);color:#fff;padding:14px 16px;border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:14px}
+    .auth-card input:focus{outline:none;border-color:var(--oxygen-blue)}
+    .auth-card button{width:100%;background:var(--oxygen-blue);color:var(--black-seed);border:none;padding:14px;border-radius:10px;font-weight:800;font-size:14px;letter-spacing:.5px;cursor:pointer;font-family:inherit}
+    .auth-card button:hover{filter:brightness(1.1)}
+  </style>
+</head>
+<body>
+
+<!-- Auth gate (shows if no token in URL or localStorage) -->
+<div id="auth-gate" class="auth-wrap" style="display:none">
+  <div class="auth-card">
+    <h1>Dashboard Reboot 30</h1>
+    <p>Acceso restringido. Pega el token de acceso para continuar.</p>
+    <input type="password" id="token-input" placeholder="Token..." autocomplete="off" />
+    <button onclick="submitToken()">Entrar</button>
+  </div>
+</div>
+
+<!-- Main dashboard -->
+<div id="dashboard" class="wrap" style="display:none">
+  <header>
+    <div>
+      <div class="brand">ReBoot<span class="dot">·</span>Lifestyle <span class="dot">·</span> <span class="yellow">Dashboard</span></div>
+      <div class="meta" id="last-updated" style="margin-top:4px">Cargando...</div>
+    </div>
+    <div class="live-pill"><span class="pulse"></span> Live · refresh 30s</div>
+  </header>
+
+  <div id="error-box"></div>
+
+  <div id="content">
+    <div class="loading">Conectando con la base de datos...</div>
+  </div>
+
+  <footer>
+    Datos en tiempo real desde Supabase · agregados, sin PII expuesta · solo refleja registros completos del form
+  </footer>
+</div>
+
+<script>
+const API_URL = 'https://reboot-master-api.vercel.app/api/dashboard';
+const REFRESH_MS = 30000;
+
+let token = null;
+
+// Try get token from URL or localStorage
+function init() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlToken = urlParams.get('token');
+  if (urlToken) {
+    token = urlToken;
+    try { localStorage.setItem('reboot_dash_token', urlToken); } catch (e) {}
+  } else {
+    try { token = localStorage.getItem('reboot_dash_token'); } catch (e) {}
+  }
+
+  if (!token) {
+    showAuth();
+  } else {
+    showDashboard();
+    fetchAndRender();
+    setInterval(fetchAndRender, REFRESH_MS);
+  }
+}
+
+function showAuth() {
+  document.getElementById('auth-gate').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+}
+
+function showDashboard() {
+  document.getElementById('auth-gate').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+}
+
+function submitToken() {
+  const v = document.getElementById('token-input').value.trim();
+  if (!v) return;
+  token = v;
+  try { localStorage.setItem('reboot_dash_token', v); } catch (e) {}
+  // Update URL with token (for shareable link)
+  const url = new URL(window.location.href);
+  url.searchParams.set('token', v);
+  window.history.replaceState({}, '', url.toString());
+  showDashboard();
+  fetchAndRender();
+  setInterval(fetchAndRender, REFRESH_MS);
+}
+
+document.getElementById('token-input')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitToken();
+});
+
+async function fetchAndRender() {
+  try {
+    const res = await fetch(`${API_URL}?token=${encodeURIComponent(token)}`);
+    if (res.status === 401) {
+      // bad token — kick back to auth
+      try { localStorage.removeItem('reboot_dash_token'); } catch (e) {}
+      token = null;
+      showAuth();
+      return;
+    }
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    render(data);
+    document.getElementById('error-box').innerHTML = '';
+  } catch (err) {
+    console.error('Dashboard fetch error:', err);
+    document.getElementById('error-box').innerHTML = `<div class="err">Error cargando datos: ${err.message}. Reintentando en 30s...</div>`;
+  }
+}
+
+function fmtNum(n) {
+  return new Intl.NumberFormat('en-US').format(n || 0);
+}
+
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleString('es-PA', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: 'short', timeZone: 'America/Panama' });
+}
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function render(d) {
+  const lastUpd = `Actualizado: ${fmtDate(d.generated_at)}`;
+  document.getElementById('last-updated').textContent = lastUpd;
+
+  const leads = d.leads || {};
+  const events = d.events || {};
+  const sources = d.top_sources || [];
+  const countries = d.top_countries || [];
+  const hourly = d.hourly_last_24h || [];
+
+  const peak = Math.max(...hourly.map(b => b.count), 1);
+
+  const html = `
+    <!-- North star metric -->
+    <div class="hero-metric">
+      <div class="hero-label">⭐ North star · Click WhatsApp = conversión final</div>
+      <div class="hero-number">${fmtNum(events.click_whatsapp_group)}</div>
+      <div class="hero-sub">personas cruzaron del email/landing al grupo WhatsApp.</div>
+    </div>
+
+    <!-- Lead stats -->
+    <h2>Registros (formulario completado)</h2>
+    <div class="stat-grid">
+      <div class="stat-card accent">
+        <div class="stat-label">Última hora</div>
+        <div class="stat-value orange">${fmtNum(leads.last_hour)}</div>
+        <div class="stat-sub">momentum del reel</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Hoy (Panamá)</div>
+        <div class="stat-value turquoise">${fmtNum(leads.today)}</div>
+        <div class="stat-sub">desde 00:00 GMT-5</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Últimas 24h</div>
+        <div class="stat-value">${fmtNum(leads.last_24h)}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Últimos 7 días</div>
+        <div class="stat-value">${fmtNum(leads.last_7d)}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Reboot 30</div>
+        <div class="stat-value yellow">${fmtNum(leads.reboot_30)}</div>
+        <div class="stat-sub">de ${fmtNum(leads.total)} registros totales</div>
+      </div>
+    </div>
+
+    <!-- Funnel -->
+    <h2>Funnel de conversión</h2>
+    <div class="funnel">
+      ${renderFunnel(events, leads)}
+    </div>
+
+    <!-- Hourly chart -->
+    <h2>Registros por hora (últimas 24h)</h2>
+    <div class="chart">
+      <div class="chart-bars">
+        ${hourly.map(b => {
+          const height = (b.count / peak) * 100;
+          const isPeak = b.count === peak && b.count > 0;
+          const localHour = new Date(b.hour).toLocaleString('es-PA', {hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'America/Panama'});
+          return `<div class="chart-bar ${isPeak?'peak':''}" style="height:${height}%">
+            <div class="tooltip">${b.count} a las ${escapeHtml(localHour)}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="chart-axis">
+        <span>Hace 24h</span>
+        <span>Hace 12h</span>
+        <span>Ahora</span>
+      </div>
+    </div>
+
+    <!-- Breakdowns -->
+    <div class="two-col">
+      <div class="breakdown">
+        <h2 style="margin-top:0">Top fuentes (últimos 7d)</h2>
+        ${sources.length === 0 ? '<div class="empty">Sin datos aún</div>' :
+          sources.map(s => `
+            <div class="row">
+              <span class="label mono">${escapeHtml(s.source)}</span>
+              <span class="count">${fmtNum(s.count)}</span>
+            </div>
+          `).join('')}
+      </div>
+      <div class="breakdown">
+        <h2 style="margin-top:0">Top países (últimos 7d)</h2>
+        ${countries.length === 0 ? '<div class="empty">Sin datos aún</div>' :
+          countries.map(c => `
+            <div class="row">
+              <span class="label">${escapeHtml(c.country)}</span>
+              <span class="count">${fmtNum(c.count)}</span>
+            </div>
+          `).join('')}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('content').innerHTML = html;
+}
+
+function renderFunnel(events, leads) {
+  const cta = events.click_cta_total || 0;
+  const formStart = events.form_start || 0;
+  const formSubmit = events.form_submit_success || 0;
+  const wa = events.click_whatsapp_group || 0;
+
+  const stages = [
+    { name: 'Click "Guardar mi cupo"', count: cta, color: 'oxygen-blue' },
+    { name: 'Empezó el form', count: formStart, color: 'oxygen-blue' },
+    { name: 'Form completo', count: formSubmit || leads.reboot_30, color: 'oxygen-blue' },
+    { name: 'Click WhatsApp ⭐', count: wa, color: 'earth-carrot' },
+  ];
+
+  const max = Math.max(...stages.map(s => s.count), 1);
+
+  return stages.map(s => {
+    const pct = (s.count / max) * 100;
+    return `
+      <div class="funnel-row">
+        <div class="funnel-name">${escapeHtml(s.name)}</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${pct}%"></div></div>
+        <div class="funnel-count">${fmtNum(s.count)}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+init();
+</script>
+</body>
+</html>
