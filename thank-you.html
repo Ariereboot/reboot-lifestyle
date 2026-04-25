@@ -568,6 +568,30 @@
                 clarity('set', 'group_region', esPanama ? 'panama' : 'internacional');
                 clarity('upgrade', 'whatsapp_joined'); // máxima prioridad en Clarity
             }
+            // Supabase events (powers /api/dashboard "north star" metric)
+            try {
+                const beaconBody = JSON.stringify({
+                    event_name: 'click_whatsapp_group',
+                    product_slug: 'reboot_30',
+                    properties: {
+                        group_region: esPanama ? 'panama' : 'internacional',
+                        pais: pais || 'unknown'
+                    }
+                });
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon(
+                        'https://reboot-master-api.vercel.app/api/events',
+                        new Blob([beaconBody], { type: 'application/json' })
+                    );
+                } else {
+                    fetch('https://reboot-master-api.vercel.app/api/events', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: beaconBody,
+                        keepalive: true
+                    }).catch(() => {});
+                }
+            } catch(e) {}
         });
     }
 
