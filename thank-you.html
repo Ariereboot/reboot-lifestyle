@@ -522,6 +522,23 @@
     const params = new URLSearchParams(window.location.search);
     const nombre = (params.get('nombre') || '').trim();
     const pais = (params.get('pais') || params.get('ciudad') || '').trim();
+    const email = (params.get('email') || '').trim();
+    const apellido = (params.get('apellido') || '').trim();
+    const phone = (params.get('phone') || '').trim();
+
+    // Append known-user params to the Semáforo Reboot CTA so redeem.html can
+    // pre-fill (or skip) the form. We're unifying DBs — once they registered
+    // in Reboot 30, the Semáforo flow MUST recognize them.
+    const semaforoLink = document.getElementById('semaforo-link');
+    if (semaforoLink && email) {
+        const url = new URL(semaforoLink.href);
+        url.searchParams.set('email', email);
+        if (nombre) url.searchParams.set('name', apellido ? `${nombre} ${apellido}` : nombre);
+        if (pais) url.searchParams.set('country', pais);
+        if (phone) url.searchParams.set('phone', phone);
+        url.searchParams.set('from', 'reboot30_thankyou');
+        semaforoLink.href = url.toString();
+    }
 
     // Fallback links (used if /api/whatsapp-link is unreachable)
     const GRUPO_PANAMA_FALLBACK = 'https://chat.whatsapp.com/BDyfETT46SX3AP0GteTYiD';

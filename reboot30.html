@@ -524,6 +524,199 @@
             .hero { padding: 40px 0 56px; }
             h1 { font-size: 32px; }
         }
+
+        /* =====================================================
+           SALES SECTIONS — landing storytelling antes del form
+           ===================================================== */
+        .container-wide { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+
+        /* MEGA HERO */
+        .mega-hero { background: var(--black-seed); color: white; padding: 72px 0 80px; position: relative; overflow: hidden; }
+        .mega-hero::before {
+            content:''; position: absolute; inset: 0; pointer-events: none;
+            background: radial-gradient(ellipse 600px 400px at 80% 20%, rgba(118,211,209,0.08), transparent 60%),
+                        radial-gradient(ellipse 500px 300px at 10% 80%, rgba(232,92,38,0.08), transparent 60%);
+        }
+        .mega-hero__inner { position: relative; z-index: 1; text-align: center; }
+        .mega-hero__eyebrow {
+            display: inline-block; padding: 6px 14px; border: 1px solid rgba(118,211,209,0.4);
+            border-radius: 100px; color: var(--oxygen-blue);
+            font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+        .mega-hero h1 {
+            font-size: 56px; font-weight: 900; line-height: 1.05; letter-spacing: -1.5px;
+            color: white; max-width: 800px; margin: 0 auto 24px;
+        }
+        .mega-hero h1 .accent-yellow { color: var(--arie-yellow); }
+        .mega-hero h1 .accent-orange { color: var(--earth-carrot); font-style: italic; font-weight: 800; }
+        .mega-hero__sub {
+            font-size: 19px; line-height: 1.55; color: rgba(255,255,255,0.78);
+            max-width: 660px; margin: 0 auto 36px; font-weight: 400;
+        }
+        .mega-hero__sub strong { color: white; font-weight: 700; }
+        .mega-hero__cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--arie-yellow); color: var(--black-seed);
+            font-weight: 900; font-size: 16px; padding: 18px 32px;
+            border-radius: 100px; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 6px 20px rgba(250,230,43,0.25);
+        }
+        .mega-hero__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(250,230,43,0.35); }
+        .mega-hero__date {
+            margin-top: 28px; color: rgba(255,255,255,0.5);
+            font-size: 13px; letter-spacing: 4px; text-transform: uppercase; font-weight: 600;
+        }
+        .mega-hero__date strong { color: var(--arie-yellow); font-weight: 800; }
+
+        /* PAIN SECTION */
+        .pain { padding: 80px 0; background: var(--pure-reset); }
+        .section-eyebrow {
+            display: block; text-align: center; color: var(--earth-carrot);
+            font-size: 11px; font-weight: 800; letter-spacing: 4px;
+            text-transform: uppercase; margin-bottom: 16px;
+        }
+        .section-title {
+            text-align: center; font-size: 38px; font-weight: 900;
+            line-height: 1.1; letter-spacing: -0.8px; color: var(--black-seed);
+            margin-bottom: 48px;
+        }
+        .section-title em { color: var(--earth-carrot); font-style: italic; font-weight: 900; }
+        .pain__grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 22px; max-width: 920px; margin: 0 auto;
+        }
+        .pain__card {
+            background: white; border-radius: 18px;
+            padding: 32px 26px;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+        .pain__num {
+            font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--earth-carrot); font-weight: 800; margin-bottom: 14px;
+        }
+        .pain__text {
+            font-size: 17px; line-height: 1.5; color: var(--text);
+            font-weight: 500;
+        }
+        .pain__closer {
+            text-align: center; max-width: 720px; margin: 48px auto 0;
+            font-size: 22px; font-weight: 700; line-height: 1.4;
+            color: var(--black-seed);
+        }
+        .pain__closer em { color: var(--earth-carrot); font-style: italic; }
+
+        /* PROGRAM SECTION */
+        .program { padding: 80px 0; background: white; }
+        .program__intro {
+            text-align: center; max-width: 720px; margin: 0 auto;
+            font-size: 18px; line-height: 1.6; color: var(--text-light);
+        }
+        .program__intro strong { color: var(--black-seed); font-weight: 700; }
+        .program__highlight {
+            margin-top: 40px; max-width: 760px; margin-left: auto; margin-right: auto;
+            background: var(--deep-neural); color: white;
+            padding: 32px 36px; border-radius: 20px;
+            font-size: 18px; line-height: 1.6;
+            position: relative;
+        }
+        .program__highlight strong { color: var(--oxygen-blue); }
+        .program__highlight::before {
+            content: '"'; position: absolute; top: -10px; left: 24px;
+            font-size: 80px; color: var(--oxygen-blue); line-height: 1; font-family: serif;
+            opacity: 0.7;
+        }
+
+        /* FEATURES */
+        .features { padding: 80px 0; background: var(--pure-reset); }
+        .features__grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 22px; max-width: 920px; margin: 0 auto;
+        }
+        .feature {
+            background: white; border-radius: 18px;
+            padding: 30px 28px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .feature__icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--arie-yellow); display: flex; align-items: center; justify-content: center;
+            font-size: 22px; margin-bottom: 8px;
+        }
+        .feature__title {
+            font-size: 19px; font-weight: 800; color: var(--black-seed);
+            line-height: 1.2;
+        }
+        .feature__desc {
+            font-size: 15px; line-height: 1.55; color: var(--text-light);
+        }
+
+        /* JOURNEY */
+        .journey { padding: 80px 0; background: white; }
+        .journey__weeks {
+            max-width: 880px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr; gap: 14px;
+        }
+        .week {
+            background: var(--pure-reset); border-radius: 16px;
+            padding: 22px 28px; display: flex; gap: 24px; align-items: center;
+            border-left: 4px solid var(--earth-carrot);
+        }
+        .week__label {
+            font-size: 12px; font-weight: 800; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--earth-carrot);
+            min-width: 110px;
+        }
+        .week__title {
+            flex: 1;
+            font-size: 19px; font-weight: 700; color: var(--black-seed);
+        }
+        .week__desc {
+            flex: 2;
+            font-size: 15px; line-height: 1.5; color: var(--text-light);
+        }
+
+        /* ARIE BIO */
+        .arie-bio { padding: 80px 0; background: var(--black-seed); color: white; }
+        .arie-bio__inner {
+            max-width: 760px; margin: 0 auto; text-align: center;
+        }
+        .arie-bio .section-eyebrow { color: var(--oxygen-blue); }
+        .arie-bio .section-title { color: white; }
+        .arie-bio__text {
+            font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.78);
+            max-width: 660px; margin: 0 auto;
+        }
+        .arie-bio__text strong { color: var(--arie-yellow); font-weight: 700; }
+
+        /* BRIDGE CTA before form */
+        .bridge-cta { padding: 56px 0; background: var(--pure-reset); text-align: center; }
+        .bridge-cta__title {
+            font-size: 36px; font-weight: 900; letter-spacing: -0.6px;
+            color: var(--black-seed); line-height: 1.1; margin-bottom: 18px;
+        }
+        .bridge-cta__title em { color: var(--earth-carrot); font-style: italic; }
+        .bridge-cta__sub {
+            font-size: 17px; color: var(--text-light);
+            max-width: 560px; margin: 0 auto;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 760px) {
+            .mega-hero h1 { font-size: 38px; }
+            .mega-hero__sub { font-size: 16px; }
+            .section-title { font-size: 28px; }
+            .pain__grid, .features__grid { grid-template-columns: 1fr; }
+            .week { flex-direction: column; align-items: flex-start; gap: 6px; padding: 18px 22px; }
+            .week__title, .week__desc { flex: unset; }
+            .bridge-cta__title { font-size: 26px; }
+            .program__highlight { padding: 24px 24px; font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -536,7 +729,143 @@
     </div>
 </header>
 
-<section class="hero">
+<!-- ============ MEGA HERO ============ -->
+<section class="mega-hero">
+    <div class="container-wide mega-hero__inner">
+        <div class="mega-hero__eyebrow">Programa Reboot 30 · 100% gratis</div>
+        <h1>
+            Apaga los <span class="accent-orange">antojos.</span><br>
+            Recupera tu <span class="accent-yellow">energía.</span><br>
+            En 30 días.
+        </h1>
+        <p class="mega-hero__sub">
+            El programa <strong>gratuito</strong> que llevo años perfeccionando con clientes en Reboot Lifestyle. <strong>Sin dieta. Sin contar calorías. Sin pasar hambre.</strong> Solo aprender a comer diferente — para siempre.
+        </p>
+        <a href="#form" class="mega-hero__cta">Reservar mi cupo →</a>
+        <div class="mega-hero__date">Inicia <strong>4 · Mayo · 2026</strong></div>
+    </div>
+</section>
+
+<!-- ============ PAIN SECTION ============ -->
+<section class="pain">
+    <div class="container-wide">
+        <span class="section-eyebrow">¿Te suena familiar?</span>
+        <h2 class="section-title">Probablemente <em>uno de estos tres</em><br>te pasa todos los días.</h2>
+        <div class="pain__grid">
+            <div class="pain__card">
+                <div class="pain__num">01</div>
+                <p class="pain__text">Picas algo dulce todas las tardes — aunque no tengas hambre real. Te dices "hoy no" en la mañana y caes igual en la noche.</p>
+            </div>
+            <div class="pain__card">
+                <div class="pain__num">02</div>
+                <p class="pain__text">Te despiertas cansado aunque dormiste 8 horas. Vives buscando café para funcionar, y a las 3pm ya eres zombie.</p>
+            </div>
+            <div class="pain__card">
+                <div class="pain__num">03</div>
+                <p class="pain__text">Sabes lo que tienes que comer. Pero en el momento, no puedes parar. Y crees que es falta de disciplina — no lo es.</p>
+            </div>
+        </div>
+        <p class="pain__closer">
+            Eso no es <em>falta de voluntad.</em><br>Es tu cuerpo enviándote señales que aún no sabes leer.
+        </p>
+    </div>
+</section>
+
+<!-- ============ PROGRAM SECTION ============ -->
+<section class="program">
+    <div class="container-wide">
+        <span class="section-eyebrow">Esto es Reboot 30</span>
+        <h2 class="section-title">30 días. Una <em>comunidad.</em><br>Un protocolo claro.</h2>
+        <p class="program__intro">
+            <strong>No es dieta. No es contar calorías. No es prohibir comida.</strong><br><br>
+            Es aprender a comer diferente — con guía diaria, lecciones cortas, y miles de personas haciéndolo contigo desde Panamá y todo el mundo.
+        </p>
+        <div class="program__highlight">
+            Lo creé después de años trabajando con clientes en Reboot Lifestyle. Vi qué funciona, qué no, y por qué la mayoría falla. <strong>Este programa elimina esos errores</strong> — y lo abro gratis durante 30 días para que tú mismo lo compruebes.
+        </div>
+    </div>
+</section>
+
+<!-- ============ FEATURES SECTION ============ -->
+<section class="features">
+    <div class="container-wide">
+        <span class="section-eyebrow">Esto vas a recibir</span>
+        <h2 class="section-title">Todo incluido. <em>Sin costo.</em></h2>
+        <div class="features__grid">
+            <div class="feature">
+                <div class="feature__icon">📱</div>
+                <div class="feature__title">Lección diaria por WhatsApp</div>
+                <div class="feature__desc">Una idea práctica al día, en menos de 5 minutos. Sin abrumarte. Sin teorías largas. Acción concreta.</div>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">👥</div>
+                <div class="feature__title">Comunidad activa</div>
+                <div class="feature__desc">Miles de personas haciéndolo en simultáneo. Te aceleras al ritmo del grupo — el apoyo es lo que cambia todo.</div>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">🥗</div>
+                <div class="feature__title">Recetas y meal plans</div>
+                <div class="feature__desc">Te muestro qué voy a comer la próxima semana. Listas de compras incluidas. Sin que tengas que pensar.</div>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">🚦</div>
+                <div class="feature__title">Acceso al Semáforo Reboot</div>
+                <div class="feature__desc">App que escanea cualquier producto del súper o foto del menú y te dice si va contigo: verde, amarillo o rojo.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ JOURNEY SECTION ============ -->
+<section class="journey">
+    <div class="container-wide">
+        <span class="section-eyebrow">Tu mes a mes</span>
+        <h2 class="section-title">El viaje de <em>30 días.</em></h2>
+        <div class="journey__weeks">
+            <div class="week">
+                <div class="week__label">Semana 1</div>
+                <div class="week__title">Reset</div>
+                <div class="week__desc">Empezamos por lo básico: hidratación, carbohidratos refinados, energía estable. Tu cuerpo se desintoxica del azúcar oculta.</div>
+            </div>
+            <div class="week">
+                <div class="week__label">Semana 2</div>
+                <div class="week__title">Construir</div>
+                <div class="week__desc">Proteína primero, grasas buenas, cómo armar el plato. Aquí los antojos empiezan a desaparecer solos.</div>
+            </div>
+            <div class="week">
+                <div class="week__label">Semana 3</div>
+                <div class="week__title">Profundizar</div>
+                <div class="week__desc">Sueño, estrés, movimiento, hábitos sostenibles. La transformación que sientes — no solo en el cuerpo, sino en cómo te relacionas con la comida.</div>
+            </div>
+            <div class="week">
+                <div class="week__label">Semana 4</div>
+                <div class="week__title">Sostener</div>
+                <div class="week__desc">Cómo seguir solo después del programa. Comer fuera, viajes, cumpleaños, eventos. El cambio que se queda — para siempre.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ARIE BIO ============ -->
+<section class="arie-bio">
+    <div class="container-wide arie-bio__inner">
+        <span class="section-eyebrow">¿Quién te acompaña?</span>
+        <h2 class="section-title">Soy <em style="color:var(--arie-yellow);">Arie.</em></h2>
+        <p class="arie-bio__text">
+            Llevo años ayudando a panameños, latinos y a mi gente alrededor del mundo a transformar su relación con la comida — sin dieta, sin sufrir, sin restricciones absurdas. Reboot 30 es <strong>el programa que ojalá hubiera tenido yo</strong> cuando empecé. Lo abro gratis, por una vez, para que <strong>mi gente</strong> lo viva conmigo.
+        </p>
+    </div>
+</section>
+
+<!-- ============ BRIDGE CTA ============ -->
+<section class="bridge-cta">
+    <div class="container-wide">
+        <h2 class="bridge-cta__title">Listo para <em>empezar?</em></h2>
+        <p class="bridge-cta__sub">Reserva tu cupo abajo. Toma 30 segundos.</p>
+    </div>
+</section>
+
+<section id="form" class="hero">
     <div class="container">
         <div class="hero-content">
             <div class="badge"><span class="badge-dot"></span>Reboot 30 · Inscripción</div>
@@ -886,10 +1215,13 @@ form.addEventListener('submit', async (e) => {
             clarity('upgrade', 'form_submitted'); // escalate session priority in Clarity
         }
 
-        // Redirect a thank-you page con params
+        // Redirect a thank-you page con params (email/phone se pasan para que el bridge al Semáforo no le vuelva a pedir datos)
         const thankYouUrl = new URL('thank-you.html', window.location.href);
         thankYouUrl.searchParams.set('nombre', nombre);
         thankYouUrl.searchParams.set('pais', pais);
+        thankYouUrl.searchParams.set('email', email);
+        if (apellido) thankYouUrl.searchParams.set('apellido', apellido);
+        if (payload.phone) thankYouUrl.searchParams.set('phone', payload.phone);
         window.location.href = thankYouUrl.toString();
 
     } catch (error) {
