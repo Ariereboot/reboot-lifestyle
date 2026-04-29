@@ -60,9 +60,9 @@
               "photo_prompt": "scrambled eggs mixed with wilted baby spinach on white plate, morning natural light, wooden breakfast table, casual iPhone food photography"
             },
             "almuerzo": {
-              "slug": "camarones-ajillo-zucchini-quinoa",
-              "name": "Camarones al ajillo con zucchini salteado y quinoa",
-              "photo_prompt": "garlic shrimp served over quinoa with sauteed zucchini slices on white plate, lunch natural light, iPhone home cooking photography"
+              "slug": "pescado-ajillo-zucchini-quinoa",
+              "name": "Pescado al ajillo con zucchini salteado y quinoa",
+              "photo_prompt": "white fish fillet pieces with golden garlic over quinoa with sauteed zucchini parsley lemon wedges on white plate natural lunch light"
             },
             "cena": {
               "slug": "nuggets-pollo-yogurt",

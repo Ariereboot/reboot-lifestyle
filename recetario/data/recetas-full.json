@@ -469,6 +469,46 @@
     ]
   },
 
+  "pescado-ajillo-zucchini-quinoa": {
+    "id": "pescado-ajillo-zucchini-quinoa",
+    "nombre": "Pescado al ajillo con zucchini salteado y quinoa",
+    "subtitulo": "Almuerzo con sabor a mar en 20 minutos.",
+    "categoria": "almuerzo",
+    "fase": "mes_1",
+    "tiempo_min": 20,
+    "dificultad": "fácil",
+    "porciones_base": 2,
+    "etiquetas": ["alta proteína", "mediterráneo", "sin gluten"],
+    "macros_fijos": {"kcal": 150, "prot": 1, "fiber": 0.5, "fat": 15, "carbs": 3},
+    "ingredientes": [
+      {"slot": "protein", "amount_base": 350, "unit": "g", "descripcion": "de filete de pescado blanco firme en cubos (corvina, mero, pargo)", "macros": {"kcal": 110, "prot": 22, "fiber": 0, "fat": 2, "carbs": 0}},
+      {"slot": "carb", "amount_base": 0.5, "unit": "taza", "descripcion": "de quinoa cruda", "macros": {"kcal": 155, "prot": 6, "fiber": 3, "fat": 2.5, "carbs": 27}},
+      {"slot": "veg", "amount_base": 2, "unit": "", "descripcion": "zucchinis medianos en cubos", "macros": {"kcal": 17, "prot": 1.2, "fiber": 1, "fat": 0.2, "carbs": 3}},
+      {"slot": null, "amount_base": 4, "unit": "dientes", "descripcion": "de ajo picado fino"},
+      {"slot": null, "amount_base": 2, "unit": "cdas", "descripcion": "de aceite de oliva"},
+      {"slot": null, "amount_base": 0, "unit": "", "descripcion": "perejil fresco picado"},
+      {"slot": null, "amount_base": 0, "unit": "", "descripcion": "sal, pimienta y hojuelas de chile al gusto"},
+      {"slot": null, "amount_base": 0.5, "unit": "", "descripcion": "limón"}
+    ],
+    "pasos": [
+      {"step_slot": "carb", "texto": "Cocina la <strong>quinoa</strong> con 1 taza de agua y sal, 15 min a fuego bajo hasta absorber el líquido."},
+      {"texto": "En sartén, saltea el <strong>zucchini</strong> con 1 cda de aceite, sal y pimienta por 4 min. Reserva."},
+      {"step_slot": "protein-cook", "texto": "En la misma sartén, calienta 1 cda de aceite. Saltea el ajo 30 seg sin que se queme, agrega los <strong>cubos de pescado</strong>. Cocina <strong>3-4 min</strong> moviendo con cuidado hasta que esté blanco y se desmenuce con el tenedor."},
+      {"step_slot": "final", "texto": "Termina con perejil y jugo de limón. Sirve el <strong class='final-protein'>pescado</strong> sobre la <strong class='final-carb'>quinoa</strong> con el zucchini al lado."}
+    ],
+    "hack": "El pescado blanco se desbarata si lo mueves mucho. Voltea con espátula 1-2 veces máximo. Si se rompe, no pasa nada — el sabor es lo mismo.",
+    "por_que_funciona": "Proteína magra altísima (pescado blanco), grasa buena (aceite de oliva), carbo completo (quinoa con proteína propia), fibra del zucchini. Balance mes 1 en 20 min, sabor mediterráneo.",
+    "sustituciones": [
+      {"from_label": "pescado", "slot": "protein", "options": [
+        {"name": "Camarones", "descripcion": "camarones pelados y limpios", "amount": 400, "unit": "g", "macros": {"kcal": 85, "prot": 20, "fiber": 0, "fat": 1, "carbs": 0}, "protein_name": "camarones", "cook_time": "2 min por lado"},
+        {"name": "Pollo", "descripcion": "pechuga de pollo en cubos", "amount": 350, "unit": "g", "macros": {"kcal": 165, "prot": 31, "fiber": 0, "fat": 3.6, "carbs": 0}, "protein_name": "pollo", "cook_time": "6-7 minutos"}
+      ]},
+      {"from_label": "quinoa", "slot": "carb", "options": [
+        {"name": "Arroz de coliflor", "descripcion": "arroz de coliflor", "amount": 2, "unit": "tazas", "macros": {"kcal": 60, "prot": 5.6, "fiber": 6, "fat": 0.4, "carbs": 12}, "carb_name": "arroz de coliflor", "carb_step": "Pulsa la coliflor en procesador hasta tipo arroz. Saltea en sartén con 1 cda de aceite y sal, <strong>5-7 min</strong>.", "phase_hint": "mes 1"}
+      ]}
+    ]
+  },
+
   "camarones-ajillo-zucchini-quinoa": {
     "id": "camarones-ajillo-zucchini-quinoa",
     "nombre": "Camarones al ajillo con zucchini salteado y quinoa",
